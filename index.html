@@ -27,7 +27,7 @@
     canvas {
       display: block;
       margin: 0 auto;
-      width: 95vw; /* nearly full screen width */
+      width: 95vw;  /* nearly full screen width */
       height: 90vh; /* nearly full screen height */
     }
   </style>
@@ -51,23 +51,23 @@
       // MASTER baseline
       const MASTER_BASE = 2800;
 
-      // Grandmaster and Challenger positions on the chart
+      // Grandmaster and Challenger "starting" points on the chart
       const gm = MASTER_BASE + GRANDMASTER_CUTOFF; 
       const chall = MASTER_BASE + CHALLENGER_CUTOFF;
 
       // Ranks used for everything below MASTER
       const ranks = [
-        "IRON", 
-        "BRONZE", 
-        "SILVER", 
-        "GOLD", 
-        "PLATINUM", 
-        "EMERALD", 
-        "DIAMOND", 
-        "MASTER"
+        "IRON",      // 0
+        "BRONZE",    // 1
+        "SILVER",    // 2
+        "GOLD",      // 3
+        "PLATINUM",  // 4
+        "EMERALD",   // 5
+        "DIAMOND",   // 6
+        "MASTER"     // 7 (used only if < gm)
       ];
 
-      // Offsets for each division inside a tier
+      // Offsets for each division inside a tier (e.g. IV is the lowest)
       const divisionOffset = {
         "IV": 300,
         "III": 200,
@@ -87,7 +87,7 @@
       Object.keys(data.summoners).forEach((summoner) => {
         const records = data.summoners[summoner];
 
-        // Convert each record into { x: date, y: adjustedLP }
+        // Convert each record into { x: Date, y: adjustedLP, realLP: for tooltip }
         const points = records.map((record) => {
           let adjustedLP = 0;
 
@@ -105,10 +105,10 @@
             adjustedLP = MASTER_BASE + record.lp;
           } 
           else {
-            // For all other tiers (IRON -> DIAMOND)
+            // For IRON -> DIAMOND
             const rankIndex = ranks.indexOf(record.tier);
             const baseLP = 400 * rankIndex; // each rank block is 400 apart
-            // 400 - offset => top of the division block
+            // top of the division = 400 - offset
             const divOffset = 400 - (divisionOffset[record.rank] || 0);
             adjustedLP = baseLP + divOffset + record.lp;
           }
@@ -116,7 +116,7 @@
           return {
             x: new Date(record.timestamp),
             y: adjustedLP,
-            realLP: record.lp // For tooltips
+            realLP: record.lp
           };
         });
 
@@ -139,20 +139,18 @@
       for (let val = 0; val <= 4400; val += 400) {
         ticksArray.push(val);
       }
-      // Push gm and chall
+      // Include gm and chall if they’re not already multiples of 400
       ticksArray.push(gm, chall);
       // Sort them in ascending order
       ticksArray.sort((a, b) => a - b);
-      // Remove any duplicates if gm/chall happens to be a multiple of 400
+      // Remove any duplicates (if gm/chall is exactly a multiple of 400)
       const uniqueTicks = [...new Set(ticksArray)];
 
       // Create the chart
       const ctx = document.getElementById("summonerChart").getContext("2d");
       new Chart(ctx, {
         type: "line",
-        data: {
-          datasets: datasets
-        },
+        data: { datasets },
         options: {
           scales: {
             x: {
@@ -174,28 +172,31 @@
             },
             y: {
               min: 0,
-              max: 4400,  // Force from 0 to 4400
-              // Instead of 'stepSize', use 'ticks.values' so we can manually place GM & Challenger
+              max: 4400,
+              // We provide a fixed set of ticks, including the multiples of 400 + gm + chall
               ticks: {
+                autoSkip: false,    // Force Chart.js to show all ticks in our array
                 color: '#ffffff',
-                // Our custom array includes 0, 400, 800, ..., 4400, plus gm/chall
                 values: uniqueTicks,
                 callback: function (value) {
-                  // Exact match → Challenger
-                  if (value === chall) {
+                  // Range-based approach:
+                  // If value >= CHALL, we call it CHALLENGER
+                  if (value >= chall) {
                     return "CHALLENGER";
                   }
-                  // Exact match → Grandmaster
-                  if (value === gm) {
+                  // If value >= GM, we call it GRANDMASTER
+                  else if (value >= gm) {
                     return "GRANDMASTER";
                   }
-                  // 2800 and up → Master
-                  if (value >= 2800) {
+                  // If value >= MASTER_BASE (2800), we call it MASTER
+                  else if (value >= MASTER_BASE) {
                     return "MASTER";
                   }
-                  // For other ranks
-                  const index = Math.floor(value / 400);
-                  return ranks[index] || ""; // Fallback if out of range
+                  // Otherwise, index into ranks for IRON → DIAMOND
+                  else {
+                    const index = Math.floor(value / 400);
+                    return ranks[index] || "";
+                  }
                 }
               },
               grid: {
@@ -213,7 +214,7 @@
             tooltip: {
               callbacks: {
                 label: function (context) {
-                  const datasetLabel = context.dataset.label || '';
+                  const datasetLabel = context.dataset.label || "";
                   const lp = context.raw.realLP;
                   return `${datasetLabel}: ${lp} LP`;
                 }
