@@ -36,149 +36,154 @@
     <canvas id="summonerChart"></canvas>
   </div>
 
-  <script>
-        async function loadData() {
-      const response = await fetch('lp_data.json'); // Load JSON file
-      const data = await response.json();
+<script>
+async function loadData() {
+  const response = await fetch('lp_data.json'); // Load JSON file
+  const data = await response.json();
 
-      // Access cutoff values
-      const challengerCutoff = data.cutoffs.CHALLENGER;  // Challenger cutoff
-      const grandmasterCutoff = data.cutoffs.GRANDMASTER; // Grandmaster cutoff
+  // Access cutoff values
+  const challengerCutoff = data.cutoffs.CHALLENGER;  // Challenger cutoff
+  const grandmasterCutoff = data.cutoffs.GRANDMASTER; // Grandmaster cutoff
 
-      // Rank Mapping and Positions
-      const ranks = [
-        "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM",
-        "EMERALD", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"
-      ];
+  // Fixed LP positions
+  const ranks = [
+    "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM",
+    "EMERALD", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"
+  ];
 
-      const rankPositions = {
-        "IRON": 0,
-        "BRONZE": 400,
-        "SILVER": 800,
-        "GOLD": 1200,
-        "PLATINUM": 1600,
-        "EMERALD": 2000,
-        "DIAMOND": 2400,
-        "MASTER": 4000,
-        "GRANDMASTER": grandmasterCutoff + 4000,
-        "CHALLENGER": challengerCutoff + 4000
-      };
+  const rankPositions = {
+    "IRON": 0,
+    "BRONZE": 400,
+    "SILVER": 800,
+    "GOLD": 1200,
+    "PLATINUM": 1600,
+    "EMERALD": 2000,
+    "DIAMOND": 2400,
+    "MASTER": 4000,
+    "GRANDMASTER": grandmasterCutoff + 4000,
+    "CHALLENGER": challengerCutoff + 4000
+  };
 
-      const datasets = [];
-      const colors = [
-        'blue', 'red', 'green', 'orange', 'purple', 
-        'cyan', 'magenta', 'teal', 'pink', 'yellow'
-      ];
+  const maxChallenger = rankPositions.CHALLENGER + 1000; // Max LP for Challenger
 
-      let colorIndex = 0;
+  // Prepare datasets
+  const datasets = [];
+  const colors = [
+    'blue', 'red', 'green', 'orange', 'purple', 
+    'cyan', 'magenta', 'teal', 'pink', 'yellow'
+  ];
 
-      // Date Range: 2 days before today to 2 days after today
-      const today = new Date();
-      const startDate = new Date(today);
-      startDate.setDate(today.getDate() - 2); // 2 days before today
-      const endDate = new Date(today);
-      endDate.setDate(today.getDate() + 2); // 2 days after today
+  let colorIndex = 0;
 
-      // Process each summoner's data
-      Object.keys(data.summoners).forEach(summoner => {
-        const records = data.summoners[summoner];
+  // Date Range: Fixed range with padding
+  const today = new Date();
+  const startDate = new Date(today);
+  startDate.setDate(today.getDate() - 2); // 2 days before today
+  const endDate = new Date(today);
+  endDate.setDate(today.getDate() + 2); // 2 days after today
 
-        // Generate points for each summoner
-        const points = records.map(record => ({
-          x: new Date(record.timestamp), // Timestamp for x-axis
-          y: record.adjustedLP,          // Adjusted LP for y-axis
-          realLP: record.lp,             // Actual LP for tooltip
-          rank: record.tier              // Rank for tooltip
-        }));
+  // Process each summoner's data
+  Object.keys(data.summoners).forEach(summoner => {
+    const records = data.summoners[summoner];
 
-        // Add a padding point to the left to start closer to the middle
-        const paddingPoint = {
-          x: new Date(startDate.getTime()), // Padding date
-          y: points[0].y,                  // Same rank for padding
-          realLP: points[0].realLP
-        };
-        const extendedPoints = [paddingPoint, ...points];
+    // Generate points for each summoner
+    const points = records.map(record => ({
+      x: new Date(record.timestamp), // Timestamp for x-axis
+      y: record.adjustedLP,          // Adjusted LP for y-axis
+      realLP: record.lp,             // Actual LP for tooltip
+      rank: record.tier              // Rank for tooltip
+    }));
 
-        // Add dataset for each summoner
-        datasets.push({
-          label: `${summoner} (${records[records.length - 1].tier} ${records[records.length - 1].rank})`,
-          data: extendedPoints,
-          borderColor: colors[colorIndex % colors.length],
-          borderWidth: 2,
-          fill: false,
-          tension: 0.1,
-          pointRadius: 5,
-          pointHoverRadius: 8
-        });
+    // Add padding point to start closer to the middle
+    const paddingPoint = {
+      x: new Date(startDate.getTime()), // Padding date
+      y: points[0].y,                  // Same rank for padding
+      realLP: points[0].realLP
+    };
+    const extendedPoints = [paddingPoint, ...points];
 
-        colorIndex++;
-      });
+    // Add dataset for each summoner
+    datasets.push({
+      label: `${summoner} (${records[records.length - 1].tier} ${records[records.length - 1].rank})`,
+      data: extendedPoints,
+      borderColor: colors[colorIndex % colors.length],
+      borderWidth: 2,
+      fill: false,
+      tension: 0.1,
+      pointRadius: 5,
+      pointHoverRadius: 8
+    });
 
-      // Create chart
-      const ctx = document.getElementById('summonerChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'line',
-        data: { datasets: datasets },
-        options: {
-          scales: {
-            x: {
-              type: 'time',
-              time: { unit: 'day' },
-              min: startDate,
-              max: endDate,
-              title: {
-                display: true,
-                text: 'Date',
-                color: '#ffffff'
-              },
-              ticks: { color: '#ffffff' }
-            },
-            y: {
-              title: {
-                display: true,
-                text: 'Rank Progression',
-                color: '#ffffff'
-              },
-              ticks: {
-                color: '#ffffff',
-                callback: function (value) {
-                  // Add all ranks based on their positions
-                  if (value >= rankPositions.CHALLENGER) return "CHALLENGER";
-                  if (value >= rankPositions.GRANDMASTER) return "GRANDMASTER";
-                  if (value >= rankPositions.MASTER) return "MASTER";
-                  if (value >= rankPositions.DIAMOND) return "DIAMOND";
-                  if (value >= rankPositions.EMERALD) return "EMERALD";
-                  if (value >= rankPositions.PLATINUM) return "PLATINUM";
-                  if (value >= rankPositions.GOLD) return "GOLD";
-                  if (value >= rankPositions.SILVER) return "SILVER";
-                  if (value >= rankPositions.BRONZE) return "BRONZE";
-                  return "IRON"; // Default lowest rank
-                }
-              }
+    colorIndex++;
+  });
+
+  // Create chart
+  const ctx = document.getElementById('summonerChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: { datasets: datasets },
+    options: {
+      scales: {
+        x: {
+          type: 'time',
+          time: { unit: 'day' },
+          min: startDate,
+          max: endDate,
+          title: {
+            display: true,
+            text: 'Date',
+            color: '#ffffff'
+          },
+          ticks: { color: '#ffffff' }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Rank Progression',
+            color: '#ffffff'
+          },
+          ticks: {
+            color: '#ffffff',
+            callback: function (value) {
+              // Always show all ranks based on fixed positions
+              if (value >= rankPositions.CHALLENGER) return "CHALLENGER";
+              if (value >= rankPositions.GRANDMASTER) return "GRANDMASTER";
+              if (value >= rankPositions.MASTER) return "MASTER";
+              if (value >= rankPositions.DIAMOND) return "DIAMOND";
+              if (value >= rankPositions.EMERALD) return "EMERALD";
+              if (value >= rankPositions.PLATINUM) return "PLATINUM";
+              if (value >= rankPositions.GOLD) return "GOLD";
+              if (value >= rankPositions.SILVER) return "SILVER";
+              if (value >= rankPositions.BRONZE) return "BRONZE";
+              return "IRON"; // Default lowest rank
             }
           },
-          plugins: {
-            legend: {
-              display: true,
-              position: 'top',
-              labels: { color: '#ffffff' }
-            },
-            tooltip: {
-              callbacks: {
-                label: function (tooltipItem) {
-                  const lp = tooltipItem.raw.realLP;
-                  const rank = tooltipItem.raw.rank;
-                  return `${tooltipItem.dataset.label}: ${lp} LP (${rank})`;
-                }
-              }
+          min: 0, // Always start at 0 LP
+          max: maxChallenger // Max is Challenger + 1000 LP
+        }
+      },
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: { color: '#ffffff' }
+        },
+        tooltip: {
+          callbacks: {
+            label: function (tooltipItem) {
+              const lp = tooltipItem.raw.realLP;
+              const rank = tooltipItem.raw.rank;
+              return `${tooltipItem.dataset.label}: ${lp} LP (${rank})`;
             }
           }
         }
-      });
+      }
     }
+  });
+}
 
-    // Load data and render chart
-    loadData();
-  </script>
+// Load data and render chart
+loadData();
+</script>
 </body>
 </html>
