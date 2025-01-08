@@ -66,16 +66,23 @@
       Object.keys(data).forEach(summoner => {
         const records = data[summoner];
 
+        // Generate points for each summoner
         const points = records.map(record => ({
           x: new Date(record.timestamp), // Timestamp for x-axis
           y: record.adjustedLP,          // Adjusted LP for y-axis
           realLP: record.lp              // Actual LP for tooltip
         }));
 
+        // Add an extra point to the left for visual continuity
+        const extendedPoints = [
+          { x: new Date(startDate.getTime() - 86400000), y: points[0].y, realLP: points[0].realLP },
+          ...points
+        ];
+
         // Add dataset for each summoner
         datasets.push({
           label: `${summoner} (${records[records.length - 1].tier} ${records[records.length - 1].rank})`,
-          data: points,
+          data: extendedPoints,
           borderColor: colors[colorIndex % colors.length],
           borderWidth: 2,
           fill: false,
@@ -115,11 +122,12 @@
               ticks: {
                 color: '#ffffff',
                 callback: function (value) {
+                  // Add all ranks
                   if (value >= 4800) return "CHALLENGER";
                   if (value >= 4400) return "GRANDMASTER";
                   if (value >= 4000) return "MASTER";
                   const index = Math.floor(value / 400);
-                  return ranks[index];
+                  return ranks[index] || "";
                 }
               }
             }
