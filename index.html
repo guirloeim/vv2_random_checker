@@ -7,7 +7,6 @@
   
   <!-- Chart.js Library -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- Chart.js Date Adapter -->
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
   
   <!-- Style -->
@@ -26,8 +25,8 @@
     canvas {
       display: block;
       margin: 0 auto;
-      width: 90vw; /* Full screen width */
-      height: 85vh; /* Full screen height */
+      width: 95vw; /* Full screen width */
+      height: 90vh; /* Full screen height */
     }
   </style>
 </head>
@@ -38,61 +37,18 @@
   </div>
 
   <script>
-    // Rank Mapping
-    const rankOrder = [
-      "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM",
-      "EMERALD", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"
-    ];
-
-    const divisionMultiplier = {
-      "IV": 0,
-      "III": 100,
-      "II": 200,
-      "I": 300
-    };
-
-    // Calculate LP Position Based on Rank and Division
-    function calculateRankLP(tier, division, lp) {
-      const baseRank = rankOrder.indexOf(tier) * 400; // 400 LP per rank
-
-      // Handle Master, Grandmaster, Challenger
-      if (tier === "MASTER") {
-        return 4000 + lp; // Master starts at 4000 LP
-      } else if (tier === "GRANDMASTER") {
-        return 4400 + lp; // Grandmaster starts at 4400 LP
-      } else if (tier === "CHALLENGER") {
-        return 4800 + lp; // Challenger starts at 4800 LP
-      }
-
-      // Handle Ranks Below Master
-      const divisionLP = divisionMultiplier[division] || 0;
-      return baseRank + divisionLP + lp;
-    }
-
-    // Load data from JSON file
     async function loadData() {
       const response = await fetch('lp_data.json'); // Load JSON file
       const data = await response.json();
 
-      const datasets = [];
-      const allLabels = new Set(); // Collect all unique timestamps
-
-      // Collect timestamps
-      Object.values(data).forEach(records => {
-        records.forEach(record => allLabels.add(new Date(record.timestamp).getTime()));
-      });
-
-      // Sort timestamps and center them in time range
-      const labels = Array.from(allLabels).sort((a, b) => a - b).map(ts => new Date(ts));
-      const firstLabel = labels[0];
-      const lastLabel = labels[labels.length - 1];
-
-      const centerTime = (firstLabel.getTime() + lastLabel.getTime()) / 2;
-      const offset = (lastLabel.getTime() - firstLabel.getTime()) * 0.2; // Add 20% spacing
-
-      const colors = [
-        'blue', 'red', 'green', 'orange', 'purple', 'brown', 'cyan', 'magenta', 'teal', 'pink'
+      // Rank Mapping
+      const ranks = [
+        "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM",
+        "EMERALD", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"
       ];
+
+      const datasets = [];
+      const colors = ['blue', 'red', 'green', 'orange', 'purple', 'cyan', 'magenta', 'teal', 'pink'];
 
       let colorIndex = 0;
 
@@ -100,36 +56,27 @@
       Object.keys(data).forEach(summoner => {
         const records = data[summoner];
 
-        const rankData = records.map((record, index) => {
-          // Generate positions with slight horizontal shifts for clarity
-          const xPos = new Date(centerTime - (index * 86400000)); // Shift left by 1 day
-          return {
-            x: xPos,
-            y: calculateRankLP(record.tier, record.rank, record.lp), // Calculated LP
-            realLP: record.lp // Real LP for tooltip
-          };
+        // Map data points
+        const points = records.map((record, index) => {
+          const x = new Date(record.timestamp); // Timestamp
+          const y = record.adjustedLP; // Adjusted LP from JSON
+          const realLP = record.lp;   // Actual LP value for tooltip
+
+          // Dynamic position spacing (closer to middle for final points)
+          const timeOffset = (records.length - index) * 86400000; // Offset by 1 day
+          return { x: new Date(x.getTime() - timeOffset), y, realLP };
         });
 
-        // Extend line towards the left for visual continuity
-        rankData.unshift({
-          x: new Date(centerTime - 2 * offset), // Extend line towards the left
-          y: rankData[0].y,
-          realLP: rankData[0].realLP
-        });
-
-        const tier = records[records.length - 1].tier;
-        const rank = records[records.length - 1].rank;
-
-        // Create dataset
+        // Add dataset
         datasets.push({
-          label: `${summoner} (${tier} ${rank})`,
-          data: rankData,
+          label: `${summoner} (${records[records.length - 1].tier} ${records[records.length - 1].rank})`,
+          data: points,
           borderColor: colors[colorIndex % colors.length],
           borderWidth: 2,
           fill: false,
           tension: 0.1,
-          pointRadius: 5, // Enlarged points
-          pointHoverRadius: 7
+          pointRadius: 5,
+          pointHoverRadius: 8
         });
 
         colorIndex++;
@@ -139,42 +86,34 @@
       const ctx = document.getElementById('summonerChart').getContext('2d');
       new Chart(ctx, {
         type: 'line',
-        data: {
-          datasets: datasets
-        },
+        data: { datasets: datasets },
         options: {
           scales: {
             x: {
               type: 'time',
-              time: {
-                unit: 'day'
-              },
-              min: new Date(centerTime - 2 * offset),
-              max: new Date(centerTime + 2 * offset),
+              time: { unit: 'day' },
               title: {
                 display: true,
                 text: 'Date',
                 color: '#ffffff'
               },
-              ticks: {
-                color: '#ffffff'
-              }
+              ticks: { color: '#ffffff' }
             },
             y: {
+              title: {
+                display: true,
+                text: 'Rank Progression',
+                color: '#ffffff'
+              },
               ticks: {
                 color: '#ffffff',
                 callback: function (value) {
                   if (value >= 4800) return "CHALLENGER";
                   if (value >= 4400) return "GRANDMASTER";
                   if (value >= 4000) return "MASTER";
-                  const rankIndex = Math.floor(value / 400);
-                  return rankOrder[rankIndex];
+                  const index = Math.floor(value / 400);
+                  return ranks[index];
                 }
-              },
-              title: {
-                display: true,
-                text: 'Rank Progression',
-                color: '#ffffff'
               }
             }
           },
@@ -182,9 +121,7 @@
             legend: {
               display: true,
               position: 'top',
-              labels: {
-                color: '#ffffff'
-              }
+              labels: { color: '#ffffff' }
             },
             tooltip: {
               callbacks: {
