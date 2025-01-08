@@ -8,6 +8,16 @@ PLATFORM_REGION = "europe"  # Use platform routing values like 'americas', 'euro
 SUMMONERS = [
     "Nico#coati",
     "Loopy#0004",
+    "The Mid Game#Canoe",
+    "emerrin#623HS",
+    "meow81#paw",
+    "Owpi#idiot",
+    "Big2080#EUW",
+    "Myst#5672",
+    "Yui#KEK",
+    "Lil Wio#EUW",
+    "King Afee#333",
+    "Lemis#33310",
     # ... add more Riot IDs (name#tag)
 ]
 
