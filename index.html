@@ -86,7 +86,7 @@
           } else {
             // Calculate for other ranks
             const rankIndex = ranks.indexOf(record.tier);
-            const baseLP = 400 * rankIndex;
+            const baseLP = 400 * (rankIndex-1);
             const divisionLP = 400 - divisionOffset[record.rank];
             adjustedLP = baseLP + divisionLP + record.lp;
           }
