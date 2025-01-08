@@ -19,15 +19,28 @@ SUMMONERS = [
     "Lil Wio#EUW",
     "King Afee#333",
     "Lemis#33310",
-    # ... add more Riot IDs (name#tag)
 ]
 
+# Global cutoff values (will be fetched dynamically)
+CHALLENGER_CUTOFF = 0
+GRANDMASTER_CUTOFF = 0
+
+
 def main():
+    global CHALLENGER_CUTOFF, GRANDMASTER_CUTOFF
+
     # Get API key from environment variable
     api_key = os.getenv("RIOT_API_KEY")
     if not api_key:
         print("Missing Riot API Key!")
         return
+
+    # Fetch cutoff LP values for Challenger and Grandmaster
+    CHALLENGER_CUTOFF = get_cutoff_lp("CHALLENGER", api_key)
+    GRANDMASTER_CUTOFF = get_cutoff_lp("GRANDMASTER", api_key)
+
+    print(f"Challenger Cutoff: {CHALLENGER_CUTOFF} LP")
+    print(f"Grandmaster Cutoff: {GRANDMASTER_CUTOFF} LP")
 
     # List to store new summoner data
     summoner_data_list = []
@@ -45,12 +58,14 @@ def main():
                 # Process solo queue data
                 solo_queue = next((q for q in ranked_info if q["queueType"] == "RANKED_SOLO_5x5"), None)
                 if solo_queue:
+                    # Adjust LP based on cutoffs
+                    adjusted_lp = adjust_lp(solo_queue["tier"], solo_queue["rank"], solo_queue["leaguePoints"])
                     summoner_data_list.append({
                         "summonerName": summoner,
                         "tier": solo_queue["tier"],
                         "rank": solo_queue["rank"],
                         "lp": solo_queue["leaguePoints"],
-                        # Fixed timestamp with timezone-aware datetime
+                        "adjustedLP": adjusted_lp,  # Include adjusted LP for plotting
                         "timestamp": datetime.now(timezone.utc).isoformat()
                     })
         except Exception as e:
@@ -61,7 +76,6 @@ def main():
     try:
         with open(data_filename, "r", encoding="utf-8") as f:
             old_data = json.load(f)
-            # Flatten grouped data if it's a dictionary
             if isinstance(old_data, dict):
                 old_data = [item for sublist in old_data.values() for item in sublist]
     except:
@@ -91,11 +105,8 @@ def main():
 
 
 def get_summoner_id(name, tag, api_key):
-    # Get PUUID from Riot ID
     url = f"https://{PLATFORM_REGION}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{name}/{tag}"
-    headers = {
-        "X-Riot-Token": api_key
-    }
+    headers = {"X-Riot-Token": api_key}
     r = requests.get(url, headers=headers)
     if r.status_code == 200:
         puuid = r.json().get("puuid")
@@ -106,11 +117,8 @@ def get_summoner_id(name, tag, api_key):
 
 
 def get_summoner_id_by_puuid(puuid, api_key):
-    # Get Summoner ID by PUUID
     url = f"https://{REGION}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{puuid}"
-    headers = {
-        "X-Riot-Token": api_key
-    }
+    headers = {"X-Riot-Token": api_key}
     r = requests.get(url, headers=headers)
     if r.status_code == 200:
         return r.json().get("id")
@@ -120,17 +128,40 @@ def get_summoner_id_by_puuid(puuid, api_key):
 
 
 def get_ranked_data(encrypted_summoner_id, api_key):
-    # Get ranked data
     url = f"https://{REGION}.api.riotgames.com/lol/league/v4/entries/by-summoner/{encrypted_summoner_id}"
-    headers = {
-        "X-Riot-Token": api_key
-    }
+    headers = {"X-Riot-Token": api_key}
     r = requests.get(url, headers=headers)
     if r.status_code == 200:
         return r.json()
     else:
         print(f"Error {r.status_code} fetching ranked data for {encrypted_summoner_id}: {r.text}")
         return None
+
+
+def get_cutoff_lp(tier, api_key):
+    """Fetch the LP cutoff for a given tier (Challenger or Grandmaster)."""
+    url = f"https://{REGION}.api.riotgames.com/lol/league/v4/{tier.lower()}leagues/by-queue/RANKED_SOLO_5x5"
+    headers = {"X-Riot-Token": api_key}
+    r = requests.get(url, headers=headers)
+    if r.status_code == 200:
+        entries = r.json().get("entries", [])
+        if entries:
+            # Find the lowest LP in this tier
+            return min(entry["leaguePoints"] for entry in entries)
+    print(f"Error fetching cutoff for {tier}: {r.text}")
+    return 0
+
+
+def adjust_lp(tier, rank, lp):
+    """Adjust LP values based on tier and cutoffs."""
+    if tier == "CHALLENGER":
+        return 4800 + lp
+    elif tier == "GRANDMASTER":
+        return 4400 + lp
+    elif tier == "MASTER":
+        return 4000 + lp
+    else:
+        return lp
 
 
 if __name__ == "__main__":
