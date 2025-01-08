@@ -7,128 +7,135 @@
   
   <!-- Chart.js Library -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Chart.js Date Adapter -->
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
   
-  <!-- Custom Styles -->
+  <!-- Style -->
   <style>
     body {
       background-color: #121212; /* Dark background */
-      color: white; /* White text for contrast */
+      color: #ffffff; /* White text */
       font-family: Arial, sans-serif;
     }
 
     h1 {
       text-align: center;
-      margin: 20px 0;
-      color: white;
+      margin-bottom: 20px;
     }
 
     canvas {
       display: block;
-      margin: 0 auto; /* Center the graph */
-      max-width: 90%;
-    }
-
-    .chart-container {
-      position: relative;
-      height: 80vh; /* Use 80% of screen height */
-      width: 100%;
+      margin: 0 auto;
+      width: 100vw; /* Full screen width */
+      height: 85vh; /* Full screen height */
     }
   </style>
 </head>
 <body>
   <h1>Summoner Progression Tracker</h1>
-  <div class="chart-container">
+  <div>
     <canvas id="summonerChart"></canvas>
   </div>
 
   <script>
+    // Rank Mapping
+    const rankOrder = [
+      "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM",
+      "EMERALD", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"
+    ];
+
+    const divisionMultiplier = {
+      "IV": 0,
+      "III": 100,
+      "II": 200,
+      "I": 300
+    };
+
+    // Calculate LP Position Based on Rank and Division
+    function calculateRankLP(tier, division, lp) {
+      const baseRank = rankOrder.indexOf(tier) * 400; // 400 LP per rank
+
+      // Handle Master, Grandmaster, Challenger
+      if (tier === "MASTER") {
+        return 4000 + lp; // Master starts at 4000 LP
+      } else if (tier === "GRANDMASTER") {
+        return 4400 + lp; // Grandmaster starts at 4400 LP
+      } else if (tier === "CHALLENGER") {
+        return 4800 + lp; // Challenger starts at 4800 LP
+      }
+
+      // Handle Ranks Below Master
+      const divisionLP = divisionMultiplier[division] || 0;
+      return baseRank + divisionLP + lp;
+    }
+
+    // Load data from JSON file
     async function loadData() {
       const response = await fetch('lp_data.json'); // Load JSON file
       const data = await response.json();
 
-      // Rank mappings
-      const ranks = [
-        "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM",
-        "EMERALD", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"
-      ];
-
-      const rankOffsets = {
-        "IRON": 0,
-        "BRONZE": 400,
-        "SILVER": 800,
-        "GOLD": 1200,
-        "PLATINUM": 1600,
-        "EMERALD": 2000,
-        "DIAMOND": 2400,
-        "MASTER": 2800,
-        "GRANDMASTER": 3200,
-        "CHALLENGER": 3600
-      };
-
       const datasets = [];
-      const colors = ['blue', 'red', 'green', 'orange', 'purple', 'cyan', 'pink', 'yellow', 'lime', 'magenta'];
+      const allLabels = new Set(); // Collect all unique timestamps
 
-      let allTimestamps = [];
-
-      // Collect all timestamps for scaling
+      // Collect timestamps
       Object.values(data).forEach(records => {
-        records.forEach(record => {
-          allTimestamps.push(new Date(record.timestamp).getTime());
-        });
+        records.forEach(record => allLabels.add(new Date(record.timestamp).getTime()));
       });
 
-      const minTime = Math.min(...allTimestamps);
-      const maxTime = Math.max(...allTimestamps);
+      // Sort timestamps and center them in time range
+      const labels = Array.from(allLabels).sort((a, b) => a - b).map(ts => new Date(ts));
+      const firstLabel = labels[0];
+      const lastLabel = labels[labels.length - 1];
 
-      Object.keys(data).forEach((summoner, index) => {
+      const centerTime = (firstLabel.getTime() + lastLabel.getTime()) / 2;
+      const offset = (lastLabel.getTime() - firstLabel.getTime()) * 0.2; // Add 20% spacing
+
+      const colors = [
+        'blue', 'red', 'green', 'orange', 'purple', 'brown', 'cyan', 'magenta', 'teal', 'pink'
+      ];
+
+      let colorIndex = 0;
+
+      // Process each summoner's data
+      Object.keys(data).forEach(summoner => {
         const records = data[summoner];
-        const color = colors[index % colors.length];
 
-        // Process data points
-        const points = records.map((record, i) => {
-          let lp = record.lp;
-          const rank = record.tier;
-          const division = record.rank;
-
-          // Adjust LP for each rank and division
-          let adjustedLP = rankOffsets[rank];
-          if (rank !== "MASTER" && rank !== "GRANDMASTER" && rank !== "CHALLENGER") {
-            adjustedLP += (4 - parseInt(division)) * 100; // Division adds LP
-          } else {
-            adjustedLP += lp; // Use LP directly for high ranks
-          }
-
-          // Add slight horizontal offset for clarity
-          const timeOffset = (maxTime - new Date(record.timestamp).getTime()) * (index + 1) * 0.0001;
-
+        const rankData = records.map((record, index) => {
+          // Generate positions with slight horizontal shifts for clarity
+          const xPos = new Date(centerTime - (index * 86400000)); // Shift left by 1 day
           return {
-            x: new Date(new Date(record.timestamp).getTime() - timeOffset), // Offset for clarity
-            y: adjustedLP,
-            realLP: lp // Store actual LP for tooltip
+            x: xPos,
+            y: calculateRankLP(record.tier, record.rank, record.lp), // Calculated LP
+            realLP: record.lp // Real LP for tooltip
           };
         });
 
-        // Add a leftward point for continuity
-        const leftmost = {
-          x: new Date(minTime - 86400000 * (index + 1)), // Push further left
-          y: points[0].y // Keep same LP value
-        };
-        points.unshift(leftmost);
+        // Extend line towards the left for visual continuity
+        rankData.unshift({
+          x: new Date(centerTime - 2 * offset), // Extend line towards the left
+          y: rankData[0].y,
+          realLP: rankData[0].realLP
+        });
 
+        const tier = records[records.length - 1].tier;
+        const rank = records[records.length - 1].rank;
+
+        // Create dataset
         datasets.push({
-          label: `${summoner} (${records[records.length - 1].tier} ${records[records.length - 1].rank})`,
-          data: points,
-          borderColor: color,
-          backgroundColor: color,
+          label: `${summoner} (${tier} ${rank})`,
+          data: rankData,
+          borderColor: colors[colorIndex % colors.length],
           borderWidth: 2,
           fill: false,
-          pointRadius: 5,
-          pointHoverRadius: 8
+          tension: 0.1,
+          pointRadius: 5, // Enlarged points
+          pointHoverRadius: 7
         });
+
+        colorIndex++;
       });
 
-      // Create the Chart
+      // Create chart
       const ctx = document.getElementById('summonerChart').getContext('2d');
       new Chart(ctx, {
         type: 'line',
@@ -136,74 +143,63 @@
           datasets: datasets
         },
         options: {
-          responsive: true,
-          maintainAspectRatio: false,
           scales: {
             x: {
               type: 'time',
               time: {
                 unit: 'day'
               },
-              min: new Date(minTime - 86400000 * 5), // Extra spacing on the left
-              max: new Date(maxTime + 86400000 * 2), // Extra spacing on the right
+              min: new Date(centerTime - 2 * offset),
+              max: new Date(centerTime + 2 * offset),
               title: {
                 display: true,
                 text: 'Date',
-                color: 'white'
+                color: '#ffffff'
               },
               ticks: {
-                color: 'white'
+                color: '#ffffff'
               }
             },
             y: {
+              ticks: {
+                color: '#ffffff',
+                callback: function (value) {
+                  if (value >= 4800) return "CHALLENGER";
+                  if (value >= 4400) return "GRANDMASTER";
+                  if (value >= 4000) return "MASTER";
+                  const rankIndex = Math.floor(value / 400);
+                  return rankOrder[rankIndex];
+                }
+              },
               title: {
                 display: true,
                 text: 'Rank Progression',
-                color: 'white'
-              },
-              ticks: {
-                callback: function(value) {
-                  if (value >= 3600) return "CHALLENGER";
-                  if (value >= 3200) return "GRANDMASTER";
-                  if (value >= 2800) return "MASTER";
-                  if (value >= 2400) return "DIAMOND";
-                  if (value >= 2000) return "EMERALD";
-                  if (value >= 1600) return "PLATINUM";
-                  if (value >= 1200) return "GOLD";
-                  if (value >= 800) return "SILVER";
-                  if (value >= 400) return "BRONZE";
-                  return "IRON";
-                },
-                color: 'white'
+                color: '#ffffff'
               }
             }
           },
           plugins: {
-            tooltip: {
-              callbacks: {
-                label: function(context) {
-                  const point = context.raw;
-                  return `${context.dataset.label}: ${point.realLP} LP`;
-                }
-              }
-            },
             legend: {
               display: true,
               position: 'top',
               labels: {
-                color: 'white'
+                color: '#ffffff'
               }
-            }
-          },
-          elements: {
-            line: {
-              tension: 0.3 // Smooth line curves
+            },
+            tooltip: {
+              callbacks: {
+                label: function (tooltipItem) {
+                  const lp = tooltipItem.raw.realLP;
+                  return `${tooltipItem.dataset.label}: ${lp} LP`;
+                }
+              }
             }
           }
         }
       });
     }
 
+    // Load data and render chart
     loadData();
   </script>
 </body>
