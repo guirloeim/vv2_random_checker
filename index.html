@@ -48,26 +48,31 @@
       ];
 
       const datasets = [];
-      const colors = ['blue', 'red', 'green', 'orange', 'purple', 'cyan', 'magenta', 'teal', 'pink'];
+      const colors = [
+        'blue', 'red', 'green', 'orange', 'purple', 
+        'cyan', 'magenta', 'teal', 'pink', 'yellow'
+      ];
 
       let colorIndex = 0;
+
+      // Date Range: 2 days before today to 2 days after today
+      const today = new Date();
+      const startDate = new Date(today);
+      startDate.setDate(today.getDate() - 2); // 2 days before today
+      const endDate = new Date(today);
+      endDate.setDate(today.getDate() + 2); // 2 days after today
 
       // Process each summoner's data
       Object.keys(data).forEach(summoner => {
         const records = data[summoner];
 
-        // Map data points
-        const points = records.map((record, index) => {
-          const x = new Date(record.timestamp); // Timestamp
-          const y = record.adjustedLP; // Adjusted LP from JSON
-          const realLP = record.lp;   // Actual LP value for tooltip
+        const points = records.map(record => ({
+          x: new Date(record.timestamp), // Timestamp for x-axis
+          y: record.adjustedLP,          // Adjusted LP for y-axis
+          realLP: record.lp              // Actual LP for tooltip
+        }));
 
-          // Dynamic position spacing (closer to middle for final points)
-          const timeOffset = (records.length - index) * 86400000; // Offset by 1 day
-          return { x: new Date(x.getTime() - timeOffset), y, realLP };
-        });
-
-        // Add dataset
+        // Add dataset for each summoner
         datasets.push({
           label: `${summoner} (${records[records.length - 1].tier} ${records[records.length - 1].rank})`,
           data: points,
@@ -92,6 +97,8 @@
             x: {
               type: 'time',
               time: { unit: 'day' },
+              min: startDate,
+              max: endDate,
               title: {
                 display: true,
                 text: 'Date',
