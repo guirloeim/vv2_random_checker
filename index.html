@@ -63,12 +63,14 @@
         records.forEach(record => allLabels.add(new Date(record.timestamp).getTime()));
       });
 
-      // Sort timestamps and ensure consistent spacing
+      // Sort timestamps and center them in time range
       const labels = Array.from(allLabels).sort((a, b) => a - b).map(ts => new Date(ts));
       const firstLabel = labels[0];
       const lastLabel = labels[labels.length - 1];
 
-      // Colors for lines
+      const centerTime = (firstLabel.getTime() + lastLabel.getTime()) / 2;
+      const offset = (lastLabel.getTime() - firstLabel.getTime()) * 0.1; // Add 10% spacing
+
       const colors = [
         'blue', 'red', 'green', 'orange', 'purple', 'brown', 'cyan', 'magenta', 'teal', 'pink'
       ];
@@ -79,29 +81,41 @@
       Object.keys(data).forEach(summoner => {
         const records = data[summoner];
 
-        // Map timestamps to rank-based LP values
         const rankData = labels.map(label => {
           const record = records.find(r => new Date(r.timestamp).getTime() === label.getTime());
           if (record) {
-            return calculateRankLP(record.tier, record.rank, record.lp);
+            return {
+              x: label,
+              y: calculateRankLP(record.tier, record.rank, record.lp)
+            };
           }
-          // Extend line leftward for missing data
+
+          // Extend line leftward for continuity
           const earliestRecord = records[0];
-          return calculateRankLP(earliestRecord.tier, earliestRecord.rank, earliestRecord.lp);
+          return {
+            x: new Date(centerTime - offset - Math.random() * 1000000), // Slight offset to the left
+            y: calculateRankLP(earliestRecord.tier, earliestRecord.rank, earliestRecord.lp)
+          };
         });
 
         const tier = records[records.length - 1].tier;
         const rank = records[records.length - 1].rank;
 
+        // Introduce small horizontal offset based on rank
+        const horizontalShift = (rankOrder.indexOf(tier) / rankOrder.length) * offset;
+
         // Create dataset
         datasets.push({
           label: `${summoner} (${tier} ${rank})`,
-          data: rankData,
+          data: rankData.map(point => ({
+            x: new Date(point.x.getTime() + horizontalShift), // Offset points by rank position
+            y: point.y
+          })),
           borderColor: colors[colorIndex % colors.length],
           borderWidth: 2,
           fill: false,
           tension: 0.1,
-          pointRadius: 5, // Enlarge data points for clarity
+          pointRadius: 5, // Enlarged points
           pointHoverRadius: 7
         });
 
@@ -113,7 +127,6 @@
       new Chart(ctx, {
         type: 'line',
         data: {
-          labels: labels, // Time on X-axis
           datasets: datasets
         },
         options: {
@@ -123,6 +136,8 @@
               time: {
                 unit: 'day'
               },
+              min: new Date(centerTime - 1.5 * offset), // Expand time range for centering
+              max: new Date(centerTime + 1.5 * offset),
               title: {
                 display: true,
                 text: 'Date'
