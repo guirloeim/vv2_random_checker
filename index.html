@@ -18,39 +18,40 @@
 
   <script>
     // Rank Mapping
-    const rankOrder = {
-      "IRON": 1,
-      "BRONZE": 2,
-      "SILVER": 3,
-      "GOLD": 4,
-      "PLATINUM": 5,
-      "EMERALD": 6,
-      "DIAMOND": 7,
-      "MASTER": 8,
-      "GRANDMASTER": 9,
-      "CHALLENGER": 10
-    };
+    const rankOrder = [
+      "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM",
+      "EMERALD", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"
+    ];
 
     const divisionMultiplier = {
       "IV": 0,
-      "III": 1,
-      "II": 2,
-      "I": 3
+      "III": 100,
+      "II": 200,
+      "I": 300
     };
 
-    // Function to calculate rank position
-    function calculateRankPosition(tier, rank, lp) {
-      const baseRank = rankOrder[tier] || 0;
-      let position = baseRank * 1000; // Base multiplier for rank
+    // Calculate LP Position Based on Rank and Division
+    function calculateRankLP(tier, division, lp) {
+      const baseRank = rankOrder.indexOf(tier) * 400; // Each rank separated by 400 LP
 
-      // Add division multiplier (if not in Master, GM, Challenger)
-      if (tier !== "MASTER" && tier !== "GRANDMASTER" && tier !== "CHALLENGER") {
-        position += (divisionMultiplier[rank] || 0) * 200; // Divisions
+      // Handle Master and Above
+      if (tier === "MASTER" || tier === "GRANDMASTER" || tier === "CHALLENGER") {
+        const masterBase = 4000; // Master starts at 4000 LP
+        return masterBase + lp; // Add LP directly for Master and above
       }
 
-      // Add LP within the tier or division
-      position += lp;
-      return position;
+      // Handle Ranks Below Master
+      const divisionLP = divisionMultiplier[division] || 0; // Add division LP
+      return baseRank + divisionLP + lp;
+    }
+
+    // Generate Y-axis Labels (Rank Names)
+    function generateYAxisLabels() {
+      const labels = [];
+      rankOrder.forEach(rank => {
+        labels.push(rank); // Add rank name
+      });
+      return labels;
     }
 
     // Load data from JSON file
@@ -80,17 +81,13 @@
       Object.keys(data).forEach(summoner => {
         const records = data[summoner];
 
-        // Map timestamps to ranks and LP
-        const rankMap = {};
-        records.forEach(record => {
-          const time = new Date(record.timestamp).getTime();
-          rankMap[time] = calculateRankPosition(record.tier, record.rank, record.lp);
-        });
-
-        // Fill missing data points
+        // Map timestamps to rank-based LP values
         const rankData = labels.map(label => {
-          const time = label.getTime();
-          return rankMap[time] !== undefined ? rankMap[time] : null;
+          const record = records.find(r => new Date(r.timestamp).getTime() === label.getTime());
+          if (record) {
+            return calculateRankLP(record.tier, record.rank, record.lp);
+          }
+          return null; // Empty spot for missing data
         });
 
         const tier = records[records.length - 1].tier;
@@ -132,22 +129,14 @@
             y: {
               ticks: {
                 callback: function (value) {
-                  // Reverse mapping for display
-                  const rankValues = Object.entries(rankOrder).sort((a, b) => a[1] - b[1]);
-                  for (const [tier, rank] of rankValues) {
-                    if (value >= rank * 1000) {
-                      const division = Math.floor((value % 1000) / 200);
-                      const lp = value % 200;
-                      if (rank >= 8) return `${tier} ${lp} LP`;
-                      return `${tier} ${4 - division} (${lp} LP)`;
-                    }
-                  }
-                  return value;
+                  if (value >= 4000) return "MASTER+";
+                  const rankIndex = Math.floor(value / 400);
+                  return rankOrder[rankIndex]; // Show rank name only
                 }
               },
               title: {
                 display: true,
-                text: 'Rank & LP'
+                text: 'Rank Progression'
               }
             }
           },
