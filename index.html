@@ -9,6 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Chart.js Date Adapter -->
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+  
   <!-- Style -->
   <style>
     body {
@@ -19,11 +20,14 @@
 
     h1 {
       text-align: center;
+      margin-bottom: 20px;
     }
 
     canvas {
       display: block;
-      margin: 0 auto; /* Center the chart */
+      margin: 0 auto;
+      width: 90vw; /* Full width */
+      height: 70vh; /* Large height */
     }
   </style>
 </head>
@@ -62,14 +66,9 @@
       return baseRank + divisionLP + lp;
     }
 
-    // Generate Y-axis Labels
-    function generateYAxisLabels() {
-      return rankOrder;
-    }
-
     // Load data from JSON file
     async function loadData() {
-      const response = await fetch('lp_data.json'); // Load JSON data
+      const response = await fetch('lp_data.json'); // Load JSON file
       const data = await response.json();
 
       const datasets = [];
@@ -100,7 +99,7 @@
 
         const rankData = records.map((record, index) => {
           // Generate positions with slight horizontal shifts for clarity
-          const xPos = new Date(centerTime + (index * 1000000)); // Offset rightward slightly
+          const xPos = new Date(centerTime - (index * 86400000)); // Shift left by 1 day
           return {
             x: xPos,
             y: calculateRankLP(record.tier, record.rank, record.lp)
@@ -109,7 +108,7 @@
 
         // Extend line towards the left for visual continuity
         rankData.unshift({
-          x: new Date(centerTime - 1.5 * offset), // Extend line towards the left
+          x: new Date(centerTime - 2 * offset), // Extend line towards the left
           y: rankData[0].y
         });
 
@@ -145,8 +144,8 @@
               time: {
                 unit: 'day'
               },
-              min: new Date(centerTime - 1.5 * offset), // Expand time range for centering
-              max: new Date(centerTime + 1.5 * offset),
+              min: new Date(centerTime - 2 * offset), // Expand time range for centering
+              max: new Date(centerTime + 2 * offset),
               title: {
                 display: true,
                 text: 'Date'
