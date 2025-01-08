@@ -13,7 +13,7 @@ SUMMONERS = [
     "meow81#paw",
     "Owpi#idiot",
     "Big2080#EUW",
-    "Myst#5672",
+    "Myst#Blade",
     "Yui#KEK",
     "Lil Wio#EUW",
     "King Afee#333",
