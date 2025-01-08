@@ -74,35 +74,30 @@ def main():
     try:
         with open(data_filename, "r", encoding="utf-8") as f:
             data = json.load(f)
-            # Check if data already contains cutoffs
-            if "cutoffs" in data:
-                old_data = data["summoners"]
-            else:
-                old_data = data
+
+            # Extract summoner data and preserve cutoffs
+            old_data = data.get("summoners", {})
+            cutoffs = data.get("cutoffs", {"CHALLENGER": 0, "GRANDMASTER": 0})
     except:
-        old_data = []
+        old_data = {}
+        cutoffs = {"CHALLENGER": 0, "GRANDMASTER": 0}
 
     # Append new data
-    old_data.extend(summoner_data_list)
-
-    # Group data by summoner
-    grouped_data = {}
-    for entry in old_data:
+    for entry in summoner_data_list:
         name = entry["summonerName"]
-        if name not in grouped_data:
-            grouped_data[name] = []
-        grouped_data[name].append(entry)
+        if name not in old_data:
+            old_data[name] = []
+        old_data[name].append(entry)
 
-    # Prepare final JSON with cutoffs
+    # Save updated data with cutoffs
     output_data = {
         "cutoffs": {
             "CHALLENGER": CHALLENGER_CUTOFF,
             "GRANDMASTER": GRANDMASTER_CUTOFF
         },
-        "summoners": grouped_data
+        "summoners": old_data
     }
 
-    # Save updated data
     with open(data_filename, "w", encoding="utf-8") as f:
         json.dump(output_data, f, indent=2)
 
