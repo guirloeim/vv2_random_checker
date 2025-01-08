@@ -78,15 +78,15 @@
 
           // Calculate adjusted LP based on rank
           if (record.tier === "CHALLENGER") {
-            adjustedLP = 4000 + record.lp; // Challenger starts at 4800
+            adjustedLP = 3200 + record.lp; // Challenger starts at 4000
           } else if (record.tier === "GRANDMASTER") {
-            adjustedLP = 3600 + record.lp; // Grandmaster starts at 4400
+            adjustedLP = 3200 + record.lp; // Grandmaster starts at 4400
           } else if (record.tier === "MASTER") {
             adjustedLP = 3200 + record.lp; // Master starts at 4000
           } else {
             // Calculate for other ranks
             const rankIndex = ranks.indexOf(record.tier);
-            const baseLP = 400 * (rankIndex-1);
+            const baseLP = 400 * rankIndex;
             const divisionLP = 400 - divisionOffset[record.rank];
             adjustedLP = baseLP + divisionLP + record.lp;
           }
