@@ -113,43 +113,51 @@ def get_cutoff_lp(tier, api_key):
 
 def adjust_lp(tier, rank, lp):
     """Calculate LP based on rank cutoffs."""
+    # Handle special tiers: Master, Grandmaster, Challenger
     if tier == "CHALLENGER":
-        return 4800 + lp
+        return CHALLENGER_CUTOFF + lp  # Use Challenger cutoff
     elif tier == "GRANDMASTER":
-        return 4400 + lp
+        return GRANDMASTER_CUTOFF + lp  # Use Grandmaster cutoff
     elif tier == "MASTER":
-        return 4000 + lp
+        return 4000 + lp  # Master starts at 4000 LP
     else:
+        # Handle ranks below Master
         division_points = {"IV": 0, "III": 100, "II": 200, "I": 300}
         rank_base = ["IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "EMERALD", "DIAMOND"].index(tier) * 400
         return rank_base + division_points[rank] + lp
 
 
 def get_summoner_id(name, tag, api_key):
+    """Fetch PUUID from Riot ID."""
     url = f"https://{PLATFORM_REGION}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{name}/{tag}"
     headers = {"X-Riot-Token": api_key}
     r = requests.get(url, headers=headers)
     if r.status_code == 200:
         puuid = r.json().get("puuid")
         return get_summoner_id_by_puuid(puuid, api_key)
+    print(f"Error fetching PUUID for {name}#{tag}: {r.text}")
     return None
 
 
 def get_summoner_id_by_puuid(puuid, api_key):
+    """Fetch Summoner ID using PUUID."""
     url = f"https://{REGION}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{puuid}"
     headers = {"X-Riot-Token": api_key}
     r = requests.get(url, headers=headers)
     if r.status_code == 200:
         return r.json().get("id")
+    print(f"Error fetching Summoner ID for PUUID {puuid}: {r.text}")
     return None
 
 
 def get_ranked_data(encrypted_summoner_id, api_key):
+    """Fetch ranked data for a given Summoner ID."""
     url = f"https://{REGION}.api.riotgames.com/lol/league/v4/entries/by-summoner/{encrypted_summoner_id}"
     headers = {"X-Riot-Token": api_key}
     r = requests.get(url, headers=headers)
     if r.status_code == 200:
         return r.json()
+    print(f"Error fetching ranked data for {encrypted_summoner_id}: {r.text}")
     return None
 
 
