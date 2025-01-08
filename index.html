@@ -69,6 +69,18 @@
       const datasets = [];
       const colors = ['blue', 'red', 'green', 'orange', 'purple', 'cyan', 'pink', 'yellow', 'lime', 'magenta'];
 
+      let allTimestamps = [];
+
+      // Collect all timestamps for scaling
+      Object.values(data).forEach(records => {
+        records.forEach(record => {
+          allTimestamps.push(new Date(record.timestamp).getTime());
+        });
+      });
+
+      const minTime = Math.min(...allTimestamps);
+      const maxTime = Math.max(...allTimestamps);
+
       Object.keys(data).forEach((summoner, index) => {
         const records = data[summoner];
         const color = colors[index % colors.length];
@@ -87,16 +99,22 @@
             adjustedLP += lp; // Use LP directly for high ranks
           }
 
-          // Push points slightly closer to the middle for clarity
-          const spacingFactor = (i + 1) / (records.length + 1); // Dynamic spacing
-          const timeOffset = spacingFactor * 1000 * 60 * 60 * 24; // Offset in days
+          // Add slight horizontal offset for clarity
+          const timeOffset = (maxTime - new Date(record.timestamp).getTime()) * (index + 1) * 0.0001;
 
           return {
-            x: new Date(new Date(record.timestamp).getTime() - timeOffset), // Adjusted for leftwards spacing
+            x: new Date(new Date(record.timestamp).getTime() - timeOffset), // Offset for clarity
             y: adjustedLP,
             realLP: lp // Store actual LP for tooltip
           };
         });
+
+        // Add a leftward point for continuity
+        const leftmost = {
+          x: new Date(minTime - 86400000 * (index + 1)), // Push further left
+          y: points[0].y // Keep same LP value
+        };
+        points.unshift(leftmost);
 
         datasets.push({
           label: `${summoner} (${records[records.length - 1].tier} ${records[records.length - 1].rank})`,
@@ -126,6 +144,8 @@
               time: {
                 unit: 'day'
               },
+              min: new Date(minTime - 86400000 * 5), // Extra spacing on the left
+              max: new Date(maxTime + 86400000 * 2), // Extra spacing on the right
               title: {
                 display: true,
                 text: 'Date',
@@ -184,7 +204,6 @@
       });
     }
 
-    // Load and render the chart
     loadData();
   </script>
 </body>
