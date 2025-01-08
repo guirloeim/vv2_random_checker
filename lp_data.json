@@ -1,412 +1,128 @@
 {
-  "Nico#coati": [
-    {
-      "summonerName": "Nico#coati",
-      "tier": "CHALLENGER",
-      "rank": "I",
-      "lp": 1044,
-      "timestamp": "2025-01-08T12:51:40.440812+00:00"
-    },
-    {
-      "summonerName": "Nico#coati",
-      "tier": "CHALLENGER",
-      "rank": "I",
-      "lp": 1044,
-      "timestamp": "2025-01-08T13:38:50.853691+00:00"
-    },
-    {
-      "summonerName": "Nico#coati",
-      "tier": "CHALLENGER",
-      "rank": "I",
-      "lp": 1044,
-      "adjustedLP": 5844,
-      "timestamp": "2025-01-08T15:53:43.237606+00:00"
-    },
-    {
-      "summonerName": "Nico#coati",
-      "tier": "CHALLENGER",
-      "rank": "I",
-      "lp": 1044,
-      "adjustedLP": 5844,
-      "timestamp": "2025-01-08T16:17:07.628626+00:00"
-    },
-    {
-      "summonerName": "Nico#coati",
-      "tier": "CHALLENGER",
-      "rank": "I",
-      "lp": 1044,
-      "adjustedLP": 1952,
-      "timestamp": "2025-01-08T16:25:23.893361+00:00"
-    }
-  ],
-  "Loopy#0004": [
-    {
-      "summonerName": "Loopy#0004",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 39,
-      "timestamp": "2025-01-08T12:51:42.033892+00:00"
-    },
-    {
-      "summonerName": "Loopy#0004",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 39,
-      "timestamp": "2025-01-08T13:38:52.346728+00:00"
-    },
-    {
-      "summonerName": "Loopy#0004",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 39,
-      "adjustedLP": 4039,
-      "timestamp": "2025-01-08T15:53:45.120637+00:00"
-    },
-    {
-      "summonerName": "Loopy#0004",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 39,
-      "adjustedLP": 4039,
-      "timestamp": "2025-01-08T16:17:08.934533+00:00"
-    },
-    {
-      "summonerName": "Loopy#0004",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 39,
-      "adjustedLP": 4039,
-      "timestamp": "2025-01-08T16:25:25.198032+00:00"
-    }
-  ],
-  "The Mid Game#Canoe": [
-    {
-      "summonerName": "The Mid Game#Canoe",
-      "tier": "GRANDMASTER",
-      "rank": "I",
-      "lp": 670,
-      "timestamp": "2025-01-08T13:38:53.841242+00:00"
-    },
-    {
-      "summonerName": "The Mid Game#Canoe",
-      "tier": "GRANDMASTER",
-      "rank": "I",
-      "lp": 670,
-      "adjustedLP": 5070,
-      "timestamp": "2025-01-08T15:53:47.101961+00:00"
-    },
-    {
-      "summonerName": "The Mid Game#Canoe",
-      "tier": "GRANDMASTER",
-      "rank": "I",
-      "lp": 670,
-      "adjustedLP": 5070,
-      "timestamp": "2025-01-08T16:17:10.181598+00:00"
-    },
-    {
-      "summonerName": "The Mid Game#Canoe",
-      "tier": "GRANDMASTER",
-      "rank": "I",
-      "lp": 670,
-      "adjustedLP": 1212,
-      "timestamp": "2025-01-08T16:25:26.480203+00:00"
-    }
-  ],
-  "emerrin#623HS": [
-    {
-      "summonerName": "emerrin#623HS",
-      "tier": "GRANDMASTER",
-      "rank": "I",
-      "lp": 665,
-      "timestamp": "2025-01-08T13:38:55.318449+00:00"
-    },
-    {
-      "summonerName": "emerrin#623HS",
-      "tier": "GRANDMASTER",
-      "rank": "I",
-      "lp": 665,
-      "adjustedLP": 5065,
-      "timestamp": "2025-01-08T15:53:48.962733+00:00"
-    },
-    {
-      "summonerName": "emerrin#623HS",
-      "tier": "GRANDMASTER",
-      "rank": "I",
-      "lp": 665,
-      "adjustedLP": 5065,
-      "timestamp": "2025-01-08T16:17:11.491277+00:00"
-    },
-    {
-      "summonerName": "emerrin#623HS",
-      "tier": "GRANDMASTER",
-      "rank": "I",
-      "lp": 685,
-      "adjustedLP": 1227,
-      "timestamp": "2025-01-08T16:25:27.775696+00:00"
-    }
-  ],
-  "meow81#paw": [
-    {
-      "summonerName": "meow81#paw",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 295,
-      "timestamp": "2025-01-08T13:38:57.042009+00:00"
-    },
-    {
-      "summonerName": "meow81#paw",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 295,
-      "adjustedLP": 4295,
-      "timestamp": "2025-01-08T15:53:51.031560+00:00"
-    },
-    {
-      "summonerName": "meow81#paw",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 295,
-      "adjustedLP": 4295,
-      "timestamp": "2025-01-08T16:17:12.884629+00:00"
-    },
-    {
-      "summonerName": "meow81#paw",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 295,
-      "adjustedLP": 4295,
-      "timestamp": "2025-01-08T16:25:29.037027+00:00"
-    }
-  ],
-  "Owpi#idiot": [
-    {
-      "summonerName": "Owpi#idiot",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 3,
-      "timestamp": "2025-01-08T13:38:58.531072+00:00"
-    },
-    {
-      "summonerName": "Owpi#idiot",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 3,
-      "adjustedLP": 4003,
-      "timestamp": "2025-01-08T15:53:52.931713+00:00"
-    },
-    {
-      "summonerName": "Owpi#idiot",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 3,
-      "adjustedLP": 4003,
-      "timestamp": "2025-01-08T16:17:14.195472+00:00"
-    },
-    {
-      "summonerName": "Owpi#idiot",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 3,
-      "adjustedLP": 4003,
-      "timestamp": "2025-01-08T16:25:30.341299+00:00"
-    }
-  ],
-  "Big2080#EUW": [
-    {
-      "summonerName": "Big2080#EUW",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 10,
-      "timestamp": "2025-01-08T13:38:59.998770+00:00"
-    },
-    {
-      "summonerName": "Big2080#EUW",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 10,
-      "adjustedLP": 4010,
-      "timestamp": "2025-01-08T15:53:54.820996+00:00"
-    },
-    {
-      "summonerName": "Big2080#EUW",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 10,
-      "adjustedLP": 4010,
-      "timestamp": "2025-01-08T16:17:15.440245+00:00"
-    },
-    {
-      "summonerName": "Big2080#EUW",
-      "tier": "MASTER",
-      "rank": "I",
-      "lp": 10,
-      "adjustedLP": 4010,
-      "timestamp": "2025-01-08T16:25:31.620178+00:00"
-    }
-  ],
-  "Myst#Blade": [
-    {
-      "summonerName": "Myst#Blade",
-      "tier": "DIAMOND",
-      "rank": "III",
-      "lp": 3,
-      "timestamp": "2025-01-08T13:39:02.130426+00:00"
-    },
-    {
-      "summonerName": "Myst#Blade",
-      "tier": "DIAMOND",
-      "rank": "III",
-      "lp": 3,
-      "adjustedLP": 3,
-      "timestamp": "2025-01-08T15:53:56.701862+00:00"
-    },
-    {
-      "summonerName": "Myst#Blade",
-      "tier": "DIAMOND",
-      "rank": "III",
-      "lp": 3,
-      "adjustedLP": 2503,
-      "timestamp": "2025-01-08T16:17:16.730683+00:00"
-    },
-    {
-      "summonerName": "Myst#Blade",
-      "tier": "DIAMOND",
-      "rank": "III",
-      "lp": 3,
-      "adjustedLP": 2503,
-      "timestamp": "2025-01-08T16:25:32.897693+00:00"
-    }
-  ],
-  "Yui#KEK": [
-    {
-      "summonerName": "Yui#KEK",
-      "tier": "DIAMOND",
-      "rank": "IV",
-      "lp": 26,
-      "timestamp": "2025-01-08T13:39:03.604711+00:00"
-    },
-    {
-      "summonerName": "Yui#KEK",
-      "tier": "DIAMOND",
-      "rank": "IV",
-      "lp": 26,
-      "adjustedLP": 26,
-      "timestamp": "2025-01-08T15:53:58.606305+00:00"
-    },
-    {
-      "summonerName": "Yui#KEK",
-      "tier": "DIAMOND",
-      "rank": "IV",
-      "lp": 26,
-      "adjustedLP": 2426,
-      "timestamp": "2025-01-08T16:17:18.012548+00:00"
-    },
-    {
-      "summonerName": "Yui#KEK",
-      "tier": "DIAMOND",
-      "rank": "IV",
-      "lp": 26,
-      "adjustedLP": 2426,
-      "timestamp": "2025-01-08T16:25:34.198209+00:00"
-    }
-  ],
-  "Lil Wio#EUW": [
-    {
-      "summonerName": "Lil Wio#EUW",
-      "tier": "PLATINUM",
-      "rank": "II",
-      "lp": 65,
-      "timestamp": "2025-01-08T13:39:05.112659+00:00"
-    },
-    {
-      "summonerName": "Lil Wio#EUW",
-      "tier": "PLATINUM",
-      "rank": "II",
-      "lp": 65,
-      "adjustedLP": 65,
-      "timestamp": "2025-01-08T15:54:00.474492+00:00"
-    },
-    {
-      "summonerName": "Lil Wio#EUW",
-      "tier": "PLATINUM",
-      "rank": "II",
-      "lp": 65,
-      "adjustedLP": 1865,
-      "timestamp": "2025-01-08T16:17:19.290006+00:00"
-    },
-    {
-      "summonerName": "Lil Wio#EUW",
-      "tier": "PLATINUM",
-      "rank": "II",
-      "lp": 65,
-      "adjustedLP": 1865,
-      "timestamp": "2025-01-08T16:25:35.462489+00:00"
-    }
-  ],
-  "King Afee#333": [
-    {
-      "summonerName": "King Afee#333",
-      "tier": "PLATINUM",
-      "rank": "III",
-      "lp": 82,
-      "timestamp": "2025-01-08T13:39:06.581726+00:00"
-    },
-    {
-      "summonerName": "King Afee#333",
-      "tier": "PLATINUM",
-      "rank": "III",
-      "lp": 82,
-      "adjustedLP": 82,
-      "timestamp": "2025-01-08T15:54:02.346558+00:00"
-    },
-    {
-      "summonerName": "King Afee#333",
-      "tier": "PLATINUM",
-      "rank": "III",
-      "lp": 82,
-      "adjustedLP": 1782,
-      "timestamp": "2025-01-08T16:17:20.563103+00:00"
-    },
-    {
-      "summonerName": "King Afee#333",
-      "tier": "PLATINUM",
-      "rank": "III",
-      "lp": 82,
-      "adjustedLP": 1782,
-      "timestamp": "2025-01-08T16:25:36.750434+00:00"
-    }
-  ],
-  "Lemis#33310": [
-    {
-      "summonerName": "Lemis#33310",
-      "tier": "GOLD",
-      "rank": "IV",
-      "lp": 61,
-      "timestamp": "2025-01-08T13:39:08.040061+00:00"
-    },
-    {
-      "summonerName": "Lemis#33310",
-      "tier": "GOLD",
-      "rank": "IV",
-      "lp": 61,
-      "adjustedLP": 61,
-      "timestamp": "2025-01-08T15:54:04.236840+00:00"
-    },
-    {
-      "summonerName": "Lemis#33310",
-      "tier": "GOLD",
-      "rank": "IV",
-      "lp": 61,
-      "adjustedLP": 1261,
-      "timestamp": "2025-01-08T16:17:21.998471+00:00"
-    },
-    {
-      "summonerName": "Lemis#33310",
-      "tier": "GOLD",
-      "rank": "IV",
-      "lp": 61,
-      "adjustedLP": 1261,
-      "timestamp": "2025-01-08T16:25:38.014160+00:00"
-    }
-  ]
+  "cutoffs": {
+    "CHALLENGER": 935,
+    "GRANDMASTER": 542
+  },
+  "summoners": {
+    "Nico#coati": [
+      {
+        "summonerName": "Nico#coati",
+        "tier": "CHALLENGER",
+        "rank": "I",
+        "lp": 1044,
+        "adjustedLP": 1979,
+        "timestamp": "2025-01-08T17:18:17.745379+00:00"
+      }
+    ],
+    "Loopy#0004": [
+      {
+        "summonerName": "Loopy#0004",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 39,
+        "adjustedLP": 4039,
+        "timestamp": "2025-01-08T17:18:19.811401+00:00"
+      }
+    ],
+    "The Mid Game#Canoe": [
+      {
+        "summonerName": "The Mid Game#Canoe",
+        "tier": "GRANDMASTER",
+        "rank": "I",
+        "lp": 670,
+        "adjustedLP": 1212,
+        "timestamp": "2025-01-08T17:18:21.922448+00:00"
+      }
+    ],
+    "emerrin#623HS": [
+      {
+        "summonerName": "emerrin#623HS",
+        "tier": "GRANDMASTER",
+        "rank": "I",
+        "lp": 685,
+        "adjustedLP": 1227,
+        "timestamp": "2025-01-08T17:18:23.982025+00:00"
+      }
+    ],
+    "meow81#paw": [
+      {
+        "summonerName": "meow81#paw",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 315,
+        "adjustedLP": 4315,
+        "timestamp": "2025-01-08T17:18:26.044689+00:00"
+      }
+    ],
+    "Owpi#idiot": [
+      {
+        "summonerName": "Owpi#idiot",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 3,
+        "adjustedLP": 4003,
+        "timestamp": "2025-01-08T17:18:28.176907+00:00"
+      }
+    ],
+    "Big2080#EUW": [
+      {
+        "summonerName": "Big2080#EUW",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 10,
+        "adjustedLP": 4010,
+        "timestamp": "2025-01-08T17:18:30.235914+00:00"
+      }
+    ],
+    "Myst#Blade": [
+      {
+        "summonerName": "Myst#Blade",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 3,
+        "adjustedLP": 2503,
+        "timestamp": "2025-01-08T17:18:32.335886+00:00"
+      }
+    ],
+    "Yui#KEK": [
+      {
+        "summonerName": "Yui#KEK",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 26,
+        "adjustedLP": 2426,
+        "timestamp": "2025-01-08T17:18:34.421163+00:00"
+      }
+    ],
+    "Lil Wio#EUW": [
+      {
+        "summonerName": "Lil Wio#EUW",
+        "tier": "PLATINUM",
+        "rank": "II",
+        "lp": 65,
+        "adjustedLP": 1865,
+        "timestamp": "2025-01-08T17:18:36.472447+00:00"
+      }
+    ],
+    "King Afee#333": [
+      {
+        "summonerName": "King Afee#333",
+        "tier": "PLATINUM",
+        "rank": "III",
+        "lp": 82,
+        "adjustedLP": 1782,
+        "timestamp": "2025-01-08T17:18:38.609003+00:00"
+      }
+    ],
+    "Lemis#33310": [
+      {
+        "summonerName": "Lemis#33310",
+        "tier": "GOLD",
+        "rank": "IV",
+        "lp": 61,
+        "adjustedLP": 1261,
+        "timestamp": "2025-01-08T17:18:40.691470+00:00"
+      }
+    ]
+  }
 }
