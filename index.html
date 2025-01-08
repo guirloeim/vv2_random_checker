@@ -139,8 +139,8 @@
                 color: '#ffffff',
                 stepSize: 400,
                 callback: function (value) {
-                  if (value >= 4800) return "CHALLENGER";
-                  if (value >= 4400) return "GRANDMASTER";
+                  if (value >= CHALLENGER_CUTOFF) return "CHALLENGER";
+                  if (value >= GRANDMASTER_CUTOFF) return "GRANDMASTER";
                   if (value >= 4000) return "MASTER";
                   const index = Math.floor(value / 400); // Handle other ranks
                   return ranks[index] || ""; // Default empty if out of range
