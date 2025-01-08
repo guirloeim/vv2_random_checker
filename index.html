@@ -37,149 +37,142 @@
   </div>
 
   <script>
-async function loadData() {
-  const response = await fetch('lp_data.json'); // Load JSON file
-  const data = await response.json();
+    async function loadData() {
+      const response = await fetch('lp_data.json'); // Load JSON file
+      const data = await response.json();
 
-  // Cutoff Values for Grandmaster and Challenger
-  const CHALLENGER_CUTOFF = data.cutoffs.CHALLENGER;
-  const GRANDMASTER_CUTOFF = data.cutoffs.GRANDMASTER;
+      // Cutoff Values for Grandmaster and Challenger
+      const CHALLENGER_CUTOFF = data.cutoffs.CHALLENGER;
+      const GRANDMASTER_CUTOFF = data.cutoffs.GRANDMASTER;
 
-  // Define constants for the y-axis
-  const MASTER_START = 2800;
-  const GM_START = MASTER_START + GRANDMASTER_CUTOFF;
-  const CHALL_START = MASTER_START + CHALLENGER_CUTOFF;
-  const MAX_LP = 4400;
+      // Rank Mapping
+      const ranks = [
+        "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM",
+        "EMERALD", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"
+      ];
 
-  // Rank Mapping
-  const ranks = [
-    "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM",
-    "EMERALD", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"
-  ];
-
-  const divisionOffset = {
-    "IV": 0,
-    "III": 100,
-    "II": 200,
-    "I": 300
-  };
-
-  const datasets = [];
-  const colors = [
-    'blue', 'red', 'green', 'orange', 'purple', 
-    'cyan', 'magenta', 'teal', 'pink', 'yellow'
-  ];
-
-  let colorIndex = 0;
-
-  // Process each summoner's data
-  Object.keys(data.summoners).forEach(summoner => {
-    const records = data.summoners[summoner];
-
-    const points = records.map(record => {
-      let adjustedLP;
-
-      // Calculate adjusted LP based on rank
-      if (record.tier === "CHALLENGER") {
-        adjustedLP = MASTER_START + CHALLENGER_CUTOFF + record.lp;
-      } else if (record.tier === "GRANDMASTER") {
-        adjustedLP = MASTER_START + GRANDMASTER_CUTOFF + record.lp;
-      } else if (record.tier === "MASTER") {
-        adjustedLP = MASTER_START + record.lp;
-      } else {
-        // Calculate for other ranks
-        const rankIndex = ranks.indexOf(record.tier);
-        const baseLP = 400 * rankIndex;
-        const divisionLP = 400 - divisionOffset[record.rank];
-        adjustedLP = baseLP + divisionLP + record.lp;
-      }
-
-      return {
-        x: new Date(record.timestamp), // Timestamp for x-axis
-        y: adjustedLP,                 // Adjusted LP for y-axis
-        realLP: record.lp              // Actual LP for tooltip
+      const divisionOffset = {
+        "IV": 0,
+        "III": 100,
+        "II": 200,
+        "I": 300
       };
-    });
 
-    // Add dataset for each summoner
-    datasets.push({
-      label: `${summoner} (${records[records.length - 1].tier} ${records[records.length - 1].rank})`,
-      data: points,
-      borderColor: colors[colorIndex % colors.length],
-      borderWidth: 2,
-      fill: false,
-      tension: 0.1,
-      pointRadius: 5,
-      pointHoverRadius: 8
-    });
+      const datasets = [];
+      const colors = [
+        'blue', 'red', 'green', 'orange', 'purple', 
+        'cyan', 'magenta', 'teal', 'pink', 'yellow'
+      ];
 
-    colorIndex++;
-  });
+      let colorIndex = 0;
 
-  // Create chart
-  const ctx = document.getElementById('summonerChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'line',
-    data: { datasets: datasets },
-    options: {
-      scales: {
-        x: {
-          type: 'time',
-          time: { unit: 'day' },
-          title: {
-            display: true,
-            text: 'Date',
-            color: '#ffffff'
-          },
-          ticks: { color: '#ffffff' }
-        },
-        y: {
-          min: 0,
-          max: MAX_LP,
-          title: {
-            display: true,
-            text: 'Rank Progression',
-            color: '#ffffff'
-          },
-          ticks: {
-            color: '#ffffff',
-            callback: function (value) {
-              if (value === 0) return "IRON";
-              if (value === 400) return "BRONZE";
-              if (value === 800) return "SILVER";
-              if (value === 1200) return "GOLD";
-              if (value === 1600) return "PLATINUM";
-              if (value === 2000) return "EMERALD";
-              if (value === 2400) return "DIAMOND";
-              if (value === MASTER_START) return "MASTER";
-              if (value === GM_START) return "GRANDMASTER";
-              if (value === CHALL_START) return "CHALLENGER";
-              return ''; // Return empty string for other ticks
-            }
+      // Process each summoner's data
+      Object.keys(data.summoners).forEach(summoner => {
+        const records = data.summoners[summoner];
+
+        const points = records.map(record => {
+          let adjustedLP;
+
+          // Calculate adjusted LP based on rank
+          if (record.tier === "CHALLENGER") {
+            adjustedLP = 4000 + record.lp; // Challenger starts at 4000
+          } else if (record.tier === "GRANDMASTER") {
+            adjustedLP = 3600 + record.lp; // Grandmaster starts at 3600
+          } else if (record.tier === "MASTER") {
+            adjustedLP = 3200 + record.lp; // Master starts at 3200
+          } else {
+            // Calculate for other ranks
+            const rankIndex = ranks.indexOf(record.tier);
+            const baseLP = 400 * rankIndex;
+            const divisionLP = divisionOffset[record.rank];
+            adjustedLP = baseLP + divisionLP + record.lp;
           }
-        }
-      },
-      plugins: {
-        legend: {
-          display: true,
-          position: 'top',
-          labels: { color: '#ffffff' }
-        },
-        tooltip: {
-          callbacks: {
-            label: function (tooltipItem) {
-              const lp = tooltipItem.raw.realLP;
-              return `${tooltipItem.dataset.label}: ${lp} LP`;
-            }
-          }
-        }
+
+          return {
+            x: new Date(record.timestamp), // Timestamp for x-axis
+            y: adjustedLP,                 // Adjusted LP for y-axis
+            realLP: record.lp              // Actual LP for tooltip
+          };
+        });
+
+        // Add dataset for each summoner
+        datasets.push({
+          label: `${summoner} (${records[records.length - 1].tier} ${records[records.length - 1].rank})`,
+          data: points,
+          borderColor: colors[colorIndex % colors.length],
+          borderWidth: 2,
+          fill: false,
+          tension: 0.1,
+          pointRadius: 5,
+          pointHoverRadius: 8
+        });
+
+        colorIndex++;
+      });
+
+      // Define y-axis ticks and labels
+      const yTicks = [];
+      for (let i = 0; i <= 3200; i += 400) {
+        yTicks.push({ value: i, label: ranks[i / 400] });
       }
-    }
-  });
-}
+      yTicks.push({ value: 3600, label: 'GRANDMASTER' });
+      yTicks.push({ value: 4000, label: 'CHALLENGER' });
 
-// Load data and render chart
-loadData();
+      // Create chart
+      const ctx = document.getElementById('summonerChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: { datasets: datasets },
+        options: {
+          scales: {
+            x: {
+              type: 'time',
+              time: { unit: 'day' },
+              title: {
+                display: true,
+                text: 'Date',
+                color: '#ffffff'
+              },
+              ticks: { color: '#ffffff' }
+            },
+            y: {
+              min: 0,
+              max: 4400, // Fixed scale from 0 to 4400
+              title: {
+                display: true,
+                text: 'Rank Progression',
+                color: '#ffffff'
+              },
+              ticks: {
+                color: '#ffffff',
+                callback: function (value) {
+                  const tick = yTicks.find(t => t.value === value);
+                  return tick ? tick.label : '';
+                }
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              labels: { color: '#ffffff' }
+            },
+            tooltip: {
+              callbacks: {
+                label: function (tooltipItem) {
+                  const lp = tooltipItem.raw.realLP;
+                  return `${tooltipItem.dataset.label}: ${lp} LP`;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // Load data and render chart
+    loadData();
   </script>
 </body>
 </html>
