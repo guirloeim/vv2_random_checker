@@ -1,0 +1,34 @@
+name: Fetch LP Data
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # runs at 00:00 UTC every day
+  workflow_dispatch:     # allow manual trigger
+
+jobs:
+  fetch-and-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests pyyaml
+
+      - name: Fetch LP Data
+        run: python fetch_lp_data.py
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "guirloeim"
+          git config --global user.email "landedmink2@gmail.com"
+          git pull origin main --rebase  # Pull the latest changes with rebase
+          git add .
+          git commit -m "Update LP data" || echo "No changes to commit"
+          git push https://${{ secrets.GH_PAT }}@github.com/guirloeim/vv2_random_checker.git HEAD:main

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summoner Progression Tracker</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Summoner Progression Tracker</h1>
+  <div id="charts-container"></div>
+
+  <script>
+    // Load data from JSON file
+    async function loadData() {
+      const response = await fetch('lp_data.json'); // Load your JSON file
+      const data = await response.json();
+
+      const container = document.getElementById('charts-container');
+
+      Object.keys(data).forEach(summoner => {
+        const records = data[summoner];
+
+        // Extract timestamps and LP values
+        const labels = records.map(record => new Date(record.timestamp));
+        const lpData = records.map(record => record.lp);
+        const tier = records[records.length - 1].tier;
+        const rank = records[records.length - 1].rank;
+
+        // Create a new canvas for each summoner
+        const canvas = document.createElement('canvas');
+        canvas.id = `chart-${summoner}`;
+        container.appendChild(canvas);
+
+        // Create chart
+        const ctx = canvas.getContext('2d');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: `${summoner} (${tier} ${rank})`,
+              data: lpData,
+              borderColor: 'blue',
+              borderWidth: 2,
+              fill: false,
+              tension: 0.1
+            }]
+          },
+          options: {
+            scales: {
+              x: {
+                type: 'time',
+                time: {
+                  unit: 'day'
+                },
+                title: {
+                  display: true,
+                  text: 'Date'
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: 'LP'
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                display: true,
+                position: 'top'
+              }
+            }
+          }
+        });
+      });
+    }
+
+    // Load data and render charts
+    loadData();
+  </script>
+</body>
+</html>
