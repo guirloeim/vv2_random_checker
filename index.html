@@ -41,6 +41,10 @@
       const response = await fetch('lp_data.json'); // Load JSON file
       const data = await response.json();
 
+      // Cutoff Values for Grandmaster and Challenger
+      const CHALLENGER_CUTOFF = data.cutoffs.CHALLENGER;
+      const GRANDMASTER_CUTOFF = data.cutoffs.GRANDMASTER;
+
       // Rank Mapping
       const ranks = [
         "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM",
@@ -66,11 +70,20 @@
       Object.keys(data.summoners).forEach(summoner => {
         const records = data.summoners[summoner];
 
-        const points = records.map(record => ({
+        const points = records.map((record, index) => ({
           x: new Date(record.timestamp), // Timestamp for x-axis
           y: record.adjustedLP,          // Adjusted LP for y-axis
           realLP: record.lp              // Actual LP for tooltip
         }));
+
+        // Extend lines to the left for visual context
+        const firstPoint = points[0];
+        const extendedPoint = {
+          x: new Date(firstPoint.x.getTime() - 86400000), // 1 day earlier
+          y: firstPoint.y,
+          realLP: firstPoint.realLP
+        };
+        points.unshift(extendedPoint);
 
         // Add dataset for each summoner
         datasets.push({
@@ -116,12 +129,11 @@
                 color: '#ffffff',
                 callback: function (value) {
                   // Label the Y-axis correctly based on LP value
-                  if (value >= data.cutoffs.CHALLENGER) return "CHALLENGER";
-                  if (value >= data.cutoffs.GRANDMASTER) return "GRANDMASTER";
+                  if (value >= CHALLENGER_CUTOFF) return "CHALLENGER";
+                  if (value >= GRANDMASTER_CUTOFF) return "GRANDMASTER";
                   if (value >= 4000) return "MASTER";
 
-                  // Dynamic rank assignment based on LP scaling
-                  const index = Math.floor(value / 400);
+                  const index = Math.floor(value / 400); // Handle other ranks
                   return ranks[index] || ""; // Default empty if out of range
                 }
               }
