@@ -7,7 +7,6 @@
   
   <!-- Chart.js Library -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- Chart.js Date Adapter -->
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
   
   <!-- Custom Styles -->
@@ -32,7 +31,7 @@
 
     .chart-container {
       position: relative;
-      height: 80vh; /* Make the graph take 80% of the viewport height */
+      height: 80vh; /* Use 80% of screen height */
       width: 100%;
     }
   </style>
@@ -44,18 +43,17 @@
   </div>
 
   <script>
-    // Load data from JSON file
     async function loadData() {
       const response = await fetch('lp_data.json'); // Load JSON file
       const data = await response.json();
 
-      // Define ranks and divisions
+      // Rank mappings
       const ranks = [
         "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM",
         "EMERALD", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"
       ];
 
-      const rankOffsets = { // Starting LP for each rank
+      const rankOffsets = {
         "IRON": 0,
         "BRONZE": 400,
         "SILVER": 800,
@@ -75,28 +73,31 @@
         const records = data[summoner];
         const color = colors[index % colors.length];
 
-        // Prepare data points
-        const points = records.map(record => {
+        // Process data points
+        const points = records.map((record, i) => {
           let lp = record.lp;
           const rank = record.tier;
           const division = record.rank;
-          
-          // Adjust LP based on rank and division
-          let adjustedLP = rankOffsets[rank]; // Base LP for rank
+
+          // Adjust LP for each rank and division
+          let adjustedLP = rankOffsets[rank];
           if (rank !== "MASTER" && rank !== "GRANDMASTER" && rank !== "CHALLENGER") {
             adjustedLP += (4 - parseInt(division)) * 100; // Division adds LP
           } else {
-            adjustedLP += lp; // Use LP directly for top ranks
+            adjustedLP += lp; // Use LP directly for high ranks
           }
 
+          // Push points slightly closer to the middle for clarity
+          const spacingFactor = (i + 1) / (records.length + 1); // Dynamic spacing
+          const timeOffset = spacingFactor * 1000 * 60 * 60 * 24; // Offset in days
+
           return {
-            x: new Date(record.timestamp),
+            x: new Date(new Date(record.timestamp).getTime() - timeOffset), // Adjusted for leftwards spacing
             y: adjustedLP,
-            realLP: lp // Store actual LP for hover tooltip
+            realLP: lp // Store actual LP for tooltip
           };
         });
 
-        // Create dataset for this summoner
         datasets.push({
           label: `${summoner} (${records[records.length - 1].tier} ${records[records.length - 1].rank})`,
           data: points,
@@ -109,7 +110,7 @@
         });
       });
 
-      // Create Chart
+      // Create the Chart
       const ctx = document.getElementById('summonerChart').getContext('2d');
       new Chart(ctx, {
         type: 'line',
@@ -128,21 +129,20 @@
               title: {
                 display: true,
                 text: 'Date',
-                color: 'white' // Axis label color
+                color: 'white'
               },
               ticks: {
-                color: 'white' // Ticks color
+                color: 'white'
               }
             },
             y: {
               title: {
                 display: true,
                 text: 'Rank Progression',
-                color: 'white' // Axis label color
+                color: 'white'
               },
               ticks: {
                 callback: function(value) {
-                  // Convert LP back into rank labels
                   if (value >= 3600) return "CHALLENGER";
                   if (value >= 3200) return "GRANDMASTER";
                   if (value >= 2800) return "MASTER";
@@ -154,7 +154,7 @@
                   if (value >= 400) return "BRONZE";
                   return "IRON";
                 },
-                color: 'white' // Ticks color
+                color: 'white'
               }
             }
           },
@@ -171,20 +171,20 @@
               display: true,
               position: 'top',
               labels: {
-                color: 'white' // Legend text color
+                color: 'white'
               }
             }
           },
           elements: {
             line: {
-              tension: 0.3 // Slight curve for smoother lines
+              tension: 0.3 // Smooth line curves
             }
           }
         }
       });
     }
 
-    // Load data and render chart
+    // Load and render the chart
     loadData();
   </script>
 </body>
