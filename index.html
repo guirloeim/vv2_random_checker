@@ -109,7 +109,7 @@
             const rankIndex = ranks.indexOf(record.tier);
             const baseLP = 400 * rankIndex; // each rank block is 400 apart
             // top of the division = 400 - offset
-            const divOffset = 400 - (divisionOffset[record.rank] || 0);
+            const divOffset = 300 - (divisionOffset[record.rank] || 0);
             adjustedLP = baseLP + divOffset + record.lp;
           }
 
@@ -136,7 +136,7 @@
 
       // Generate the full array of ticks: multiples of 400 + gm + chall
       const ticksArray = [];
-      for (let val = 0; val <= 4400; val += 400) {
+      for (let val = 0; val <= 4800; val += 400) {
         ticksArray.push(val);
       }
       // Include gm and chall if they’re not already multiples of 400
