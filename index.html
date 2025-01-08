@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Summoner Progression Tracker</title>
-  
+
   <!-- Chart.js Library -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
-  
+
   <!-- Style -->
   <style>
     body {
       background-color: #121212; /* Dark background */
-      color: #ffffff; /* White text */
+      color: #ffffff;            /* White text */
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 20px;
+      margin: 20px 0;
     }
 
     canvas {
       display: block;
       margin: 0 auto;
-      width: 95vw; /* Full screen width */
-      height: 90vh; /* Full screen height */
+      width: 95vw; /* nearly full screen width */
+      height: 90vh; /* nearly full screen height */
     }
   </style>
 </head>
@@ -38,64 +40,86 @@
 
   <script>
     async function loadData() {
-      const response = await fetch('lp_data.json'); // Load JSON file
+      // Load your JSON file
+      const response = await fetch("lp_data.json");
       const data = await response.json();
 
-      // Cutoff Values for Grandmaster and Challenger
-      const CHALLENGER_CUTOFF = data.cutoffs.CHALLENGER;
-      const GRANDMASTER_CUTOFF = data.cutoffs.GRANDMASTER;
+      // Extract cutoff values
+      const CHALLENGER_CUTOFF = data.cutoffs.CHALLENGER;   // e.g. 500
+      const GRANDMASTER_CUTOFF = data.cutoffs.GRANDMASTER; // e.g. 200
 
-      // Rank Mapping
+      // MASTER baseline
+      const MASTER_BASE = 2800;
+
+      // Grandmaster and Challenger positions on the chart
+      const gm = MASTER_BASE + GRANDMASTER_CUTOFF; 
+      const chall = MASTER_BASE + CHALLENGER_CUTOFF;
+
+      // Ranks used for everything below MASTER
       const ranks = [
-        "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM",
-        "EMERALD", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"
+        "IRON", 
+        "BRONZE", 
+        "SILVER", 
+        "GOLD", 
+        "PLATINUM", 
+        "EMERALD", 
+        "DIAMOND", 
+        "MASTER"
       ];
 
+      // Offsets for each division inside a tier
       const divisionOffset = {
-        "IV": 0,
-        "III": 100,
-        "II": 200,
-        "I": 300
+        "IV": 300,
+        "III": 200,
+        "II": 100,
+        "I": 0
       };
 
+      // Prepare an array of datasets (one per summoner)
       const datasets = [];
       const colors = [
-        'blue', 'red', 'green', 'orange', 'purple', 
+        'blue', 'red', 'green', 'orange', 'purple',
         'cyan', 'magenta', 'teal', 'pink', 'yellow'
       ];
-
       let colorIndex = 0;
 
-      // Process each summoner's data
-      Object.keys(data.summoners).forEach(summoner => {
+      // Iterate over each summoner
+      Object.keys(data.summoners).forEach((summoner) => {
         const records = data.summoners[summoner];
 
-        const points = records.map(record => {
-          let adjustedLP;
+        // Convert each record into { x: date, y: adjustedLP }
+        const points = records.map((record) => {
+          let adjustedLP = 0;
 
-          // Calculate adjusted LP based on rank
+          // Determine the adjusted LP based on the rank/tier
           if (record.tier === "CHALLENGER") {
-            adjustedLP = 4000 + record.lp; // Challenger starts at 4000
-          } else if (record.tier === "GRANDMASTER") {
-            adjustedLP = 3600 + record.lp; // Grandmaster starts at 3600
-          } else if (record.tier === "MASTER") {
-            adjustedLP = 3200 + record.lp; // Master starts at 3200
-          } else {
-            // Calculate for other ranks
+            // CHALLENGER starts at 'chall'
+            adjustedLP = chall + record.lp;
+          } 
+          else if (record.tier === "GRANDMASTER") {
+            // GRANDMASTER starts at 'gm'
+            adjustedLP = gm + record.lp;
+          } 
+          else if (record.tier === "MASTER") {
+            // MASTER starts at MASTER_BASE
+            adjustedLP = MASTER_BASE + record.lp;
+          } 
+          else {
+            // For all other tiers (IRON -> DIAMOND)
             const rankIndex = ranks.indexOf(record.tier);
-            const baseLP = 400 * rankIndex;
-            const divisionLP = divisionOffset[record.rank];
-            adjustedLP = baseLP + divisionLP + record.lp;
+            const baseLP = 400 * rankIndex; // each rank block is 400 apart
+            // 400 - offset => top of the division block
+            const divOffset = 400 - (divisionOffset[record.rank] || 0);
+            adjustedLP = baseLP + divOffset + record.lp;
           }
 
           return {
-            x: new Date(record.timestamp), // Timestamp for x-axis
-            y: adjustedLP,                 // Adjusted LP for y-axis
-            realLP: record.lp              // Actual LP for tooltip
+            x: new Date(record.timestamp),
+            y: adjustedLP,
+            realLP: record.lp // For tooltips
           };
         });
 
-        // Add dataset for each summoner
         datasets.push({
           label: `${summoner} (${records[records.length - 1].tier} ${records[records.length - 1].rank})`,
           data: points,
@@ -110,59 +134,88 @@
         colorIndex++;
       });
 
-      // Define y-axis ticks and labels
-      const yTicks = [];
-      for (let i = 0; i <= 3200; i += 400) {
-        yTicks.push({ value: i, label: ranks[i / 400] });
+      // Generate the full array of ticks: multiples of 400 + gm + chall
+      const ticksArray = [];
+      for (let val = 0; val <= 4400; val += 400) {
+        ticksArray.push(val);
       }
-      yTicks.push({ value: 3600, label: 'GRANDMASTER' });
-      yTicks.push({ value: 4000, label: 'CHALLENGER' });
+      // Push gm and chall
+      ticksArray.push(gm, chall);
+      // Sort them in ascending order
+      ticksArray.sort((a, b) => a - b);
+      // Remove any duplicates if gm/chall happens to be a multiple of 400
+      const uniqueTicks = [...new Set(ticksArray)];
 
-      // Create chart
-      const ctx = document.getElementById('summonerChart').getContext('2d');
+      // Create the chart
+      const ctx = document.getElementById("summonerChart").getContext("2d");
       new Chart(ctx, {
-        type: 'line',
-        data: { datasets: datasets },
+        type: "line",
+        data: {
+          datasets: datasets
+        },
         options: {
           scales: {
             x: {
               type: 'time',
-              time: { unit: 'day' },
+              time: {
+                unit: 'day'
+              },
               title: {
                 display: true,
                 text: 'Date',
                 color: '#ffffff'
               },
-              ticks: { color: '#ffffff' }
+              ticks: {
+                color: '#ffffff'
+              },
+              grid: {
+                color: 'rgba(255,255,255,0.2)'
+              }
             },
             y: {
               min: 0,
-              max: 4400, // Fixed scale from 0 to 4400
-              title: {
-                display: true,
-                text: 'Rank Progression',
-                color: '#ffffff'
-              },
+              max: 4400,  // Force from 0 to 4400
+              // Instead of 'stepSize', use 'ticks.values' so we can manually place GM & Challenger
               ticks: {
                 color: '#ffffff',
+                // Our custom array includes 0, 400, 800, ..., 4400, plus gm/chall
+                values: uniqueTicks,
                 callback: function (value) {
-                  const tick = yTicks.find(t => t.value === value);
-                  return tick ? tick.label : '';
+                  // Exact match → Challenger
+                  if (value === chall) {
+                    return "CHALLENGER";
+                  }
+                  // Exact match → Grandmaster
+                  if (value === gm) {
+                    return "GRANDMASTER";
+                  }
+                  // 2800 and up → Master
+                  if (value >= 2800) {
+                    return "MASTER";
+                  }
+                  // For other ranks
+                  const index = Math.floor(value / 400);
+                  return ranks[index] || ""; // Fallback if out of range
                 }
+              },
+              grid: {
+                color: 'rgba(255,255,255,0.2)'
               }
             }
           },
           plugins: {
             legend: {
               display: true,
-              position: 'top',
-              labels: { color: '#ffffff' }
+              labels: {
+                color: '#ffffff'
+              }
             },
             tooltip: {
               callbacks: {
-                label: function (tooltipItem) {
-                  const lp = tooltipItem.raw.realLP;
-                  return `${tooltipItem.dataset.label}: ${lp} LP`;
+                label: function (context) {
+                  const datasetLabel = context.dataset.label || '';
+                  const lp = context.raw.realLP;
+                  return `${datasetLabel}: ${lp} LP`;
                 }
               }
             }
@@ -171,7 +224,7 @@
       });
     }
 
-    // Load data and render chart
+    // Kick off the data loading and chart rendering
     loadData();
   </script>
 </body>
