@@ -23,32 +23,55 @@
       const data = await response.json();
 
       const datasets = []; // Stores data for each summoner
+      const allLabels = new Set(); // Collect all unique timestamps
 
-      // Generate a unique color for each dataset
-      const colors = ['blue', 'red', 'green', 'orange', 'purple', 'brown', 'cyan'];
+      // Collect all timestamps across all summoners
+      Object.values(data).forEach(records => {
+        records.forEach(record => allLabels.add(new Date(record.timestamp).getTime()));
+      });
+
+      // Sort timestamps in ascending order
+      const labels = Array.from(allLabels).sort((a, b) => a - b).map(ts => new Date(ts));
+
+      // Generate dynamic colors for each summoner
+      const colors = [
+        'blue', 'red', 'green', 'orange', 'purple', 'brown', 'cyan', 'magenta', 'teal', 'pink'
+      ];
+
+      let colorIndex = 0;
 
       // Process each summoner's data
-      Object.keys(data).forEach((summoner, index) => {
+      Object.keys(data).forEach(summoner => {
         const records = data[summoner];
 
-        // Extract timestamps and LP values
-        const labels = records.map(record => new Date(record.timestamp));
-        const lpData = records.map(record => record.lp);
+        // Create a mapping of timestamp to LP for this summoner
+        const lpMap = {};
+        records.forEach(record => {
+          const time = new Date(record.timestamp).getTime();
+          lpMap[time] = record.lp;
+        });
+
+        // Fill missing data with null for alignment
+        const lpData = labels.map(label => {
+          const time = label.getTime();
+          return lpMap[time] !== undefined ? lpMap[time] : null;
+        });
+
+        // Get the latest tier and rank for labeling
         const tier = records[records.length - 1].tier;
         const rank = records[records.length - 1].rank;
 
         // Create dataset for this summoner
         datasets.push({
           label: `${summoner} (${tier} ${rank})`,
-          data: records.map(record => ({
-            x: new Date(record.timestamp),
-            y: record.lp
-          })),
-          borderColor: colors[index % colors.length],
+          data: lpData,
+          borderColor: colors[colorIndex % colors.length],
           borderWidth: 2,
           fill: false,
           tension: 0.1
         });
+
+        colorIndex++;
       });
 
       // Create chart
@@ -56,6 +79,7 @@
       new Chart(ctx, {
         type: 'line',
         data: {
+          labels: labels, // Unified timestamps as x-axis labels
           datasets: datasets
         },
         options: {
