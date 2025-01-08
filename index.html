@@ -9,6 +9,23 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Chart.js Date Adapter -->
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+  <!-- Style -->
+  <style>
+    body {
+      background-color: #121212; /* Dark background */
+      color: #e0e0e0; /* Light text */
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    canvas {
+      display: block;
+      margin: 0 auto; /* Center the chart */
+    }
+  </style>
 </head>
 <body>
   <h1>Summoner Progression Tracker</h1>
@@ -81,36 +98,28 @@
       Object.keys(data).forEach(summoner => {
         const records = data[summoner];
 
-        const rankData = labels.map(label => {
-          const record = records.find(r => new Date(r.timestamp).getTime() === label.getTime());
-          if (record) {
-            return {
-              x: label,
-              y: calculateRankLP(record.tier, record.rank, record.lp)
-            };
-          }
-
-          // Extend line leftward for continuity
-          const earliestRecord = records[0];
+        const rankData = records.map((record, index) => {
+          // Generate positions with slight horizontal shifts for clarity
+          const xPos = new Date(centerTime + (index * 1000000)); // Offset rightward slightly
           return {
-            x: new Date(centerTime - offset - Math.random() * 1000000), // Slight offset to the left
-            y: calculateRankLP(earliestRecord.tier, earliestRecord.rank, earliestRecord.lp)
+            x: xPos,
+            y: calculateRankLP(record.tier, record.rank, record.lp)
           };
+        });
+
+        // Extend line towards the left for visual continuity
+        rankData.unshift({
+          x: new Date(centerTime - 1.5 * offset), // Extend line towards the left
+          y: rankData[0].y
         });
 
         const tier = records[records.length - 1].tier;
         const rank = records[records.length - 1].rank;
 
-        // Introduce small horizontal offset based on rank
-        const horizontalShift = (rankOrder.indexOf(tier) / rankOrder.length) * offset;
-
         // Create dataset
         datasets.push({
           label: `${summoner} (${tier} ${rank})`,
-          data: rankData.map(point => ({
-            x: new Date(point.x.getTime() + horizontalShift), // Offset points by rank position
-            y: point.y
-          })),
+          data: rankData,
           borderColor: colors[colorIndex % colors.length],
           borderWidth: 2,
           fill: false,
