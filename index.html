@@ -12,7 +12,9 @@
 </head>
 <body>
   <h1>Summoner Progression Tracker</h1>
-  <div id="charts-container"></div>
+  <div>
+    <canvas id="summonerChart"></canvas>
+  </div>
 
   <script>
     // Load data from JSON file
@@ -20,9 +22,13 @@
       const response = await fetch('lp_data.json'); // Load your JSON file
       const data = await response.json();
 
-      const container = document.getElementById('charts-container');
+      const datasets = []; // Stores data for each summoner
 
-      Object.keys(data).forEach(summoner => {
+      // Generate a unique color for each dataset
+      const colors = ['blue', 'red', 'green', 'orange', 'purple', 'brown', 'cyan'];
+
+      // Process each summoner's data
+      Object.keys(data).forEach((summoner, index) => {
         const records = data[summoner];
 
         // Extract timestamps and LP values
@@ -31,57 +37,57 @@
         const tier = records[records.length - 1].tier;
         const rank = records[records.length - 1].rank;
 
-        // Create a new canvas for each summoner
-        const canvas = document.createElement('canvas');
-        canvas.id = `chart-${summoner}`;
-        container.appendChild(canvas);
+        // Create dataset for this summoner
+        datasets.push({
+          label: `${summoner} (${tier} ${rank})`,
+          data: records.map(record => ({
+            x: new Date(record.timestamp),
+            y: record.lp
+          })),
+          borderColor: colors[index % colors.length],
+          borderWidth: 2,
+          fill: false,
+          tension: 0.1
+        });
+      });
 
-        // Create chart
-        const ctx = canvas.getContext('2d');
-        new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: `${summoner} (${tier} ${rank})`,
-              data: lpData,
-              borderColor: 'blue',
-              borderWidth: 2,
-              fill: false,
-              tension: 0.1
-            }]
-          },
-          options: {
-            scales: {
-              x: {
-                type: 'time', // Requires a date adapter!
-                time: {
-                  unit: 'day'
-                },
-                title: {
-                  display: true,
-                  text: 'Date'
-                }
+      // Create chart
+      const ctx = document.getElementById('summonerChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          datasets: datasets
+        },
+        options: {
+          scales: {
+            x: {
+              type: 'time', // Requires a date adapter!
+              time: {
+                unit: 'day'
               },
-              y: {
-                title: {
-                  display: true,
-                  text: 'LP'
-                }
+              title: {
+                display: true,
+                text: 'Date'
               }
             },
-            plugins: {
-              legend: {
+            y: {
+              title: {
                 display: true,
-                position: 'top'
+                text: 'LP'
               }
             }
+          },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top'
+            }
           }
-        });
+        }
       });
     }
 
-    // Load data and render charts
+    // Load data and render chart
     loadData();
   </script>
 </body>
