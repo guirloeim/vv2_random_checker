@@ -29,6 +29,14 @@
       "lp": 1044,
       "adjustedLP": 5844,
       "timestamp": "2025-01-08T16:17:07.628626+00:00"
+    },
+    {
+      "summonerName": "Nico#coati",
+      "tier": "CHALLENGER",
+      "rank": "I",
+      "lp": 1044,
+      "adjustedLP": 1952,
+      "timestamp": "2025-01-08T16:25:23.893361+00:00"
     }
   ],
   "Loopy#0004": [
@@ -61,6 +69,14 @@
       "lp": 39,
       "adjustedLP": 4039,
       "timestamp": "2025-01-08T16:17:08.934533+00:00"
+    },
+    {
+      "summonerName": "Loopy#0004",
+      "tier": "MASTER",
+      "rank": "I",
+      "lp": 39,
+      "adjustedLP": 4039,
+      "timestamp": "2025-01-08T16:25:25.198032+00:00"
     }
   ],
   "The Mid Game#Canoe": [
@@ -86,6 +102,14 @@
       "lp": 670,
       "adjustedLP": 5070,
       "timestamp": "2025-01-08T16:17:10.181598+00:00"
+    },
+    {
+      "summonerName": "The Mid Game#Canoe",
+      "tier": "GRANDMASTER",
+      "rank": "I",
+      "lp": 670,
+      "adjustedLP": 1212,
+      "timestamp": "2025-01-08T16:25:26.480203+00:00"
     }
   ],
   "emerrin#623HS": [
@@ -111,6 +135,14 @@
       "lp": 665,
       "adjustedLP": 5065,
       "timestamp": "2025-01-08T16:17:11.491277+00:00"
+    },
+    {
+      "summonerName": "emerrin#623HS",
+      "tier": "GRANDMASTER",
+      "rank": "I",
+      "lp": 685,
+      "adjustedLP": 1227,
+      "timestamp": "2025-01-08T16:25:27.775696+00:00"
     }
   ],
   "meow81#paw": [
@@ -136,6 +168,14 @@
       "lp": 295,
       "adjustedLP": 4295,
       "timestamp": "2025-01-08T16:17:12.884629+00:00"
+    },
+    {
+      "summonerName": "meow81#paw",
+      "tier": "MASTER",
+      "rank": "I",
+      "lp": 295,
+      "adjustedLP": 4295,
+      "timestamp": "2025-01-08T16:25:29.037027+00:00"
     }
   ],
   "Owpi#idiot": [
@@ -161,6 +201,14 @@
       "lp": 3,
       "adjustedLP": 4003,
       "timestamp": "2025-01-08T16:17:14.195472+00:00"
+    },
+    {
+      "summonerName": "Owpi#idiot",
+      "tier": "MASTER",
+      "rank": "I",
+      "lp": 3,
+      "adjustedLP": 4003,
+      "timestamp": "2025-01-08T16:25:30.341299+00:00"
     }
   ],
   "Big2080#EUW": [
@@ -186,6 +234,14 @@
       "lp": 10,
       "adjustedLP": 4010,
       "timestamp": "2025-01-08T16:17:15.440245+00:00"
+    },
+    {
+      "summonerName": "Big2080#EUW",
+      "tier": "MASTER",
+      "rank": "I",
+      "lp": 10,
+      "adjustedLP": 4010,
+      "timestamp": "2025-01-08T16:25:31.620178+00:00"
     }
   ],
   "Myst#Blade": [
@@ -211,6 +267,14 @@
       "lp": 3,
       "adjustedLP": 2503,
       "timestamp": "2025-01-08T16:17:16.730683+00:00"
+    },
+    {
+      "summonerName": "Myst#Blade",
+      "tier": "DIAMOND",
+      "rank": "III",
+      "lp": 3,
+      "adjustedLP": 2503,
+      "timestamp": "2025-01-08T16:25:32.897693+00:00"
     }
   ],
   "Yui#KEK": [
@@ -236,6 +300,14 @@
       "lp": 26,
       "adjustedLP": 2426,
       "timestamp": "2025-01-08T16:17:18.012548+00:00"
+    },
+    {
+      "summonerName": "Yui#KEK",
+      "tier": "DIAMOND",
+      "rank": "IV",
+      "lp": 26,
+      "adjustedLP": 2426,
+      "timestamp": "2025-01-08T16:25:34.198209+00:00"
     }
   ],
   "Lil Wio#EUW": [
@@ -261,6 +333,14 @@
       "lp": 65,
       "adjustedLP": 1865,
       "timestamp": "2025-01-08T16:17:19.290006+00:00"
+    },
+    {
+      "summonerName": "Lil Wio#EUW",
+      "tier": "PLATINUM",
+      "rank": "II",
+      "lp": 65,
+      "adjustedLP": 1865,
+      "timestamp": "2025-01-08T16:25:35.462489+00:00"
     }
   ],
   "King Afee#333": [
@@ -286,6 +366,14 @@
       "lp": 82,
       "adjustedLP": 1782,
       "timestamp": "2025-01-08T16:17:20.563103+00:00"
+    },
+    {
+      "summonerName": "King Afee#333",
+      "tier": "PLATINUM",
+      "rank": "III",
+      "lp": 82,
+      "adjustedLP": 1782,
+      "timestamp": "2025-01-08T16:25:36.750434+00:00"
     }
   ],
   "Lemis#33310": [
@@ -311,6 +399,14 @@
       "lp": 61,
       "adjustedLP": 1261,
       "timestamp": "2025-01-08T16:17:21.998471+00:00"
+    },
+    {
+      "summonerName": "Lemis#33310",
+      "tier": "GOLD",
+      "rank": "IV",
+      "lp": 61,
+      "adjustedLP": 1261,
+      "timestamp": "2025-01-08T16:25:38.014160+00:00"
     }
   ]
 }
