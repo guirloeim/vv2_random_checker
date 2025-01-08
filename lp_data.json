@@ -6,6 +6,13 @@
       "rank": "I",
       "lp": 1044,
       "timestamp": "2025-01-08T12:51:40.440812+00:00"
+    },
+    {
+      "summonerName": "Nico#coati",
+      "tier": "CHALLENGER",
+      "rank": "I",
+      "lp": 1044,
+      "timestamp": "2025-01-08T13:38:50.853691+00:00"
     }
   ],
   "Loopy#0004": [
@@ -15,6 +22,103 @@
       "rank": "I",
       "lp": 39,
       "timestamp": "2025-01-08T12:51:42.033892+00:00"
+    },
+    {
+      "summonerName": "Loopy#0004",
+      "tier": "MASTER",
+      "rank": "I",
+      "lp": 39,
+      "timestamp": "2025-01-08T13:38:52.346728+00:00"
+    }
+  ],
+  "The Mid Game#Canoe": [
+    {
+      "summonerName": "The Mid Game#Canoe",
+      "tier": "GRANDMASTER",
+      "rank": "I",
+      "lp": 670,
+      "timestamp": "2025-01-08T13:38:53.841242+00:00"
+    }
+  ],
+  "emerrin#623HS": [
+    {
+      "summonerName": "emerrin#623HS",
+      "tier": "GRANDMASTER",
+      "rank": "I",
+      "lp": 665,
+      "timestamp": "2025-01-08T13:38:55.318449+00:00"
+    }
+  ],
+  "meow81#paw": [
+    {
+      "summonerName": "meow81#paw",
+      "tier": "MASTER",
+      "rank": "I",
+      "lp": 295,
+      "timestamp": "2025-01-08T13:38:57.042009+00:00"
+    }
+  ],
+  "Owpi#idiot": [
+    {
+      "summonerName": "Owpi#idiot",
+      "tier": "MASTER",
+      "rank": "I",
+      "lp": 3,
+      "timestamp": "2025-01-08T13:38:58.531072+00:00"
+    }
+  ],
+  "Big2080#EUW": [
+    {
+      "summonerName": "Big2080#EUW",
+      "tier": "MASTER",
+      "rank": "I",
+      "lp": 10,
+      "timestamp": "2025-01-08T13:38:59.998770+00:00"
+    }
+  ],
+  "Myst#Blade": [
+    {
+      "summonerName": "Myst#Blade",
+      "tier": "DIAMOND",
+      "rank": "III",
+      "lp": 3,
+      "timestamp": "2025-01-08T13:39:02.130426+00:00"
+    }
+  ],
+  "Yui#KEK": [
+    {
+      "summonerName": "Yui#KEK",
+      "tier": "DIAMOND",
+      "rank": "IV",
+      "lp": 26,
+      "timestamp": "2025-01-08T13:39:03.604711+00:00"
+    }
+  ],
+  "Lil Wio#EUW": [
+    {
+      "summonerName": "Lil Wio#EUW",
+      "tier": "PLATINUM",
+      "rank": "II",
+      "lp": 65,
+      "timestamp": "2025-01-08T13:39:05.112659+00:00"
+    }
+  ],
+  "King Afee#333": [
+    {
+      "summonerName": "King Afee#333",
+      "tier": "PLATINUM",
+      "rank": "III",
+      "lp": 82,
+      "timestamp": "2025-01-08T13:39:06.581726+00:00"
+    }
+  ],
+  "Lemis#33310": [
+    {
+      "summonerName": "Lemis#33310",
+      "tier": "GOLD",
+      "rank": "IV",
+      "lp": 61,
+      "timestamp": "2025-01-08T13:39:08.040061+00:00"
     }
   ]
 }
