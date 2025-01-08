@@ -73,11 +73,13 @@
           realLP: record.lp              // Actual LP for tooltip
         }));
 
-        // Add an extra point to the left for visual continuity
-        const extendedPoints = [
-          { x: new Date(startDate.getTime() - 86400000), y: points[0].y, realLP: points[0].realLP },
-          ...points
-        ];
+        // Add a padding point to the left to start closer to the middle
+        const paddingPoint = {
+          x: new Date(startDate.getTime()), // Padding date
+          y: points[0].y,                  // Same rank for padding
+          realLP: points[0].realLP
+        };
+        const extendedPoints = [paddingPoint, ...points];
 
         // Add dataset for each summoner
         datasets.push({
