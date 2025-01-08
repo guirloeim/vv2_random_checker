@@ -21,7 +21,7 @@ SUMMONERS = [
     "Lemis#33310",
 ]
 
-# Global cutoff values (will be fetched dynamically)
+# Dynamic cutoffs for Grandmaster and Challenger
 CHALLENGER_CUTOFF = 0
 GRANDMASTER_CUTOFF = 0
 
@@ -35,43 +35,41 @@ def main():
         print("Missing Riot API Key!")
         return
 
-    # Fetch cutoff LP values for Challenger and Grandmaster
+    # Fetch cutoff LP values dynamically
     CHALLENGER_CUTOFF = get_cutoff_lp("CHALLENGER", api_key)
     GRANDMASTER_CUTOFF = get_cutoff_lp("GRANDMASTER", api_key)
 
     print(f"Challenger Cutoff: {CHALLENGER_CUTOFF} LP")
     print(f"Grandmaster Cutoff: {GRANDMASTER_CUTOFF} LP")
 
-    # List to store new summoner data
+    # Collect summoner data
     summoner_data_list = []
     for summoner in SUMMONERS:
         try:
-            # Extract name and tag
             name, tag = summoner.split("#")
             summoner_id = get_summoner_id(name, tag, api_key)
             if not summoner_id:
                 continue
 
-            # Get ranked data
             ranked_info = get_ranked_data(summoner_id, api_key)
             if ranked_info:
                 # Process solo queue data
                 solo_queue = next((q for q in ranked_info if q["queueType"] == "RANKED_SOLO_5x5"), None)
                 if solo_queue:
-                    # Adjust LP based on cutoffs
+                    # Add adjusted LP for graph positioning
                     adjusted_lp = adjust_lp(solo_queue["tier"], solo_queue["rank"], solo_queue["leaguePoints"])
                     summoner_data_list.append({
                         "summonerName": summoner,
                         "tier": solo_queue["tier"],
                         "rank": solo_queue["rank"],
                         "lp": solo_queue["leaguePoints"],
-                        "adjustedLP": adjusted_lp,  # Include adjusted LP for plotting
+                        "adjustedLP": adjusted_lp,
                         "timestamp": datetime.now(timezone.utc).isoformat()
                     })
         except Exception as e:
             print(f"Error for {summoner}: {e}")
 
-    # Load existing data if present
+    # Load existing data
     data_filename = "lp_data.json"
     try:
         with open(data_filename, "r", encoding="utf-8") as f:
@@ -81,65 +79,26 @@ def main():
     except:
         old_data = []
 
-    # Ensure old_data is a list
-    if not isinstance(old_data, list):
-        old_data = []
-
-    # Append new data records
+    # Append new data
     old_data.extend(summoner_data_list)
 
-    # Group data by summoner name for progression tracking
+    # Group data by summoner
     grouped_data = {}
     for entry in old_data:
-        if isinstance(entry, dict):  # Ensure entry is a dictionary
-            name = entry["summonerName"]
-            if name not in grouped_data:
-                grouped_data[name] = []
-            grouped_data[name].append(entry)
+        name = entry["summonerName"]
+        if name not in grouped_data:
+            grouped_data[name] = []
+        grouped_data[name].append(entry)
 
-    # Save back to file
+    # Save updated data
     with open(data_filename, "w", encoding="utf-8") as f:
         json.dump(grouped_data, f, indent=2)
 
     print(f"Successfully updated {data_filename} with {len(summoner_data_list)} new records.")
 
 
-def get_summoner_id(name, tag, api_key):
-    url = f"https://{PLATFORM_REGION}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{name}/{tag}"
-    headers = {"X-Riot-Token": api_key}
-    r = requests.get(url, headers=headers)
-    if r.status_code == 200:
-        puuid = r.json().get("puuid")
-        return get_summoner_id_by_puuid(puuid, api_key)
-    else:
-        print(f"Error {r.status_code} fetching PUUID for {name}#{tag}: {r.text}")
-        return None
-
-
-def get_summoner_id_by_puuid(puuid, api_key):
-    url = f"https://{REGION}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{puuid}"
-    headers = {"X-Riot-Token": api_key}
-    r = requests.get(url, headers=headers)
-    if r.status_code == 200:
-        return r.json().get("id")
-    else:
-        print(f"Error {r.status_code} fetching Summoner ID for PUUID {puuid}: {r.text}")
-        return None
-
-
-def get_ranked_data(encrypted_summoner_id, api_key):
-    url = f"https://{REGION}.api.riotgames.com/lol/league/v4/entries/by-summoner/{encrypted_summoner_id}"
-    headers = {"X-Riot-Token": api_key}
-    r = requests.get(url, headers=headers)
-    if r.status_code == 200:
-        return r.json()
-    else:
-        print(f"Error {r.status_code} fetching ranked data for {encrypted_summoner_id}: {r.text}")
-        return None
-
-
 def get_cutoff_lp(tier, api_key):
-    """Fetch the LP cutoff for a given tier (Challenger or Grandmaster)."""
+    """Fetch the cutoff LP for Grandmaster and Challenger."""
     url = f"https://{REGION}.api.riotgames.com/lol/league/v4/{tier.lower()}leagues/by-queue/RANKED_SOLO_5x5"
     headers = {"X-Riot-Token": api_key}
     r = requests.get(url, headers=headers)
@@ -153,7 +112,7 @@ def get_cutoff_lp(tier, api_key):
 
 
 def adjust_lp(tier, rank, lp):
-    """Adjust LP values based on tier and cutoffs."""
+    """Calculate LP based on rank cutoffs."""
     if tier == "CHALLENGER":
         return 4800 + lp
     elif tier == "GRANDMASTER":
@@ -161,7 +120,37 @@ def adjust_lp(tier, rank, lp):
     elif tier == "MASTER":
         return 4000 + lp
     else:
-        return lp
+        division_points = {"IV": 0, "III": 100, "II": 200, "I": 300}
+        rank_base = ["IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "EMERALD", "DIAMOND"].index(tier) * 400
+        return rank_base + division_points[rank] + lp
+
+
+def get_summoner_id(name, tag, api_key):
+    url = f"https://{PLATFORM_REGION}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{name}/{tag}"
+    headers = {"X-Riot-Token": api_key}
+    r = requests.get(url, headers=headers)
+    if r.status_code == 200:
+        puuid = r.json().get("puuid")
+        return get_summoner_id_by_puuid(puuid, api_key)
+    return None
+
+
+def get_summoner_id_by_puuid(puuid, api_key):
+    url = f"https://{REGION}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{puuid}"
+    headers = {"X-Riot-Token": api_key}
+    r = requests.get(url, headers=headers)
+    if r.status_code == 200:
+        return r.json().get("id")
+    return None
+
+
+def get_ranked_data(encrypted_summoner_id, api_key):
+    url = f"https://{REGION}.api.riotgames.com/lol/league/v4/entries/by-summoner/{encrypted_summoner_id}"
+    headers = {"X-Riot-Token": api_key}
+    r = requests.get(url, headers=headers)
+    if r.status_code == 200:
+        return r.json()
+    return None
 
 
 if __name__ == "__main__":
