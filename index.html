@@ -32,31 +32,27 @@
 
     // Calculate LP Position Based on Rank and Division
     function calculateRankLP(tier, division, lp) {
-      const baseRank = rankOrder.indexOf(tier) * 400; // Each rank separated by 400 LP
+      const baseRank = rankOrder.indexOf(tier) * 400; // 400 LP per rank
 
-      // Handle Master and Above
+      // Handle Master, Grandmaster, Challenger
       if (tier === "MASTER" || tier === "GRANDMASTER" || tier === "CHALLENGER") {
         const masterBase = 4000; // Master starts at 4000 LP
-        return masterBase + lp; // Add LP directly for Master and above
+        return masterBase + lp; // Add LP directly
       }
 
       // Handle Ranks Below Master
-      const divisionLP = divisionMultiplier[division] || 0; // Add division LP
+      const divisionLP = divisionMultiplier[division] || 0;
       return baseRank + divisionLP + lp;
     }
 
-    // Generate Y-axis Labels (Rank Names)
+    // Generate Y-axis Labels
     function generateYAxisLabels() {
-      const labels = [];
-      rankOrder.forEach(rank => {
-        labels.push(rank); // Add rank name
-      });
-      return labels;
+      return rankOrder;
     }
 
     // Load data from JSON file
     async function loadData() {
-      const response = await fetch('lp_data.json'); // Load your JSON file
+      const response = await fetch('lp_data.json'); // Load JSON data
       const data = await response.json();
 
       const datasets = [];
@@ -67,8 +63,10 @@
         records.forEach(record => allLabels.add(new Date(record.timestamp).getTime()));
       });
 
-      // Sort timestamps
+      // Sort timestamps and ensure consistent spacing
       const labels = Array.from(allLabels).sort((a, b) => a - b).map(ts => new Date(ts));
+      const firstLabel = labels[0];
+      const lastLabel = labels[labels.length - 1];
 
       // Colors for lines
       const colors = [
@@ -87,7 +85,9 @@
           if (record) {
             return calculateRankLP(record.tier, record.rank, record.lp);
           }
-          return null; // Empty spot for missing data
+          // Extend line leftward for missing data
+          const earliestRecord = records[0];
+          return calculateRankLP(earliestRecord.tier, earliestRecord.rank, earliestRecord.lp);
         });
 
         const tier = records[records.length - 1].tier;
@@ -100,7 +100,9 @@
           borderColor: colors[colorIndex % colors.length],
           borderWidth: 2,
           fill: false,
-          tension: 0.1
+          tension: 0.1,
+          pointRadius: 5, // Enlarge data points for clarity
+          pointHoverRadius: 7
         });
 
         colorIndex++;
@@ -129,9 +131,11 @@
             y: {
               ticks: {
                 callback: function (value) {
-                  if (value >= 4000) return "MASTER+";
+                  if (value >= 4000 && value < 4400) return "MASTER";
+                  if (value >= 4400 && value < 4800) return "GRANDMASTER";
+                  if (value >= 4800) return "CHALLENGER";
                   const rankIndex = Math.floor(value / 400);
-                  return rankOrder[rankIndex]; // Show rank name only
+                  return rankOrder[rankIndex]; // Show rank name
                 }
               },
               title: {
