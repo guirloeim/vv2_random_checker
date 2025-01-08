@@ -45,8 +45,8 @@
       const CHALLENGER_CUTOFF = data.cutoffs.CHALLENGER;
       const GRANDMASTER_CUTOFF = data.cutoffs.GRANDMASTER;
 
-      const gm = GRANDMASTER_CUTOFF + 3200;
-      const chall = CHALLENGER_CUTOFF + 3200;
+      const gm = GRANDMASTER_CUTOFF + 2800;
+      const chall = CHALLENGER_CUTOFF + 2800;
 
       // Rank Mapping
       const ranks = [
@@ -86,7 +86,7 @@
           } else {
             // Calculate for other ranks
             const rankIndex = ranks.indexOf(record.tier);
-            const baseLP = 400 * rankIndex;
+            const baseLP = 400 * (rankIndex-1);
             const divisionLP = 400 - divisionOffset[record.rank];
             adjustedLP = baseLP + divisionLP + record.lp;
           }
@@ -132,7 +132,7 @@
             },
             y: {
               min: 0,
-              max: 4400, // Fixed scale from 0 to 6000
+              max: 4000, // Fixed scale from 0 to 6000
               title: {
                 display: true,
                 text: 'Rank Progression',
@@ -144,7 +144,7 @@
                 callback: function (value) {
                   if (value >= chall) return "CHALLENGER";
                   if (value >= gm) return "GRANDMASTER";
-                  if (value >= 3200) return "MASTER";
+                  if (value >= 2800) return "MASTER";
                   const index = Math.floor(value / 400); // Handle other ranks
                   return ranks[index] || ""; // Default empty if out of range
                 }
