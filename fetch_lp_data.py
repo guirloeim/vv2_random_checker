@@ -73,9 +73,12 @@ def main():
     data_filename = "lp_data.json"
     try:
         with open(data_filename, "r", encoding="utf-8") as f:
-            old_data = json.load(f)
-            if isinstance(old_data, dict):
-                old_data = [item for sublist in old_data.values() for item in sublist]
+            data = json.load(f)
+            # Check if data already contains cutoffs
+            if "cutoffs" in data:
+                old_data = data["summoners"]
+            else:
+                old_data = data
     except:
         old_data = []
 
@@ -90,9 +93,18 @@ def main():
             grouped_data[name] = []
         grouped_data[name].append(entry)
 
+    # Prepare final JSON with cutoffs
+    output_data = {
+        "cutoffs": {
+            "CHALLENGER": CHALLENGER_CUTOFF,
+            "GRANDMASTER": GRANDMASTER_CUTOFF
+        },
+        "summoners": grouped_data
+    }
+
     # Save updated data
     with open(data_filename, "w", encoding="utf-8") as f:
-        json.dump(grouped_data, f, indent=2)
+        json.dump(output_data, f, indent=2)
 
     print(f"Successfully updated {data_filename} with {len(summoner_data_list)} new records.")
 
