@@ -17,23 +17,59 @@
   </div>
 
   <script>
+    // Rank Mapping
+    const rankOrder = {
+      "IRON": 1,
+      "BRONZE": 2,
+      "SILVER": 3,
+      "GOLD": 4,
+      "PLATINUM": 5,
+      "EMERALD": 6,
+      "DIAMOND": 7,
+      "MASTER": 8,
+      "GRANDMASTER": 9,
+      "CHALLENGER": 10
+    };
+
+    const divisionMultiplier = {
+      "IV": 0,
+      "III": 1,
+      "II": 2,
+      "I": 3
+    };
+
+    // Function to calculate rank position
+    function calculateRankPosition(tier, rank, lp) {
+      const baseRank = rankOrder[tier] || 0;
+      let position = baseRank * 1000; // Base multiplier for rank
+
+      // Add division multiplier (if not in Master, GM, Challenger)
+      if (tier !== "MASTER" && tier !== "GRANDMASTER" && tier !== "CHALLENGER") {
+        position += (divisionMultiplier[rank] || 0) * 200; // Divisions
+      }
+
+      // Add LP within the tier or division
+      position += lp;
+      return position;
+    }
+
     // Load data from JSON file
     async function loadData() {
       const response = await fetch('lp_data.json'); // Load your JSON file
       const data = await response.json();
 
-      const datasets = []; // Stores data for each summoner
+      const datasets = [];
       const allLabels = new Set(); // Collect all unique timestamps
 
-      // Collect all timestamps across all summoners
+      // Collect timestamps
       Object.values(data).forEach(records => {
         records.forEach(record => allLabels.add(new Date(record.timestamp).getTime()));
       });
 
-      // Sort timestamps in ascending order
+      // Sort timestamps
       const labels = Array.from(allLabels).sort((a, b) => a - b).map(ts => new Date(ts));
 
-      // Generate dynamic colors for each summoner
+      // Colors for lines
       const colors = [
         'blue', 'red', 'green', 'orange', 'purple', 'brown', 'cyan', 'magenta', 'teal', 'pink'
       ];
@@ -44,27 +80,26 @@
       Object.keys(data).forEach(summoner => {
         const records = data[summoner];
 
-        // Create a mapping of timestamp to LP for this summoner
-        const lpMap = {};
+        // Map timestamps to ranks and LP
+        const rankMap = {};
         records.forEach(record => {
           const time = new Date(record.timestamp).getTime();
-          lpMap[time] = record.lp;
+          rankMap[time] = calculateRankPosition(record.tier, record.rank, record.lp);
         });
 
-        // Fill missing data with null for alignment
-        const lpData = labels.map(label => {
+        // Fill missing data points
+        const rankData = labels.map(label => {
           const time = label.getTime();
-          return lpMap[time] !== undefined ? lpMap[time] : null;
+          return rankMap[time] !== undefined ? rankMap[time] : null;
         });
 
-        // Get the latest tier and rank for labeling
         const tier = records[records.length - 1].tier;
         const rank = records[records.length - 1].rank;
 
-        // Create dataset for this summoner
+        // Create dataset
         datasets.push({
           label: `${summoner} (${tier} ${rank})`,
-          data: lpData,
+          data: rankData,
           borderColor: colors[colorIndex % colors.length],
           borderWidth: 2,
           fill: false,
@@ -79,13 +114,13 @@
       new Chart(ctx, {
         type: 'line',
         data: {
-          labels: labels, // Unified timestamps as x-axis labels
+          labels: labels, // Time on X-axis
           datasets: datasets
         },
         options: {
           scales: {
             x: {
-              type: 'time', // Requires a date adapter!
+              type: 'time', // Requires date adapter
               time: {
                 unit: 'day'
               },
@@ -95,9 +130,24 @@
               }
             },
             y: {
+              ticks: {
+                callback: function (value) {
+                  // Reverse mapping for display
+                  const rankValues = Object.entries(rankOrder).sort((a, b) => a[1] - b[1]);
+                  for (const [tier, rank] of rankValues) {
+                    if (value >= rank * 1000) {
+                      const division = Math.floor((value % 1000) / 200);
+                      const lp = value % 200;
+                      if (rank >= 8) return `${tier} ${lp} LP`;
+                      return `${tier} ${4 - division} (${lp} LP)`;
+                    }
+                  }
+                  return value;
+                }
+              },
               title: {
                 display: true,
-                text: 'LP'
+                text: 'Rank & LP'
               }
             }
           },
