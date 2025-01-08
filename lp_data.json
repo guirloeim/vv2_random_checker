@@ -1,1 +1,20 @@
-[]
+{
+  "Nico#coati": [
+    {
+      "summonerName": "Nico#coati",
+      "tier": "CHALLENGER",
+      "rank": "I",
+      "lp": 1044,
+      "timestamp": "2025-01-08T12:51:40.440812+00:00"
+    }
+  ],
+  "Loopy#0004": [
+    {
+      "summonerName": "Loopy#0004",
+      "tier": "MASTER",
+      "rank": "I",
+      "lp": 39,
+      "timestamp": "2025-01-08T12:51:42.033892+00:00"
+    }
+  ]
+}
