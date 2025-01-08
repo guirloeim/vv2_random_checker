@@ -3,6 +3,7 @@ import requests
 import json
 from datetime import datetime, timezone
 
+# Configuration
 REGION = "euw1"  # Or na1, kr, etc.
 PLATFORM_REGION = "europe"  # Use platform routing values like 'americas', 'europe', 'asia', 'sea'
 SUMMONERS = [
@@ -21,7 +22,6 @@ SUMMONERS = [
     # ... add more Riot IDs (name#tag)
 ]
 
-
 def main():
     # Get API key from environment variable
     api_key = os.getenv("RIOT_API_KEY")
@@ -29,6 +29,7 @@ def main():
         print("Missing Riot API Key!")
         return
 
+    # List to store new summoner data
     summoner_data_list = []
     for summoner in SUMMONERS:
         try:
@@ -60,25 +61,27 @@ def main():
     try:
         with open(data_filename, "r", encoding="utf-8") as f:
             old_data = json.load(f)
-            # Ensure old_data is treated as a list
+            # Flatten grouped data if it's a dictionary
             if isinstance(old_data, dict):
-                old_data = list(old_data.values())
+                old_data = [item for sublist in old_data.values() for item in sublist]
     except:
         old_data = []
 
-    # Append new data records
+    # Ensure old_data is a list
     if not isinstance(old_data, list):
         old_data = []
 
+    # Append new data records
     old_data.extend(summoner_data_list)
 
     # Group data by summoner name for progression tracking
     grouped_data = {}
     for entry in old_data:
-        name = entry["summonerName"]
-        if name not in grouped_data:
-            grouped_data[name] = []
-        grouped_data[name].append(entry)
+        if isinstance(entry, dict):  # Ensure entry is a dictionary
+            name = entry["summonerName"]
+            if name not in grouped_data:
+                grouped_data[name] = []
+            grouped_data[name].append(entry)
 
     # Save back to file
     with open(data_filename, "w", encoding="utf-8") as f:
