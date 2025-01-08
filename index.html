@@ -55,10 +55,10 @@
       ];
 
       const divisionOffset = {
-        "IV": 0,
-        "III": 100,
-        "II": 200,
-        "I": 300
+        "IV": 300,
+        "III": 200,
+        "II": 100,
+        "I": 0
       };
 
       const datasets = [];
@@ -144,7 +144,7 @@
                 callback: function (value) {
                   if (value >= chall) return "CHALLENGER";
                   if (value >= gm) return "GRANDMASTER";
-                  if (value >= 2800) return "MASTER";
+                  if (value >= 3200) return "MASTER";
                   const index = Math.floor(value / 400); // Handle other ranks
                   return ranks[index] || ""; // Default empty if out of range
                 }
