@@ -106,17 +106,17 @@
 
           // Figure out adjusted LP
           if (record.tier === "CHALLENGER") {
-            adjustedLP = chall + record.lp;
+            adjustedLP = MASTER_BASE + record.lp;
           } 
           else if (record.tier === "GRANDMASTER") {
-            adjustedLP = gm + record.lp;
+            adjustedLP = MASTER_BASE + record.lp;
           } 
           else if (record.tier === "MASTER") {
             adjustedLP = MASTER_BASE + record.lp;
           } 
           else {
             const rankIndex = ranks.indexOf(record.tier); 
-            const baseLP = 400 * (rankIndex + 1);
+            const baseLP = 400 * rankIndex;
             const divOff = 300 - (divisionOffset[record.rank] || 0);
             adjustedLP = baseLP + divOff + record.lp;
           }
@@ -187,8 +187,8 @@
       const yAxis = d3.axisLeft(yScale)
         .tickValues(uniqueTicks)
         .tickFormat(value => {
-          if (value >= chall) return "CHALLENGER";
-          else if (value >= gm) return "GRANDMASTER";
+          if (value >= chall) return "CHALL";
+          else if (value >= gm) return "GM";
           else if (value >= MASTER_BASE) return "MASTER";
           else {
             // For IRON -> DIAMOND
