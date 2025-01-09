@@ -27,8 +27,9 @@
     #chart {
       display: block;
       margin: 0 auto;
-      width: 95vw;  /* nearly full screen width */
-      height: 90vh; /* nearly full screen height */
+      /* Decrease width from 95vw to 90vw to leave space on the right */
+      width: 90vw;
+      height: 90vh;
       position: relative; /* so we can position tooltip absolutely */
     }
 
@@ -154,7 +155,8 @@
       const width = container.clientWidth;
       const height = container.clientHeight;
 
-      const margin = { top: 20, right: 30, bottom: 50, left: 60 };
+      // Increase the right margin for the legend
+      const margin = { top: 20, right: 200, bottom: 50, left: 60 };
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
 
@@ -313,12 +315,14 @@
           });
       });
 
-      // 21) Optional legend
+      // 21) Legend
+      // Move the legend to the far right, beyond the plot area
       const legend = g.selectAll(".legend")
         .data(summoners)
         .enter()
         .append("g")
-        .attr("transform", (d, i) => `translate(${innerWidth - 120}, ${i * 20})`);
+        // +10 to the 'innerWidth' so it sits in the extra margin space
+        .attr("transform", (d, i) => `translate(${innerWidth + 10}, ${i * 20})`);
 
       legend.append("rect")
         .attr("width", 12)
