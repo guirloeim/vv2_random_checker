@@ -57,17 +57,17 @@
       const data = await response.json();
 
       // 2) Extract cutoff values
-      const CHALLENGER_CUTOFF = data.cutoffs.CHALLENGER;   // e.g. 500
-      const GRANDMASTER_CUTOFF = data.cutoffs.GRANDMASTER; // e.g. 200
+      const CHALLENGER_CUTOFF = data.cutoffs.CHALLENGER;   
+      const GRANDMASTER_CUTOFF = data.cutoffs.GRANDMASTER; 
 
       // Master baseline
       const MASTER_BASE = 2800;
 
-      // Compute the exact positions for GM and Challenger
+      // Compute GM and Challenger cutoffs
       const gm = MASTER_BASE + GRANDMASTER_CUTOFF;
       const chall = MASTER_BASE + CHALLENGER_CUTOFF;
 
-      // Tiers used below Master
+      // Ranks below Master
       const ranks = [
         "IRON",      // index 0 => 0..400
         "BRONZE",    // index 1 => 400..800
@@ -87,26 +87,16 @@
         "I": 0
       };
 
-      // 3) Convert data into an array of summoners
-      // data.summoners should be an object keyed by summoner name
-      // We'll transform it into an array for easier handling in D3.
-      // Each element will look like:
-      // {
-      //   name: summonerName,
-      //   points: [
-      //     { x: Date, y: Number, realLP: Number },
-      //     ...
-      //   ]
-      // }
+      // 3) Transform the data into an array of summoners
       const summonerNames = Object.keys(data.summoners);
       const summoners = summonerNames.map((summoner) => {
         const records = data.summoners[summoner];
         const points = records.map((record) => {
           let adjustedLP = 0;
 
-          // Figure out adjusted LP
+          // Determine adjusted LP based on rank
           if (record.tier === "CHALLENGER") {
-            adjustedLP = MASTER_BASE + record.lp;
+            adjustedLP = MASTER_BASE + record.lp; 
           } 
           else if (record.tier === "GRANDMASTER") {
             adjustedLP = MASTER_BASE + record.lp;
@@ -115,6 +105,7 @@
             adjustedLP = MASTER_BASE + record.lp;
           } 
           else {
+            // IRON -> DIAMOND
             const rankIndex = ranks.indexOf(record.tier); 
             const baseLP = 400 * rankIndex;
             const divOff = 300 - (divisionOffset[record.rank] || 0);
@@ -135,15 +126,26 @@
         };
       });
 
-      // 4) Determine min/max dates across all summoners to set x-axis domain
+      // 4) Determine min/max date across all summoners
       let allPoints = [];
       summoners.forEach(s => allPoints = allPoints.concat(s.points));
 
-      const minDate = d3.min(allPoints, d => d.x);
-      const maxDate = d3.max(allPoints, d => d.x);
+      const earliestDate = d3.min(allPoints, d => d.x);
+      const latestDate = d3.max(allPoints, d => d.x);
 
-      // 5) Dimensions & margins for the SVG
-      // We can use the #chart div's width/height, or pick a static size
+      // 5) We expand domain to "earliestDate - 2 days" and "latestDate + 1 day"
+      // so we see at least 2 days before the earliest record, and 1 day after the latest
+      const domainStart = d3.timeDay.offset(earliestDate, -2);
+      const domainEnd   = d3.timeDay.offset(latestDate, +1);
+
+      // If you want to ignore data range and just show "today - 2 days" to "today + 1 day,"
+      // comment out the above and uncomment these lines:
+      //
+      // const now = new Date();
+      // const domainStart = d3.timeDay.offset(now, -2);
+      // const domainEnd   = d3.timeDay.offset(now, +1);
+
+      // 6) Dimensions & margins for the SVG
       const container = document.getElementById('chart');
       const width = container.clientWidth;
       const height = container.clientHeight;
@@ -152,38 +154,36 @@
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
 
-      // 6) Create an SVG inside #chart
+      // 7) Create the SVG
       const svg = d3.select("#chart")
         .append("svg")
         .attr("width", width)
         .attr("height", height);
 
-      // 7) Scales
-      // x-scale: time
+      // 8) Create a group (g) with margins
+      const g = svg.append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+      // 9) x-scale: time
       const xScale = d3.scaleTime()
-        .domain([minDate, maxDate])
+        .domain([domainStart, domainEnd])
         .range([0, innerWidth]);
 
-      // y-scale: linear from 0..4400
+      // 10) y-scale: from 0..4400
       const yScale = d3.scaleLinear()
         .domain([0, 4400])
         .range([innerHeight, 0]);
 
-      // 8) Create a group (g) that we'll translate for margins
-      const g = svg.append("g")
-        .attr("transform", `translate(${margin.left},${margin.top})`);
-
-      // 9) Build custom tick values for y-axis:
-      //    multiples of 400 from 0..2800, plus gm & chall
+      // 11) Build custom tick values for y-axis
       const tickVals = [];
       for (let val = 0; val <= 2800; val += 400) {
         tickVals.push(val);
       }
       tickVals.push(gm, chall);
       tickVals.sort((a, b) => a - b);
-      const uniqueTicks = Array.from(new Set(tickVals)); // remove duplicates
+      const uniqueTicks = Array.from(new Set(tickVals));
 
-      // 10) Y-axis with custom tick format
+      // 12) Y-axis with custom labels
       const yAxis = d3.axisLeft(yScale)
         .tickValues(uniqueTicks)
         .tickFormat(value => {
@@ -191,24 +191,25 @@
           else if (value >= gm) return "GM";
           else if (value >= MASTER_BASE) return "MASTER";
           else {
-            // For IRON -> DIAMOND
             const idx = Math.floor(value / 400);
             return ranks[idx] || "";
           }
         });
 
-      // 11) X-axis (time)
+      // 13) X-axis: daily ticks (the domain is only a few days wide)
+      // We'll request 5 ticks, or you can generate them daily.
       const xAxis = d3.axisBottom(xScale)
-        .ticks(d3.timeDay.every(1)) // daily ticks, adjust as needed
-        .tickFormat(d3.timeFormat("%b %d")); // e.g. "Jan 01"
+        .ticks(d3.timeDay.every(1))      // one tick per day
+        .tickFormat(d3.timeFormat("%b %d")); // e.g. "Jan 03"
 
-      // 12) Render axes
+      // 14) Render y-axis
       g.append("g")
         .attr("class", "y-axis")
         .call(yAxis)
         .selectAll("text")
-        .attr("fill", "#ffffff");   // White text
+        .attr("fill", "#ffffff");
 
+      // 15) Render x-axis
       g.append("g")
         .attr("class", "x-axis")
         .attr("transform", `translate(0,${innerHeight})`)
@@ -216,23 +217,23 @@
         .selectAll("text")
         .attr("fill", "#ffffff");
 
-      // 13) Axis lines color
+      // 16) Axis lines color
       g.selectAll(".domain, .tick line")
         .attr("stroke", "rgba(255,255,255,0.2)");
 
-      // 14) Create line generator
+      // 17) Create the line generator
       const lineGen = d3.line()
         .x(d => xScale(d.x))
         .y(d => yScale(d.y))
-        .curve(d3.curveLinear); // or d3.curveMonotoneX, etc.
+        .curve(d3.curveLinear);
 
-      // 15) A color scale for summoners
+      // 18) Color scale for summoners
       const color = d3.scaleOrdinal()
         .domain(summonerNames)
         .range(["blue", "red", "green", "orange", "purple",
                 "cyan", "magenta", "teal", "pink", "yellow"]);
 
-      // 16) Draw lines for each summoner
+      // 19) Draw lines
       summoners.forEach(s => {
         g.append("path")
           .datum(s.points)
@@ -242,7 +243,7 @@
           .attr("d", lineGen);
       });
 
-      // 17) Draw circles for each data point + add a "title" or a real tooltip
+      // 20) Draw circles for each data point
       summoners.forEach(s => {
         g.selectAll(`.circle-${s.name}`)
           .data(s.points)
@@ -255,12 +256,12 @@
           .attr("fill", color(s.name));
       });
 
-      // 18) Create a tooltip div
+      // 21) Create a tooltip div
       const tooltip = d3.select("#chart")
         .append("div")
         .attr("class", "tooltip");
 
-      // 19) Add mouse events for each circle to show/hide tooltip
+      // 22) Mouse events for each circle
       summoners.forEach(s => {
         g.selectAll(`.circle-${s.name}`)
           .on("mouseover", (event, d) => {
@@ -269,7 +270,6 @@
               .html(`<strong>${s.name}</strong><br>${d.realLP} LP<br>${d.x.toDateString()}`);
           })
           .on("mousemove", event => {
-            // position the tooltip near the mouse
             tooltip
               .style("top", (event.pageY - 40) + "px")
               .style("left", (event.pageX + 10) + "px");
@@ -279,7 +279,7 @@
           });
       });
 
-      // 20) Optionally, create a legend
+      // 23) Optional legend
       const legend = g.selectAll(".legend")
         .data(summoners)
         .enter()
@@ -287,8 +287,6 @@
         .attr("transform", (d, i) => `translate(${innerWidth - 120}, ${i * 20})`);
 
       legend.append("rect")
-        .attr("x", 0)
-        .attr("y", 0)
         .attr("width", 12)
         .attr("height", 12)
         .attr("fill", d => color(d.name));
