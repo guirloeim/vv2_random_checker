@@ -1,7 +1,7 @@
 {
   "cutoffs": {
-    "CHALLENGER": 935,
-    "GRANDMASTER": 542
+    "CHALLENGER": 1003,
+    "GRANDMASTER": 653
   },
   "summoners": {
     "Nico#coati": [
@@ -12,6 +12,14 @@
         "lp": 1044,
         "adjustedLP": 1979,
         "timestamp": "2025-01-08T17:18:17.745379+00:00"
+      },
+      {
+        "summonerName": "Nico#coati",
+        "tier": "CHALLENGER",
+        "rank": "I",
+        "lp": 1044,
+        "adjustedLP": 2047,
+        "timestamp": "2025-01-09T01:27:22.124838+00:00"
       }
     ],
     "Loopy#0004": [
@@ -22,6 +30,14 @@
         "lp": 39,
         "adjustedLP": 4039,
         "timestamp": "2025-01-08T17:18:19.811401+00:00"
+      },
+      {
+        "summonerName": "Loopy#0004",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 99,
+        "adjustedLP": 4099,
+        "timestamp": "2025-01-09T01:27:23.609580+00:00"
       }
     ],
     "The Mid Game#Canoe": [
@@ -32,6 +48,14 @@
         "lp": 670,
         "adjustedLP": 1212,
         "timestamp": "2025-01-08T17:18:21.922448+00:00"
+      },
+      {
+        "summonerName": "The Mid Game#Canoe",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 630,
+        "adjustedLP": 4630,
+        "timestamp": "2025-01-09T01:27:25.124693+00:00"
       }
     ],
     "emerrin#623HS": [
@@ -42,6 +66,14 @@
         "lp": 685,
         "adjustedLP": 1227,
         "timestamp": "2025-01-08T17:18:23.982025+00:00"
+      },
+      {
+        "summonerName": "emerrin#623HS",
+        "tier": "GRANDMASTER",
+        "rank": "I",
+        "lp": 685,
+        "adjustedLP": 1338,
+        "timestamp": "2025-01-09T01:27:26.585198+00:00"
       }
     ],
     "meow81#paw": [
@@ -52,6 +84,14 @@
         "lp": 315,
         "adjustedLP": 4315,
         "timestamp": "2025-01-08T17:18:26.044689+00:00"
+      },
+      {
+        "summonerName": "meow81#paw",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 335,
+        "adjustedLP": 4335,
+        "timestamp": "2025-01-09T01:27:28.076802+00:00"
       }
     ],
     "Owpi#idiot": [
@@ -62,6 +102,14 @@
         "lp": 3,
         "adjustedLP": 4003,
         "timestamp": "2025-01-08T17:18:28.176907+00:00"
+      },
+      {
+        "summonerName": "Owpi#idiot",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 11,
+        "adjustedLP": 4011,
+        "timestamp": "2025-01-09T01:27:29.552146+00:00"
       }
     ],
     "Big2080#EUW": [
@@ -72,6 +120,14 @@
         "lp": 10,
         "adjustedLP": 4010,
         "timestamp": "2025-01-08T17:18:30.235914+00:00"
+      },
+      {
+        "summonerName": "Big2080#EUW",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 10,
+        "adjustedLP": 4010,
+        "timestamp": "2025-01-09T01:27:31.011439+00:00"
       }
     ],
     "Myst#Blade": [
@@ -82,6 +138,14 @@
         "lp": 3,
         "adjustedLP": 2503,
         "timestamp": "2025-01-08T17:18:32.335886+00:00"
+      },
+      {
+        "summonerName": "Myst#Blade",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 3,
+        "adjustedLP": 2503,
+        "timestamp": "2025-01-09T01:27:32.523617+00:00"
       }
     ],
     "Yui#KEK": [
@@ -92,6 +156,14 @@
         "lp": 26,
         "adjustedLP": 2426,
         "timestamp": "2025-01-08T17:18:34.421163+00:00"
+      },
+      {
+        "summonerName": "Yui#KEK",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 26,
+        "adjustedLP": 2426,
+        "timestamp": "2025-01-09T01:27:33.993117+00:00"
       }
     ],
     "Lil Wio#EUW": [
@@ -102,6 +174,14 @@
         "lp": 65,
         "adjustedLP": 1865,
         "timestamp": "2025-01-08T17:18:36.472447+00:00"
+      },
+      {
+        "summonerName": "Lil Wio#EUW",
+        "tier": "PLATINUM",
+        "rank": "II",
+        "lp": 62,
+        "adjustedLP": 1862,
+        "timestamp": "2025-01-09T01:27:35.449907+00:00"
       }
     ],
     "King Afee#333": [
@@ -112,6 +192,14 @@
         "lp": 82,
         "adjustedLP": 1782,
         "timestamp": "2025-01-08T17:18:38.609003+00:00"
+      },
+      {
+        "summonerName": "King Afee#333",
+        "tier": "PLATINUM",
+        "rank": "II",
+        "lp": 6,
+        "adjustedLP": 1806,
+        "timestamp": "2025-01-09T01:27:36.918461+00:00"
       }
     ],
     "Lemis#33310": [
@@ -122,6 +210,14 @@
         "lp": 61,
         "adjustedLP": 1261,
         "timestamp": "2025-01-08T17:18:40.691470+00:00"
+      },
+      {
+        "summonerName": "Lemis#33310",
+        "tier": "GOLD",
+        "rank": "IV",
+        "lp": 61,
+        "adjustedLP": 1261,
+        "timestamp": "2025-01-09T01:27:38.376205+00:00"
       }
     ]
   }
