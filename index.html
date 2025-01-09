@@ -192,13 +192,28 @@
                   } 
                   else if (value >= MASTER_BASE) {
                     return "MASTER";
-                  } 
-                  else {
-                    // For IRON -> DIAMOND
-                    const index = Math.floor(value / 400);
-                    // e.g. 1600 => index=4 => "PLATINUM"
-                    return ranks[index] || "";
                   }
+                  else if (value == 2400) {
+                    return "DIAMOND";
+                  } 
+                  else if (value == 2000) {
+                    return "EMERALD";
+                  }
+                  else if (value == 1600) {
+                    return "PLATINUM";
+                  }
+                  else if (value == 1200) {
+                    return "GOLD";
+                  } 
+                  else if (value == 800) {
+                    return "SILVER";
+                  } 
+                  else if (value == 400) {
+                    return "BRONZE";
+                  } 
+                  else if (value == 0) {
+                    return "IRON";
+                  } 
                 }
               },
               grid: {
