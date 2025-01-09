@@ -19,7 +19,7 @@ SUMMONERS = [
     "Lil Wio#EUW",
     "King Afee#333",
     "Lemis#33310",
-    "FOOTJOB ENJOYER#QUEEN",
+    "FOOTJOB ENJOYER#QU33N",
     "MENTALB00MXDD#EUW",
     "L9 Lemis#OWPI",
     "l1kenJ#KITTY",
