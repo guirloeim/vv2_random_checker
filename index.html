@@ -90,19 +90,17 @@
 
       // 3) Convert the data into an array of summoners
       const summonerNames = Object.keys(data.summoners);
-
-      // We'll figure out earliest and latest dates across all summoners
       let allPoints = [];
 
-      const summoners = summonerNames.map((summoner) => {
+      // Build summoners array
+      const summoners = summonerNames.map(summoner => {
         const records = data.summoners[summoner];
 
-        // Build the array of data points for this summoner
-        let points = records.map((record) => {
+        let points = records.map(record => {
           let adjustedLP = 0;
 
           if (record.tier === "CHALLENGER") {
-            adjustedLP = MASTER_BASE + record.lp; 
+            adjustedLP = MASTER_BASE + record.lp;
           }
           else if (record.tier === "GRANDMASTER") {
             adjustedLP = MASTER_BASE + record.lp;
@@ -111,13 +109,12 @@
             adjustedLP = MASTER_BASE + record.lp;
           }
           else {
-            const rankIndex = ranks.indexOf(record.tier); 
+            const rankIndex = ranks.indexOf(record.tier);
             const baseLP = 400 * rankIndex;
             const divOff = 300 - (divisionOffset[record.rank] || 0);
             adjustedLP = baseLP + divOff + record.lp;
           }
 
-          // Return the data point, plus tier and division for the tooltip
           return {
             x: new Date(record.timestamp),
             y: adjustedLP,
@@ -127,24 +124,23 @@
           };
         });
 
-        // Sort points by date ascending
+        // Sort by date ascending
         points.sort((a, b) => a.x - b.x);
-
-        // Collect in allPoints for domain calculation
         allPoints = allPoints.concat(points);
 
         return {
           name: summoner,
           points,
+          // We'll store the text "latestTier" for convenience
           latestTier: `${records[records.length - 1].tier} ${records[records.length - 1].rank}`
         };
       });
 
-      // 4) Determine earliest and latest actual data date
+      // 4) Determine earliest & latest date
       const earliestDate = d3.min(allPoints, d => d.x);
       const latestDate = d3.max(allPoints, d => d.x);
 
-      // 5) Expand domain to "earliestDate - 2 days" and "latestDate + 1 day"
+      // 5) Expand domain to earliestDate - 2 days, latestDate + 1 day
       const domainStart = d3.timeDay.offset(earliestDate, -2);
       const domainEnd   = d3.timeDay.offset(latestDate, +1);
 
@@ -153,12 +149,11 @@
       const width = container.clientWidth;
       const height = container.clientHeight;
 
-      // Increase the right margin for the legend
       const margin = { top: 20, right: 250, bottom: 50, left: 60 };
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
 
-      // 7) Create the SVG
+      // 7) Create svg
       const svg = d3.select("#chart")
         .append("svg")
         .attr("width", width)
@@ -173,7 +168,7 @@
         .domain([domainStart, domainEnd])
         .range([0, innerWidth]);
 
-      // 10) y-scale
+      // 10) y-scale: linear
       const yScale = d3.scaleLinear()
         .domain([0, 4400])
         .range([innerHeight, 0]);
@@ -200,19 +195,18 @@
           }
         });
 
-      // 13) X-axis (daily ticks)
+      // 13) X-axis
       const xAxis = d3.axisBottom(xScale)
         .ticks(d3.timeDay.every(1))
         .tickFormat(d3.timeFormat("%b %d"));
 
-      // Render y-axis
+      // Render axes
       g.append("g")
         .attr("class", "y-axis")
         .call(yAxis)
         .selectAll("text")
         .attr("fill", "#ffffff");
 
-      // Render x-axis
       g.append("g")
         .attr("class", "x-axis")
         .attr("transform", `translate(0,${innerHeight})`)
@@ -224,7 +218,7 @@
       g.selectAll(".domain, .tick line")
         .attr("stroke", "rgba(255,255,255,0.2)");
 
-      // 14) D3 line generator
+      // 14) Line generator
       const lineGen = d3.line()
         .x(d => xScale(d.x))
         .y(d => yScale(d.y))
@@ -253,7 +247,7 @@
         }
       });
 
-      // 17) Draw lines FIRST (so they don't intercept events on circles)
+      // 17) Draw lines
       summoners.forEach(s => {
         g.append("path")
           .datum(s.points)
@@ -264,11 +258,9 @@
           .attr("d", lineGen);
       });
 
-      // 18) Draw circles for each data point
+      // 18) Circles
       summoners.forEach(s => {
-        // Replace invalid CSS selector chars with underscores
         const safeName = s.name.replace(/[^a-zA-Z0-9_-]/g, "_");
-
         g.selectAll(`.circle-${safeName}`)
           .data(s.points)
           .enter()
@@ -285,7 +277,7 @@
         .append("div")
         .attr("class", "tooltip");
 
-      // 20) Mouse events
+      // 20) Circle mouse events
       summoners.forEach(s => {
         const safeName = s.name.replace(/[^a-zA-Z0-9_-]/g, "_");
 
@@ -310,22 +302,24 @@
           });
       });
 
-      /**
-       * 21) Sort the summoners array by the final y-value in descending order,
-       *     so the highest line's legend is at the top.
-       */
+      // 21) Sort summoners by final y-value descending
       summoners.sort((a, b) => {
         const aLast = a.points[a.points.length - 1].y;
         const bLast = b.points[b.points.length - 1].y;
-        return bLast - aLast; // desc
+        return bLast - aLast; 
       });
 
-      // 22) Build the legend with the sorted summoners
+      // 22) Store each summoner's final realLP so we can show it in the legend
+      summoners.forEach(s => {
+        const lastPt = s.points[s.points.length - 1];
+        s.finalLP = lastPt.realLP;
+      });
+
+      // 23) Legend
       const legend = g.selectAll(".legend")
         .data(summoners)
         .enter()
         .append("g")
-        // +10 to the 'innerWidth' so it sits in the extra margin space
         .attr("transform", (d, i) => `translate(${innerWidth + 10}, ${i * 20})`);
 
       legend.append("rect")
@@ -333,12 +327,14 @@
         .attr("height", 12)
         .attr("fill", d => color(d.name));
 
+      // Add the final LP to the legend text
       legend.append("text")
         .attr("x", 18)
         .attr("y", 10)
         .attr("fill", "#ffffff")
         .style("font-size", "0.85rem")
-        .text(d => `${d.name} (${d.latestTier})`);
+        // Display something like: "SummonerName (TIER DIV, 123 LP)"
+        .text(d => `${d.name} (${d.latestTier}, ${d.finalLP} LP)`);
     }
 
     // Kick off data loading and chart rendering
