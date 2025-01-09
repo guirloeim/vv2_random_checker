@@ -107,7 +107,7 @@
           else {
             // For IRON -> DIAMOND
             const rankIndex = ranks.indexOf(record.tier);
-            const baseLP = 400 * rankIndex; // each rank block is 400 apart
+            const baseLP = 400 * (rankIndex+1); // each rank block is 400 apart
             // top of the division = 400 - offset
             const divOffset = 400 - (divisionOffset[record.rank] || 0);
             adjustedLP = baseLP + divOffset + record.lp;
@@ -172,7 +172,7 @@
             },
             y: {
               min: 0,
-              max: 4400,
+              max: 4800,
               // We provide a fixed set of ticks, including the multiples of 400 + gm + chall
               ticks: {
                 autoSkip: false,    // Force Chart.js to show all ticks in our array
