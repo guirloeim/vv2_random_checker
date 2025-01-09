@@ -57,14 +57,14 @@
 
       // Ranks used for everything below MASTER
       const ranks = [
-        "IRON",      // 0
-        "BRONZE",    // 1
-        "SILVER",    // 2
-        "GOLD",      // 3
-        "PLATINUM",  // 4
-        "EMERALD",   // 5
-        "DIAMOND",   // 6
-        "MASTER"     // 7 (used only if < gm)
+        "IRON",      // 0 0 - 400
+        "BRONZE",    // 1 400 - 800
+        "SILVER",    // 2 800 - 1200
+        "GOLD",      // 3 1200 - 1600
+        "PLATINUM",  // 4 1600 - 2000
+        "EMERALD",   // 5 2000 - 2400
+        "DIAMOND",   // 6 2400 - 2800
+        "MASTER"     // 7 2800 - gm cutoff (used only if < gm)
       ];
 
       // Offsets for each division inside a tier (e.g. IV is the lowest)
@@ -94,11 +94,11 @@
           // Determine the adjusted LP based on the rank/tier
           if (record.tier === "CHALLENGER") {
             // CHALLENGER starts at 'chall'
-            adjustedLP = chall + record.lp;
+            adjustedLP = MASTER_BASE + record.lp;
           } 
           else if (record.tier === "GRANDMASTER") {
             // GRANDMASTER starts at 'gm'
-            adjustedLP = gm + record.lp;
+            adjustedLP = MASTER_BASE + record.lp;
           } 
           else if (record.tier === "MASTER") {
             // MASTER starts at MASTER_BASE
@@ -136,7 +136,7 @@
 
       // Generate the full array of ticks: multiples of 400 + gm + chall
       const ticksArray = [];
-      for (let val = 0; val <= 5000; val += 400) {
+      for (let val = 0; val <= 2800; val += 400) {
         ticksArray.push(val);
       }
       // Include gm and chall if they’re not already multiples of 400
@@ -145,7 +145,7 @@
       // Sort them in ascending order
       ticksArray.sort((a, b) => a - b);
       // Remove any duplicates (if gm/chall is exactly a multiple of 400)
-      const uniqueTicks = [...new Set(ticksArray)];
+      //const uniqueTicks = [...new Set(ticksArray)];
 
       // Create the chart
       const ctx = document.getElementById("summonerChart").getContext("2d");
@@ -173,7 +173,7 @@
             },
             y: {
               min: 0,
-              max: 5200,
+              max: 4400,
               // We provide a fixed set of ticks, including the multiples of 400 + gm + chall
               ticks: {
                 autoSkip: false,    // Force Chart.js to show all ticks in our array
