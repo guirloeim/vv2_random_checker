@@ -1,7 +1,7 @@
 {
   "cutoffs": {
-    "CHALLENGER": 1003,
-    "GRANDMASTER": 653
+    "CHALLENGER": 0,
+    "GRANDMASTER": 0
   },
   "summoners": {
     "Nico#coati": [
