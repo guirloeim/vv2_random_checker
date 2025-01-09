@@ -101,7 +101,6 @@
         let points = records.map((record) => {
           let adjustedLP = 0;
 
-          // Determine adjusted LP based on rank
           if (record.tier === "CHALLENGER") {
             adjustedLP = MASTER_BASE + record.lp; 
           }
@@ -112,7 +111,6 @@
             adjustedLP = MASTER_BASE + record.lp;
           }
           else {
-            // IRON -> DIAMOND
             const rankIndex = ranks.indexOf(record.tier); 
             const baseLP = 400 * rankIndex;
             const divOff = 300 - (divisionOffset[record.rank] || 0);
@@ -124,8 +122,8 @@
             x: new Date(record.timestamp),
             y: adjustedLP,
             realLP: record.lp,
-            tier: record.tier,   // e.g. "GOLD"
-            division: record.rank // e.g. "III"
+            tier: record.tier,
+            division: record.rank
           };
         });
 
@@ -180,7 +178,7 @@
         .domain([0, 4400])
         .range([innerHeight, 0]);
 
-      // 11) Y-axis ticks
+      // 11) Build y-axis ticks
       const tickVals = [];
       for (let val = 0; val <= 2800; val += 400) {
         tickVals.push(val);
@@ -244,7 +242,6 @@
         if (pts.length) {
           const earliestPt = pts[0];
           if (domainStart < earliestPt.x) {
-            // Clone the earliest point but change the x to domainStart
             pts.unshift({
               x: domainStart,
               y: earliestPt.y,
@@ -263,13 +260,11 @@
           .attr("fill", "none")
           .attr("stroke", color(s.name))
           .attr("stroke-width", 2)
-          // Ensures the path won't block mouse events on circles
           .attr("pointer-events", "none")
           .attr("d", lineGen);
       });
 
-      // 18) Draw circles for each data point (on top),
-      //     but sanitize summoner name to avoid invalid selectors.
+      // 18) Draw circles for each data point
       summoners.forEach(s => {
         // Replace invalid CSS selector chars with underscores
         const safeName = s.name.replace(/[^a-zA-Z0-9_-]/g, "_");
@@ -290,7 +285,7 @@
         .append("div")
         .attr("class", "tooltip");
 
-      // 20) Mouse events (again use the safeName)
+      // 20) Mouse events
       summoners.forEach(s => {
         const safeName = s.name.replace(/[^a-zA-Z0-9_-]/g, "_");
 
@@ -315,8 +310,17 @@
           });
       });
 
-      // 21) Legend
-      // Move the legend to the far right, beyond the plot area
+      /**
+       * 21) Sort the summoners array by the final y-value in descending order,
+       *     so the highest line's legend is at the top.
+       */
+      summoners.sort((a, b) => {
+        const aLast = a.points[a.points.length - 1].y;
+        const bLast = b.points[b.points.length - 1].y;
+        return bLast - aLast; // desc
+      });
+
+      // 22) Build the legend with the sorted summoners
       const legend = g.selectAll(".legend")
         .data(summoners)
         .enter()
