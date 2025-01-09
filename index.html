@@ -109,7 +109,7 @@
             const rankIndex = ranks.indexOf(record.tier);
             const baseLP = 400 * rankIndex; // each rank block is 400 apart
             // top of the division = 400 - offset
-            const divOffset = 300 - (divisionOffset[record.rank] || 0);
+            const divOffset = 400 - (divisionOffset[record.rank] || 0);
             adjustedLP = baseLP + divOffset + record.lp;
           }
 
