@@ -57,8 +57,8 @@
       const data = await response.json();
 
       // 2) Extract cutoff values
-      const CHALLENGER_CUTOFF = data.cutoffs.CHALLENGER;   
-      const GRANDMASTER_CUTOFF = data.cutoffs.GRANDMASTER; 
+      const CHALLENGER_CUTOFF = data.cutoffs.CHALLENGER;
+      const GRANDMASTER_CUTOFF = data.cutoffs.GRANDMASTER;
 
       // Master baseline
       const MASTER_BASE = 2800;
@@ -103,13 +103,13 @@
           // Determine adjusted LP based on rank
           if (record.tier === "CHALLENGER") {
             adjustedLP = MASTER_BASE + record.lp; 
-          } 
+          }
           else if (record.tier === "GRANDMASTER") {
             adjustedLP = MASTER_BASE + record.lp;
-          } 
+          }
           else if (record.tier === "MASTER") {
             adjustedLP = MASTER_BASE + record.lp;
-          } 
+          }
           else {
             // IRON -> DIAMOND
             const rankIndex = ranks.indexOf(record.tier); 
@@ -118,10 +118,13 @@
             adjustedLP = baseLP + divOff + record.lp;
           }
 
+          // Return the data point, plus tier and division for the tooltip
           return {
             x: new Date(record.timestamp),
             y: adjustedLP,
-            realLP: record.lp
+            realLP: record.lp,
+            tier: record.tier,   // e.g. "GOLD"
+            division: record.rank // e.g. "III"
           };
         });
 
@@ -239,10 +242,13 @@
         if (pts.length) {
           const earliestPt = pts[0];
           if (domainStart < earliestPt.x) {
+            // Clone the earliest point but change the x to domainStart
             pts.unshift({
               x: domainStart,
               y: earliestPt.y,
-              realLP: earliestPt.realLP
+              realLP: earliestPt.realLP,
+              tier: earliestPt.tier,
+              division: earliestPt.division
             });
           }
         }
@@ -292,6 +298,7 @@
               .style("visibility", "visible")
               .html(`
                 <strong>${s.name}</strong><br>
+                ${d.tier} ${d.division}<br>
                 ${d.realLP} LP<br>
                 ${d.x.toDateString()}
               `);
