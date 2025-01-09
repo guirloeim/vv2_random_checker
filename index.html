@@ -48,33 +48,32 @@
       const CHALLENGER_CUTOFF = data.cutoffs.CHALLENGER;   // e.g. 500
       const GRANDMASTER_CUTOFF = data.cutoffs.GRANDMASTER; // e.g. 200
 
-      // MASTER baseline (constant 2800)
+      // MASTER baseline
       const MASTER_BASE = 2800;
 
-      // Calculate exact positions for GM and Challenger
-      const gm = MASTER_BASE + GRANDMASTER_CUTOFF;  // e.g. 2800 + 200 = 3000
-      const chall = MASTER_BASE + CHALLENGER_CUTOFF; // e.g. 2800 + 500 = 3300
+      // Grandmaster and Challenger "starting" points on the chart
+      const gm = MASTER_BASE + GRANDMASTER_CUTOFF; 
+      const chall = MASTER_BASE + CHALLENGER_CUTOFF;
 
-      // Prepare the EXACT 10 tick values in ascending order:
-      // 0, 400, 800, 1200, 1600, 2000, 2400, 2800, gm, chall
-      let fixedTicks = [
-        0,
-        400,
-        800,
-        1200,
-        1600,
-        2000,
-        2400,
-        MASTER_BASE, // 2800
-        gm,
-        chall
+      // Ranks used for everything below MASTER
+      const ranks = [
+        "IRON",      // index 0 => 0   LP to <400
+        "BRONZE",    // index 1 => 400 LP to <800
+        "SILVER",    // index 2 => 800 LP to <1200
+        "GOLD",      // index 3 => 1200 LP to <1600
+        "PLATINUM",  // index 4 => 1600 LP to <2000
+        "EMERALD",   // index 5 => 2000 LP to <2400
+        "DIAMOND",   // index 6 => 2400 LP to <2800
+        "MASTER"     // index 7 => 2800 LP to < gm
       ];
 
-      // Sort them just in case gm or chall are less than 2800, etc.
-      fixedTicks.sort((a, b) => a - b);
-
-      // Remove duplicates if gm or chall accidentally equals one of the earlier ticks
-      const uniqueTicks = [...new Set(fixedTicks)];
+      // Offsets for each division inside a tier
+      const divisionOffset = {
+        "IV": 300,
+        "III": 200,
+        "II": 100,
+        "I": 0
+      };
 
       // Prepare an array of datasets (one per summoner)
       const datasets = [];
@@ -84,14 +83,6 @@
       ];
       let colorIndex = 0;
 
-      // For IRON through DIAMOND, offset logic
-      const divisionOffset = {
-        "IV": 300,
-        "III": 200,
-        "II": 100,
-        "I": 0
-      };
-
       // Iterate over each summoner
       Object.keys(data.summoners).forEach((summoner) => {
         const records = data.summoners[summoner];
@@ -100,38 +91,33 @@
         const points = records.map((record) => {
           let adjustedLP = 0;
 
+          // Determine the adjusted LP based on the rank/tier
           if (record.tier === "CHALLENGER") {
-            // In your original logic, you'd do: adjustedLP = chall + record.lp
-            // But if you want to see "Challenger starts after Master 2800 + cutoff"
-            // you can do so, or you might prefer the range-based approach.
+            // CHALLENGER starts at 'chall'
             adjustedLP = chall + record.lp;
-          }
+          } 
           else if (record.tier === "GRANDMASTER") {
+            // GRANDMASTER starts at 'gm'
             adjustedLP = gm + record.lp;
-          }
+          } 
           else if (record.tier === "MASTER") {
+            // MASTER starts at MASTER_BASE
             adjustedLP = MASTER_BASE + record.lp;
-          }
+          } 
           else {
-            // IRON(0..400), BRONZE(400..800), etc.
-            // Usually rankIndex = 0 => IRON, 1 => BRONZE, ...
-            // But be sure your logic matches your needs
-            const rankMap = {
-              "IRON": 0,
-              "BRONZE": 1,
-              "SILVER": 2,
-              "GOLD": 3,
-              "PLATINUM": 4,
-              "EMERALD": 5,
-              "DIAMOND": 6
-            };
-            const rankIndex = rankMap[record.tier] || 0;
+            // For IRON -> DIAMOND
+            const rankIndex = ranks.indexOf(record.tier); 
+            // Each rank block is 400 wide
+            // e.g. IRON => 0..400, BRONZE => 400..800, etc.
+            // (rankIndex + 1) * 400 was your original logic for base,
+            // but let's ensure it matches the desired spacing:
+            const baseLP = 400 * (rankIndex + 1);
 
-            // For example, IRON might start at 0, BRONZE at 400, etc.
-            const baseLP = rankIndex * 400; 
-            const divOffsetVal = 400 - (divisionOffset[record.rank] || 0);
+            // top of the division = 300 - offset logic
+            // but let's keep your original approach exactly, to not break anything else.
+            const divOffset = 300 - (divisionOffset[record.rank] || 0);
 
-            adjustedLP = baseLP + divOffsetVal + record.lp;
+            adjustedLP = baseLP + divOffset + record.lp;
           }
 
           return {
@@ -148,12 +134,22 @@
           borderWidth: 2,
           fill: false,
           tension: 0.1,
-          pointRadius: 4,
-          pointHoverRadius: 7
+          pointRadius: 5,
+          pointHoverRadius: 8
         });
 
         colorIndex++;
       });
+
+      // Build an array of ticks from 0 to 2800 in steps of 400, plus GM & Challenger
+      const ticksArray = [];
+      for (let val = 0; val <= 2800; val += 400) {
+        ticksArray.push(val);
+      }
+      ticksArray.push(gm, chall);   // Add gm & challenger
+      ticksArray.sort((a, b) => a - b);
+      // Remove duplicates in case gm or chall is exactly a multiple of 400
+      const uniqueTicks = [...new Set(ticksArray)];
 
       // Create the chart
       const ctx = document.getElementById("summonerChart").getContext("2d");
@@ -181,25 +177,27 @@
             },
             y: {
               min: 0,
-              max: 4400,  // Force from 0 up to 4400
+              max: 4400,  // Keep some space up to 4400
               ticks: {
-                autoSkip: false,      // Don't skip any of our custom ticks
-                values: uniqueTicks,  // Exactly those 10 ticks
+                autoSkip: false,  // Force Chart.js to show all ticks we provide
                 color: '#ffffff',
+                values: uniqueTicks,
                 callback: function (value) {
-                  // Use direct equality checks for each tier cutoff
-                  switch (value) {
-                    case 0:    return "IRON";
-                    case 400:  return "BRONZE";
-                    case 800:  return "SILVER";
-                    case 1200: return "GOLD";
-                    case 1600: return "PLATINUM";
-                    case 2000: return "EMERALD";
-                    case 2400: return "DIAMOND";
-                    case 2800: return "MASTER";
-                    case gm:   return "GRANDMASTER";
-                    case chall:return "CHALLENGER";
-                    default:   return "";
+                  // Range-based approach so GM or Challenger show up properly
+                  if (value >= chall) {
+                    return "CHALLENGER";
+                  } 
+                  else if (value >= gm) {
+                    return "GRANDMASTER";
+                  } 
+                  else if (value >= MASTER_BASE) {
+                    return "MASTER";
+                  } 
+                  else {
+                    // For IRON -> DIAMOND
+                    const index = Math.floor(value / 400);
+                    // e.g. 1600 => index=4 => "PLATINUM"
+                    return ranks[index] || "";
                   }
                 }
               },
