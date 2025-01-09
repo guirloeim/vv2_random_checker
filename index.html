@@ -57,17 +57,17 @@
 
       // Ranks used for everything below MASTER
       const ranks = [
-        "IRON",      // 0 0 - 400
-        "BRONZE",    // 1 400 - 800
-        "SILVER",    // 2 800 - 1200
-        "GOLD",      // 3 1200 - 1600
-        "PLATINUM",  // 4 1600 - 2000
-        "EMERALD",   // 5 2000 - 2400
-        "DIAMOND",   // 6 2400 - 2800
-        "MASTER"     // 7 2800 - gm cutoff (used only if < gm)
+        "IRON",      // index 0 => 0   LP to <400
+        "BRONZE",    // index 1 => 400 LP to <800
+        "SILVER",    // index 2 => 800 LP to <1200
+        "GOLD",      // index 3 => 1200 LP to <1600
+        "PLATINUM",  // index 4 => 1600 LP to <2000
+        "EMERALD",   // index 5 => 2000 LP to <2400
+        "DIAMOND",   // index 6 => 2400 LP to <2800
+        "MASTER"     // index 7 => 2800 LP to < gm
       ];
 
-      // Offsets for each division inside a tier (e.g. IV is the lowest)
+      // Offsets for each division inside a tier
       const divisionOffset = {
         "IV": 300,
         "III": 200,
@@ -94,11 +94,11 @@
           // Determine the adjusted LP based on the rank/tier
           if (record.tier === "CHALLENGER") {
             // CHALLENGER starts at 'chall'
-            adjustedLP = MASTER_BASE + record.lp;
+            adjustedLP = chall + record.lp;
           } 
           else if (record.tier === "GRANDMASTER") {
             // GRANDMASTER starts at 'gm'
-            adjustedLP = MASTER_BASE + record.lp;
+            adjustedLP = gm + record.lp;
           } 
           else if (record.tier === "MASTER") {
             // MASTER starts at MASTER_BASE
@@ -106,10 +106,17 @@
           } 
           else {
             // For IRON -> DIAMOND
-            const rankIndex = ranks.indexOf(record.tier);
-            const baseLP = 400 * (rankIndex+1); // each rank block is 400 apart
-            // top of the division = 400 - offset
+            const rankIndex = ranks.indexOf(record.tier); 
+            // Each rank block is 400 wide
+            // e.g. IRON => 0..400, BRONZE => 400..800, etc.
+            // (rankIndex + 1) * 400 was your original logic for base,
+            // but let's ensure it matches the desired spacing:
+            const baseLP = 400 * (rankIndex + 1);
+
+            // top of the division = 300 - offset logic
+            // but let's keep your original approach exactly, to not break anything else.
             const divOffset = 300 - (divisionOffset[record.rank] || 0);
+
             adjustedLP = baseLP + divOffset + record.lp;
           }
 
@@ -121,7 +128,7 @@
         });
 
         datasets.push({
-          label: ${summoner} (${records[records.length - 1].tier} ${records[records.length - 1].rank}),
+          label: `${summoner} (${records[records.length - 1].tier} ${records[records.length - 1].rank})`,
           data: points,
           borderColor: colors[colorIndex % colors.length],
           borderWidth: 2,
@@ -134,17 +141,14 @@
         colorIndex++;
       });
 
-      // Generate the full array of ticks: multiples of 400 + gm + chall
+      // Build an array of ticks from 0 to 2800 in steps of 400, plus GM & Challenger
       const ticksArray = [];
       for (let val = 0; val <= 2800; val += 400) {
         ticksArray.push(val);
       }
-      // Include gm and chall if they’re not already multiples of 400
-      ticksArray.push(gm);
-      ticksArray.push(chall);
-      // Sort them in ascending order
+      ticksArray.push(gm, chall);   // Add gm & challenger
       ticksArray.sort((a, b) => a - b);
-      // Remove any duplicates (if gm/chall is exactly a multiple of 400)
+      // Remove duplicates in case gm or chall is exactly a multiple of 400
       const uniqueTicks = [...new Set(ticksArray)];
 
       // Create the chart
@@ -173,29 +177,26 @@
             },
             y: {
               min: 0,
-              max: 4400,
-              // We provide a fixed set of ticks, including the multiples of 400 + gm + chall
+              max: 4400,  // Keep some space up to 4400
               ticks: {
-                autoSkip: false,    // Force Chart.js to show all ticks in our array
+                autoSkip: false,  // Force Chart.js to show all ticks we provide
                 color: '#ffffff',
                 values: uniqueTicks,
                 callback: function (value) {
-                  // Range-based approach:
-                  // If value >= CHALL, we call it CHALLENGER
+                  // Range-based approach so GM or Challenger show up properly
                   if (value >= chall) {
                     return "CHALLENGER";
-                  }
-                  // If value >= GM, we call it GRANDMASTER
-                  else if (value > gm) {
+                  } 
+                  else if (value >= gm) {
                     return "GRANDMASTER";
-                  }
-                  // If value >= MASTER_BASE (2800), we call it MASTER
-                  else if (value >= MASTER_BASE && value < gm) {
+                  } 
+                  else if (value >= MASTER_BASE) {
                     return "MASTER";
                   }
-                  // Otherwise, index into ranks for IRON → DIAMOND
                   else {
+                    // For IRON -> DIAMOND
                     const index = Math.floor(value / 400);
+                    // e.g. 1600 => index=4 => "PLATINUM"
                     return ranks[index] || "";
                   }
                 }
@@ -217,7 +218,7 @@
                 label: function (context) {
                   const datasetLabel = context.dataset.label || "";
                   const lp = context.raw.realLP;
-                  return ${datasetLabel}: ${lp} LP;
+                  return `${datasetLabel}: ${lp} LP`;
                 }
               }
             }
