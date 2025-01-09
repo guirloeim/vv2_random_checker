@@ -136,11 +136,12 @@
 
       // Generate the full array of ticks: multiples of 400 + gm + chall
       const ticksArray = [];
-      for (let val = 0; val <= 2800; val += 400) {
+      for (let val = 0; val <= 5000; val += 400) {
         ticksArray.push(val);
       }
       // Include gm and chall if they’re not already multiples of 400
-      ticksArray.push(gm, chall);
+      ticksArray.push(gm);
+      ticksArray.push(chall);
       // Sort them in ascending order
       ticksArray.sort((a, b) => a - b);
       // Remove any duplicates (if gm/chall is exactly a multiple of 400)
