@@ -128,16 +128,13 @@
         // Sort points by date ascending
         points.sort((a, b) => a.x - b.x);
 
-        // We'll insert a new point at the domainStart later, once we know domainStart
-        // But let's keep them sorted for now
-
         // Collect in allPoints for domain calculation
         allPoints = allPoints.concat(points);
 
         return {
           name: summoner,
-          latestTier: `${records[records.length - 1].tier} ${records[records.length - 1].rank}`,
-          points
+          points,
+          latestTier: `${records[records.length - 1].tier} ${records[records.length - 1].rank}`
         };
       });
 
@@ -185,7 +182,7 @@
       }
       tickVals.push(gm, chall);
       tickVals.sort((a, b) => a - b);
-      const uniqueTicks = Array.from(new Set(tickVals));
+      const uniqueTicks = [...new Set(tickVals)];
 
       // 12) Y-axis
       const yAxis = d3.axisLeft(yScale)
@@ -236,13 +233,11 @@
         .range(["blue", "red", "green", "orange", "purple",
                 "cyan", "magenta", "teal", "pink", "yellow"]);
 
-      // 16) For each summoner, optionally add a "fake" point at domainStart
-      //     with same y as earliest real point (for the horizontal line).
+      // 16) Insert a "fake" point at domainStart if needed
       summoners.forEach(s => {
         const pts = s.points;
         if (pts.length) {
-          const earliestPt = pts[0]; // already sorted by date
-          // Insert a new point at domainStart with the same y
+          const earliestPt = pts[0];
           if (domainStart < earliestPt.x) {
             pts.unshift({
               x: domainStart,
@@ -265,13 +260,17 @@
           .attr("d", lineGen);
       });
 
-      // 18) Draw circles for each data point (on top)
+      // 18) Draw circles for each data point (on top),
+      //     but sanitize summoner name to avoid invalid selectors.
       summoners.forEach(s => {
-        g.selectAll(`.circle-${s.name}`)
+        // Replace invalid CSS selector chars with underscores
+        const safeName = s.name.replace(/[^a-zA-Z0-9_-]/g, "_");
+
+        g.selectAll(`.circle-${safeName}`)
           .data(s.points)
           .enter()
           .append("circle")
-          .attr("class", `circle-${s.name}`)
+          .attr("class", `circle-${safeName}`)
           .attr("cx", d => xScale(d.x))
           .attr("cy", d => yScale(d.y))
           .attr("r", 5)
@@ -283,9 +282,11 @@
         .append("div")
         .attr("class", "tooltip");
 
-      // 20) Mouse events
+      // 20) Mouse events (again use the safeName)
       summoners.forEach(s => {
-        g.selectAll(`.circle-${s.name}`)
+        const safeName = s.name.replace(/[^a-zA-Z0-9_-]/g, "_");
+
+        g.selectAll(`.circle-${safeName}`)
           .on("mouseover", (event, d) => {
             tooltip
               .style("visibility", "visible")
