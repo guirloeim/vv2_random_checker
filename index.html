@@ -87,11 +87,17 @@
         "I": 0
       };
 
-      // 3) Transform the data into an array of summoners
+      // 3) Convert the data into an array of summoners
       const summonerNames = Object.keys(data.summoners);
+
+      // We'll figure out earliest and latest dates across all summoners
+      let allPoints = [];
+
       const summoners = summonerNames.map((summoner) => {
         const records = data.summoners[summoner];
-        const points = records.map((record) => {
+
+        // Build the array of data points for this summoner
+        let points = records.map((record) => {
           let adjustedLP = 0;
 
           // Determine adjusted LP based on rank
@@ -119,6 +125,15 @@
           };
         });
 
+        // Sort points by date ascending
+        points.sort((a, b) => a.x - b.x);
+
+        // We'll insert a new point at the domainStart later, once we know domainStart
+        // But let's keep them sorted for now
+
+        // Collect in allPoints for domain calculation
+        allPoints = allPoints.concat(points);
+
         return {
           name: summoner,
           latestTier: `${records[records.length - 1].tier} ${records[records.length - 1].rank}`,
@@ -126,26 +141,15 @@
         };
       });
 
-      // 4) Determine min/max date across all summoners
-      let allPoints = [];
-      summoners.forEach(s => allPoints = allPoints.concat(s.points));
-
+      // 4) Determine earliest and latest actual data date
       const earliestDate = d3.min(allPoints, d => d.x);
       const latestDate = d3.max(allPoints, d => d.x);
 
-      // 5) We expand domain to "earliestDate - 2 days" and "latestDate + 1 day"
-      // so we see at least 2 days before the earliest record, and 1 day after the latest
+      // 5) Expand domain to "earliestDate - 2 days" and "latestDate + 1 day"
       const domainStart = d3.timeDay.offset(earliestDate, -2);
       const domainEnd   = d3.timeDay.offset(latestDate, +1);
 
-      // If you want to ignore data range and just show "today - 2 days" to "today + 1 day,"
-      // comment out the above and uncomment these lines:
-      //
-      // const now = new Date();
-      // const domainStart = d3.timeDay.offset(now, -2);
-      // const domainEnd   = d3.timeDay.offset(now, +1);
-
-      // 6) Dimensions & margins for the SVG
+      // 6) Dimensions & margins
       const container = document.getElementById('chart');
       const width = container.clientWidth;
       const height = container.clientHeight;
@@ -160,7 +164,7 @@
         .attr("width", width)
         .attr("height", height);
 
-      // 8) Create a group (g) with margins
+      // 8) Main group
       const g = svg.append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -169,12 +173,12 @@
         .domain([domainStart, domainEnd])
         .range([0, innerWidth]);
 
-      // 10) y-scale: from 0..4400
+      // 10) y-scale
       const yScale = d3.scaleLinear()
         .domain([0, 4400])
         .range([innerHeight, 0]);
 
-      // 11) Build custom tick values for y-axis
+      // 11) Y-axis ticks
       const tickVals = [];
       for (let val = 0; val <= 2800; val += 400) {
         tickVals.push(val);
@@ -183,7 +187,7 @@
       tickVals.sort((a, b) => a - b);
       const uniqueTicks = Array.from(new Set(tickVals));
 
-      // 12) Y-axis with custom labels
+      // 12) Y-axis
       const yAxis = d3.axisLeft(yScale)
         .tickValues(uniqueTicks)
         .tickFormat(value => {
@@ -196,20 +200,19 @@
           }
         });
 
-      // 13) X-axis: daily ticks (the domain is only a few days wide)
-      // We'll request 5 ticks, or you can generate them daily.
+      // 13) X-axis (daily ticks)
       const xAxis = d3.axisBottom(xScale)
-        .ticks(d3.timeDay.every(1))      // one tick per day
-        .tickFormat(d3.timeFormat("%b %d")); // e.g. "Jan 03"
+        .ticks(d3.timeDay.every(1))
+        .tickFormat(d3.timeFormat("%b %d"));
 
-      // 14) Render y-axis
+      // Render y-axis
       g.append("g")
         .attr("class", "y-axis")
         .call(yAxis)
         .selectAll("text")
         .attr("fill", "#ffffff");
 
-      // 15) Render x-axis
+      // Render x-axis
       g.append("g")
         .attr("class", "x-axis")
         .attr("transform", `translate(0,${innerHeight})`)
@@ -217,33 +220,52 @@
         .selectAll("text")
         .attr("fill", "#ffffff");
 
-      // 16) Axis lines color
+      // Style axis lines
       g.selectAll(".domain, .tick line")
         .attr("stroke", "rgba(255,255,255,0.2)");
 
-      // 17) Create the line generator
+      // 14) D3 line generator
       const lineGen = d3.line()
         .x(d => xScale(d.x))
         .y(d => yScale(d.y))
         .curve(d3.curveLinear);
 
-      // 18) Color scale for summoners
+      // 15) Color scale
       const color = d3.scaleOrdinal()
         .domain(summonerNames)
         .range(["blue", "red", "green", "orange", "purple",
                 "cyan", "magenta", "teal", "pink", "yellow"]);
 
-      // 19) Draw lines
+      // 16) For each summoner, optionally add a "fake" point at domainStart
+      //     with same y as earliest real point (for the horizontal line).
+      summoners.forEach(s => {
+        const pts = s.points;
+        if (pts.length) {
+          const earliestPt = pts[0]; // already sorted by date
+          // Insert a new point at domainStart with the same y
+          if (domainStart < earliestPt.x) {
+            pts.unshift({
+              x: domainStart,
+              y: earliestPt.y,
+              realLP: earliestPt.realLP
+            });
+          }
+        }
+      });
+
+      // 17) Draw lines FIRST (so they don't intercept events on circles)
       summoners.forEach(s => {
         g.append("path")
           .datum(s.points)
           .attr("fill", "none")
           .attr("stroke", color(s.name))
           .attr("stroke-width", 2)
+          // Ensures the path won't block mouse events on circles
+          .attr("pointer-events", "none")
           .attr("d", lineGen);
       });
 
-      // 20) Draw circles for each data point
+      // 18) Draw circles for each data point (on top)
       summoners.forEach(s => {
         g.selectAll(`.circle-${s.name}`)
           .data(s.points)
@@ -252,22 +274,26 @@
           .attr("class", `circle-${s.name}`)
           .attr("cx", d => xScale(d.x))
           .attr("cy", d => yScale(d.y))
-          .attr("r", 4)
+          .attr("r", 5)
           .attr("fill", color(s.name));
       });
 
-      // 21) Create a tooltip div
+      // 19) Tooltip
       const tooltip = d3.select("#chart")
         .append("div")
         .attr("class", "tooltip");
 
-      // 22) Mouse events for each circle
+      // 20) Mouse events
       summoners.forEach(s => {
         g.selectAll(`.circle-${s.name}`)
           .on("mouseover", (event, d) => {
             tooltip
               .style("visibility", "visible")
-              .html(`<strong>${s.name}</strong><br>${d.realLP} LP<br>${d.x.toDateString()}`);
+              .html(`
+                <strong>${s.name}</strong><br>
+                ${d.realLP} LP<br>
+                ${d.x.toDateString()}
+              `);
           })
           .on("mousemove", event => {
             tooltip
@@ -279,7 +305,7 @@
           });
       });
 
-      // 23) Optional legend
+      // 21) Optional legend
       const legend = g.selectAll(".legend")
         .data(summoners)
         .enter()
