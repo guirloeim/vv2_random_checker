@@ -185,11 +185,11 @@
                     return "CHALLENGER";
                   }
                   // If value >= GM, we call it GRANDMASTER
-                  else if (value >= gm) {
+                  else if (value > gm) {
                     return "GRANDMASTER";
                   }
                   // If value >= MASTER_BASE (2800), we call it MASTER
-                  else if (value >= MASTER_BASE) {
+                  else if (value >= MASTER_BASE && value < gm) {
                     return "MASTER";
                   }
                   // Otherwise, index into ranks for IRON → DIAMOND
