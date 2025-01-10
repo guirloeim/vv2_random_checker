@@ -153,9 +153,9 @@
         const pts = s.points;
         const timestamps = pts.map(p => p.x.getTime());
         
-        // Filter only dates that are before or equal to today
+        // Check for missing dates before or on today, but only add if no point exists for that date
         const missingDates = [domainStart, d3.timeDay.offset(today, -1), today].filter(date =>
-          !timestamps.includes(date.getTime())
+          !timestamps.includes(date.getTime()) // Only add if no point exists for that date
         );
 
         missingDates.forEach(date => {
@@ -170,6 +170,7 @@
 
         pts.sort((a, b) => a.x - b.x);
       });
+
 
 
 
