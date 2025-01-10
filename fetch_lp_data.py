@@ -37,6 +37,7 @@ SUMMONERS_NA = [
     "Evie#ember",
     "Feels#444",
     "FroneZone#9688",
+    "staples#na2",
 ]
 
 # Dynamic cutoffs for Grandmaster and Challenger
