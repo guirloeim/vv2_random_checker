@@ -342,31 +342,53 @@
 
       // 22) Store each summoner's final realLP so we can show it in the legend
       summoners.forEach(s => {
-        const lastPt = s.points[s.points.length - 1];
-        s.finalLP = lastPt.realLP;
-      });
+  const pts = s.points;
+  const timestamps = pts.map(p => p.x.getTime());
+  
+  // Ensure points for domainStart, domainStart+1, and today, but skip future dates
+  const missingDates = [domainStart, d3.timeDay.offset(today, -1), today].filter(date =>
+    !timestamps.includes(date.getTime()) // Only add if no point exists for that date
+  );
 
-      // 23) Legend
-      const legend = g.selectAll(".legend")
-        .data(summoners)
-        .enter()
-        .append("g")
-        .attr("transform", (d, i) => `translate(${innerWidth + 10}, ${i * 20})`);
+  missingDates.forEach(date => {
+    pts.push({
+      x: date,
+      y: 0, // Default LP to 0
+      realLP: 0,
+      tier: "UNRANKED",
+      division: "LMAO"
+    });
+  });
 
-      legend.append("rect")
-        .attr("width", 12)
-        .attr("height", 12)
-        .attr("fill", d => color(d.name));
+  pts.sort((a, b) => a.x - b.x);
 
-      // Add the final LP to the legend text
-      legend.append("text")
-        .attr("x", 18)
-        .attr("y", 10)
-        .attr("fill", "#ffffff")
-        .style("font-size", "0.85rem")
-        // Display something like: "SummonerName (TIER DIV, 123 LP)"
-        .text(d => `${d.name} (${d.latestTier}, ${d.finalLP} LP)`);
-    }
+  // Determine today's data for the legend
+  const todayTimestamp = today.setHours(0, 0, 0, 0); // Normalize to midnight
+  const todayPoint = pts.find(p => p.x.getTime() === todayTimestamp);
+
+  s.finalLP = todayPoint ? todayPoint.realLP : 0; // Today's LP or 0
+  s.latestTier = todayPoint ? `${todayPoint.tier} ${todayPoint.division}` : "UNRANKED LMAO";
+});
+
+// Legend Update
+const legend = g.selectAll(".legend")
+  .data(summoners)
+  .enter()
+  .append("g")
+  .attr("transform", (d, i) => `translate(${innerWidth + 10}, ${i * 20})`);
+
+legend.append("rect")
+  .attr("width", 12)
+  .attr("height", 12)
+  .attr("fill", d => color(d.name));
+
+legend.append("text")
+  .attr("x", 18)
+  .attr("y", 10)
+  .attr("fill", "#ffffff")
+  .style("font-size", "0.85rem")
+  .text(d => `${d.name} (${d.latestTier}, ${d.finalLP} LP)`);
+  }
 
     // Kick off data loading and chart rendering
     loadData();
