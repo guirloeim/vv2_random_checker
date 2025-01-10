@@ -8,42 +8,35 @@
   <!-- D3.js Library -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
-  <!-- Style -->
   <style>
     body {
-      background-color: #121212; /* Dark background */
-      color: #ffffff;            /* White text */
+      background-color: #121212;
+      color: #ffffff;
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
     }
-
     h1 {
       text-align: center;
       margin: 20px 0;
     }
-
-    /* We'll create a container for the chart */
     #chart {
       display: block;
       margin: 0 auto;
-      /* Decrease width from 95vw to 90vw to leave space on the right */
       width: 90vw;
       height: 90vh;
-      position: relative; /* so we can position tooltip absolutely */
+      position: relative;
     }
-
-    /* Our tooltip */
     .tooltip {
       position: absolute;
       background-color: rgba(0,0,0,0.8);
       color: #fff;
       padding: 6px 10px;
       border-radius: 4px;
-      pointer-events: none; /* ignore mouse so as not to block hover */
+      pointer-events: none;
       font-size: 0.85rem;
       font-family: Arial, sans-serif;
-      visibility: hidden;   /* hidden by default */
+      visibility: hidden;
     }
   </style>
 </head>
@@ -52,6 +45,11 @@
   <div id="chart"></div>
 
   <script>
+    // Helper: convert a Date to midnight of the same calendar day
+    function toMidnight(d) {
+      return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    }
+
     async function loadData() {
       // 1) Load your JSON file
       const response = await fetch("lp_data.json");
@@ -63,7 +61,6 @@
 
       // Master baseline
       const MASTER_BASE = 2800;
-
       // Compute GM and Challenger cutoffs
       const gm = MASTER_BASE + GRANDMASTER_CUTOFF;
       const chall = MASTER_BASE + CHALLENGER_CUTOFF;
@@ -88,92 +85,72 @@
         "I": 0
       };
 
+      // Helper to get adjusted LP
+      function getAdjustedLP(tier, rank, lp) {
+        if (tier === "CHALLENGER" || tier === "GRANDMASTER" || tier === "MASTER") {
+          return MASTER_BASE + lp;
+        }
+        const rankIndex = ranks.indexOf(tier);
+        const baseLP = 400 * rankIndex;
+        const divOff = 300 - (divisionOffset[rank] || 0);
+        return baseLP + divOff + lp;
+      }
+
       // 3) Convert the data into an array of summoners
       const summonerNames = Object.keys(data.summoners);
       let allPoints = [];
 
-      // Build summoners array
       const summoners = summonerNames.map(summoner => {
         const records = data.summoners[summoner];
-
-        let points = records.map(record => {
-          let adjustedLP = 0;
-
-          if (record.tier === "CHALLENGER") {
-            adjustedLP = MASTER_BASE + record.lp;
-          }
-          else if (record.tier === "GRANDMASTER") {
-            adjustedLP = MASTER_BASE + record.lp;
-          }
-          else if (record.tier === "MASTER") {
-            adjustedLP = MASTER_BASE + record.lp;
-          }
-          else {
-            const rankIndex = ranks.indexOf(record.tier);
-            const baseLP = 400 * rankIndex;
-            const divOff = 300 - (divisionOffset[record.rank] || 0);
-            adjustedLP = baseLP + divOff + record.lp;
-          }
-
-          return {
-            x: new Date(record.timestamp),
-            y: adjustedLP,
-            realLP: record.lp,
-            tier: record.tier,
-            division: record.rank
-          };
-        });
+        const points = records.map(r => ({
+          x: new Date(r.timestamp),
+          y: getAdjustedLP(r.tier, r.rank, r.lp),
+          realLP: r.lp,
+          tier: r.tier,
+          division: r.rank
+        }));
 
         // Sort by date ascending
         points.sort((a, b) => a.x - b.x);
-        allPoints = allPoints.concat(points);
+        allPoints.push(...points);
 
-        return {
-          name: summoner,
-          points,
-          // We'll store the text "latestTier" for convenience
-          latestTier: `${records[records.length - 1].tier} ${records[records.length - 1].rank}`
-        };
+        return { name: summoner, points };
       });
 
-      // 4) Determine earliest & latest date
-      const earliestDate = d3.min(allPoints, d => d.x);
-      const latestDate = d3.max(allPoints, d => d.x);
-
-      // 5) Expand domain to earliestDate - 2 days, latestDate + 1 day
-      const today = new Date();
-      const domainStart = d3.timeDay.offset(today, -2);
-      const domainEnd = d3.timeDay.offset(today, +1);
+      // 4) Domain: 2 days before today to 1 day after
+      //    But we only fill missing data for domainStart, yesterday, and today
+      const now = new Date();
+      const midnightToday = toMidnight(now); 
+      const domainStart = d3.timeDay.offset(midnightToday, -2);
+      const domainEnd = d3.timeDay.offset(midnightToday, +1);
+      const midnightYesterday = d3.timeDay.offset(midnightToday, -1);
 
       console.log("Domain Start:", domainStart);
       console.log("Domain End:", domainEnd);
 
-      // Ensure all summoners have data for the range
+      // 5) Insert missing data points ONLY for domainStart, yesterday, and today
+      //    ignoring future dates. Also skip if user already has a point that day.
       summoners.forEach(s => {
         const pts = s.points;
-        const timestamps = pts.map(p => p.x.getTime());
-        
-        // Check for missing dates before or on today, but only add if no point exists for that date
-        const missingDates = [domainStart, d3.timeDay.offset(today, -1), today].filter(date =>
-          !timestamps.includes(date.getTime()) // Only add if no point exists for that date
-        );
+        // We'll store the calendar day (in ms) of each existing point
+        const existingDays = pts.map(p => toMidnight(p.x).getTime());
 
-        missingDates.forEach(date => {
+        // We only want [domainStart, midnightYesterday, midnightToday] as potential missing days
+        const datesToCheck = [domainStart, midnightYesterday, midnightToday];
+        const missingDates = datesToCheck.filter(d => !existingDays.includes(d.getTime()));
+
+        missingDates.forEach(d => {
           pts.push({
-            x: date,
-            y: 0, // Default LP to 0 for the new season
-            realLP: 0, // No real LP, default to 0
-            tier: "UNRANKED", // New default tier
-            division: "LMAO" // New default division
+            x: d,
+            y: 0,
+            realLP: 0,
+            tier: "UNRANKED",
+            division: "LMAO"
           });
         });
 
         pts.sort((a, b) => a.x - b.x);
       });
-
-
-
-
 
       // 6) Dimensions & margins
       const container = document.getElementById('chart');
@@ -184,7 +161,7 @@
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
 
-      // 7) Create svg
+      // 7) Create SVG
       const svg = d3.select("#chart")
         .append("svg")
         .attr("width", width)
@@ -194,12 +171,12 @@
       const g = svg.append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-      // 9) x-scale: time
+      // 9) x-scale
       const xScale = d3.scaleTime()
         .domain([domainStart, domainEnd])
         .range([0, innerWidth]);
 
-      // 10) y-scale: linear
+      // 10) y-scale
       const yScale = d3.scaleLinear()
         .domain([0, 4400])
         .range([innerHeight, 0]);
@@ -210,10 +187,9 @@
         tickVals.push(val);
       }
       tickVals.push(gm, chall);
-      tickVals.sort((a, b) => a - b);
-      const uniqueTicks = [...new Set(tickVals)];
+      const uniqueTicks = [...new Set(tickVals.sort((a, b) => a - b))];
 
-      // 12) Y-axis
+      // 12) y-axis
       const yAxis = d3.axisLeft(yScale)
         .tickValues(uniqueTicks)
         .tickFormat(value => {
@@ -226,12 +202,11 @@
           }
         });
 
-      // 13) X-axis
+      // 13) x-axis
       const xAxis = d3.axisBottom(xScale)
         .ticks(d3.timeDay.every(1))
         .tickFormat(d3.timeFormat("%b %d"));
 
-      // Render axes
       g.append("g")
         .attr("class", "y-axis")
         .call(yAxis)
@@ -258,13 +233,15 @@
       // 15) Color scale
       const color = d3.scaleOrdinal()
         .domain(summonerNames)
-        .range(["blue", "red", "green", "orange", "purple",
-                "cyan", "magenta", "teal", "pink", "yellow"]);
+        .range([
+          "blue", "red", "green", "orange", "purple",
+          "cyan", "magenta", "teal", "pink", "yellow"
+        ]);
 
-      // 16) Insert a "fake" point at domainStart if needed
+      // 16) Optional: insert a "fake" point at domainStart if needed
       summoners.forEach(s => {
         const pts = s.points;
-        if (pts.length) {
+        if (pts.length > 0) {
           const earliestPt = pts[0];
           if (domainStart < earliestPt.x) {
             pts.unshift({
@@ -311,7 +288,6 @@
       // 20) Circle mouse events
       summoners.forEach(s => {
         const safeName = s.name.replace(/[^a-zA-Z0-9_-]/g, "_");
-
         g.selectAll(`.circle-${safeName}`)
           .on("mouseover", (event, d) => {
             tooltip
@@ -333,64 +309,47 @@
           });
       });
 
-      // 21) Sort summoners by final y-value descending
-      summoners.sort((a, b) => {
-        const aLast = a.points[a.points.length - 1].y;
-        const bLast = b.points[b.points.length - 1].y;
-        return bLast - aLast; 
+      // 21) Determine each summoner's "today" data for the legend
+      summoners.forEach(s => {
+        // Try to find a point that matches today's date (ignoring time)
+        const foundToday = s.points.find(d =>
+          toMidnight(d.x).getTime() === midnightToday.getTime()
+        );
+        if (foundToday) {
+          // Has data for today
+          s.finalLP = foundToday.realLP;
+          s.latestTier = `${foundToday.tier} ${foundToday.division}`;
+        } else {
+          // No data for today: default to UNRANKED LMAO 0
+          s.finalLP = 0;
+          s.latestTier = `UNRANKED LMAO`;
+        }
       });
 
-      // 22) Store each summoner's final realLP so we can show it in the legend
-      summoners.forEach(s => {
-  const pts = s.points;
-  const timestamps = pts.map(p => p.x.getTime());
-  
-  // Ensure points for domainStart, domainStart+1, and today, but skip future dates
-  const missingDates = [domainStart, d3.timeDay.offset(today, -1), today].filter(date =>
-    !timestamps.includes(date.getTime()) // Only add if no point exists for that date
-  );
+      // 22) Sort summoners by "today's" final LP descending
+      summoners.sort((a, b) => b.finalLP - a.finalLP);
 
-  missingDates.forEach(date => {
-    pts.push({
-      x: date,
-      y: 0, // Default LP to 0
-      realLP: 0,
-      tier: "UNRANKED",
-      division: "LMAO"
-    });
-  });
+      // 23) Legend
+      const legend = g.selectAll(".legend")
+        .data(summoners)
+        .enter()
+        .append("g")
+        .attr("transform", (d, i) => `translate(${innerWidth + 10}, ${i * 20})`);
 
-  pts.sort((a, b) => a.x - b.x);
+      legend.append("rect")
+        .attr("width", 12)
+        .attr("height", 12)
+        .attr("fill", d => color(d.name));
 
-  // Determine today's data for the legend
-  const todayTimestamp = today.setHours(0, 0, 0, 0); // Normalize to midnight
-  const todayPoint = pts.find(p => p.x.getTime() === todayTimestamp);
+      legend.append("text")
+        .attr("x", 18)
+        .attr("y", 10)
+        .attr("fill", "#ffffff")
+        .style("font-size", "0.85rem")
+        // e.g. SummonerName (TIER DIV, LP)
+        .text(d => `${d.name} (${d.latestTier}, ${d.finalLP} LP)`);
+    }
 
-  s.finalLP = todayPoint ? todayPoint.realLP : 0; // Today's LP or 0
-  s.latestTier = todayPoint ? `${todayPoint.tier} ${todayPoint.division}` : "UNRANKED LMAO";
-});
-
-// Legend Update
-const legend = g.selectAll(".legend")
-  .data(summoners)
-  .enter()
-  .append("g")
-  .attr("transform", (d, i) => `translate(${innerWidth + 10}, ${i * 20})`);
-
-legend.append("rect")
-  .attr("width", 12)
-  .attr("height", 12)
-  .attr("fill", d => color(d.name));
-
-legend.append("text")
-  .attr("x", 18)
-  .attr("y", 10)
-  .attr("fill", "#ffffff")
-  .style("font-size", "0.85rem")
-  .text(d => `${d.name} (${d.latestTier}, ${d.finalLP} LP)`);
-  }
-
-    // Kick off data loading and chart rendering
     loadData();
   </script>
 </body>
