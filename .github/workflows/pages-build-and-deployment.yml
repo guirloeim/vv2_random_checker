@@ -1,0 +1,49 @@
+name: pages-build-and-deployment
+
+on:
+  # Run workflow on pushes to `main` (or your default branch)
+  push:
+    branches:
+      - main
+  # ALSO run every day at 00:10 UTC
+  schedule:
+    - cron: '10 0 * * *'
+  # Allows manual trigger from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      # If you have any build steps (npm install, etc.), add them here
+      # e.g., 
+      # - name: Install dependencies
+      #   run: npm ci
+      #
+      # - name: Build
+      #   run: npm run build
+
+  # This job is added by GitHub Pages + Actions integration.
+  # If GitHub auto-generated a job named 'pages-build-deployment',
+  # you can rename or adapt it to use the 'schedule' above.
+  # Make sure it depends on the 'build' job if you have separate build steps.
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: build  # So 'build' finishes first
+
+    steps:
+      # This step is added automatically by GitHub when you enable Pages + Actions
+      - name: GitHub Pages action
+        id: pages
+        uses: actions/upload-pages-artifact@v1
+    
+  # Also automatically added by GitHub’s Pages integration:
+  # job that actually deploys the artifact to GitHub Pages
+  # So you might see something like "report-build-status" or "deploy" in your existing file
+  # Keep them as is, or adapt them if you want to rename.
+  # Just ensure they run after the build job and also have the 'schedule:' in `on:`.
