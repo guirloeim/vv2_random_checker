@@ -81,6 +81,15 @@
         "adjustedLP": 2487,
         "timestamp": "2025-01-10T15:39:15.715779+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Loopy#0004",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 87,
+        "adjustedLP": 2487,
+        "timestamp": "2025-01-10T15:55:16.017987+00:00",
+        "region": "EUW"
       }
     ],
     "The Mid Game#Canoe": [
@@ -196,6 +205,15 @@
         "adjustedLP": 2605,
         "timestamp": "2025-01-10T15:39:21.674511+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Owpi#idiot",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 5,
+        "adjustedLP": 2605,
+        "timestamp": "2025-01-10T15:55:24.310140+00:00",
+        "region": "EUW"
       }
     ],
     "Big2080#EUW": [
@@ -274,6 +292,15 @@
         "lp": 45,
         "adjustedLP": 2145,
         "timestamp": "2025-01-10T15:39:24.628564+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Myst#Blade",
+        "tier": "EMERALD",
+        "rank": "III",
+        "lp": 45,
+        "adjustedLP": 2145,
+        "timestamp": "2025-01-10T15:55:28.425839+00:00",
         "region": "EUW"
       }
     ],
@@ -365,6 +392,15 @@
         "adjustedLP": 897,
         "timestamp": "2025-01-10T15:39:30.553657+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Lemis#33310",
+        "tier": "SILVER",
+        "rank": "IV",
+        "lp": 97,
+        "adjustedLP": 897,
+        "timestamp": "2025-01-10T15:55:36.658361+00:00",
+        "region": "EUW"
       }
     ],
     "FOOTJOB ENJOYER#QU33N": [
@@ -410,6 +446,15 @@
         "adjustedLP": 1926,
         "timestamp": "2025-01-10T15:39:32.094039+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "FOOTJOB ENJOYER#QU33N",
+        "tier": "PLATINUM",
+        "rank": "I",
+        "lp": 63,
+        "adjustedLP": 1963,
+        "timestamp": "2025-01-10T15:55:38.710368+00:00",
+        "region": "EUW"
       }
     ],
     "dingo#gday": [
@@ -446,6 +491,26 @@
         "lp": 50,
         "adjustedLP": 2550,
         "timestamp": "2025-01-10T15:39:39.463206+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "dingo#gday",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 50,
+        "adjustedLP": 2550,
+        "timestamp": "2025-01-10T15:55:48.997906+00:00",
+        "region": "EUW"
+      }
+    ],
+    "Reynor#2002": [
+      {
+        "summonerName": "Reynor#2002",
+        "tier": "EMERALD",
+        "rank": "II",
+        "lp": 47,
+        "adjustedLP": 2247,
+        "timestamp": "2025-01-10T15:55:57.204942+00:00",
         "region": "EUW"
       }
     ]
