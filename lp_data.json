@@ -38,6 +38,14 @@
         "lp": 99,
         "adjustedLP": 4099,
         "timestamp": "2025-01-09T01:27:23.609580+00:00"
+      },
+      {
+        "summonerName": "Loopy#0004",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 87,
+        "adjustedLP": 2487,
+        "timestamp": "2025-01-10T01:37:42.637820+00:00"
       }
     ],
     "The Mid Game#Canoe": [
@@ -110,6 +118,14 @@
         "lp": 11,
         "adjustedLP": 4011,
         "timestamp": "2025-01-09T01:27:29.552146+00:00"
+      },
+      {
+        "summonerName": "Owpi#idiot",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 75,
+        "adjustedLP": 2575,
+        "timestamp": "2025-01-10T01:37:48.767658+00:00"
       }
     ],
     "Big2080#EUW": [
@@ -146,6 +162,14 @@
         "lp": 3,
         "adjustedLP": 2503,
         "timestamp": "2025-01-09T01:27:32.523617+00:00"
+      },
+      {
+        "summonerName": "Myst#Blade",
+        "tier": "EMERALD",
+        "rank": "III",
+        "lp": 45,
+        "adjustedLP": 2145,
+        "timestamp": "2025-01-10T01:37:51.717360+00:00"
       }
     ],
     "Yui#KEK": [
@@ -218,6 +242,16 @@
         "lp": 61,
         "adjustedLP": 1261,
         "timestamp": "2025-01-09T01:27:38.376205+00:00"
+      }
+    ],
+    "FOOTJOB ENJOYER#QU33N": [
+      {
+        "summonerName": "FOOTJOB ENJOYER#QU33N",
+        "tier": "PLATINUM",
+        "rank": "III",
+        "lp": 61,
+        "adjustedLP": 1761,
+        "timestamp": "2025-01-10T01:37:59.038828+00:00"
       }
     ]
   }
