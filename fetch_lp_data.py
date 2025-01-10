@@ -27,6 +27,13 @@ SUMMONERS = [
     "dingo#gday",
 ]
 
+REGION_NA = "na1"  # Or na1, kr, etc.
+PLATFORM_REGION_NA = "americas"  # Use platform routing values like 'americas', 'europe', 'asia', 'sea'
+SUMMONERS_NA = [
+    "Evie#ember",
+    "Mash#NA3",
+]
+
 # Dynamic cutoffs for Grandmaster and Challenger
 CHALLENGER_CUTOFF = 0
 GRANDMASTER_CUTOFF = 0
@@ -53,11 +60,11 @@ def main():
     for summoner in SUMMONERS:
         try:
             name, tag = summoner.split("#")
-            summoner_id = get_summoner_id(name, tag, api_key)
+            summoner_id = get_summoner_id(name, tag, api_key, PLATFORM_REGION, REGION)
             if not summoner_id:
                 continue
 
-            ranked_info = get_ranked_data(summoner_id, api_key)
+            ranked_info = get_ranked_data(summoner_id, api_key, REGION),
             if ranked_info:
                 # Process solo queue data
                 solo_queue = next((q for q in ranked_info if q["queueType"] == "RANKED_SOLO_5x5"), None)
@@ -70,7 +77,34 @@ def main():
                         "rank": solo_queue["rank"],
                         "lp": solo_queue["leaguePoints"],
                         "adjustedLP": adjusted_lp,
-                        "timestamp": datetime.now(timezone.utc).isoformat()
+                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "region": "EUW"
+                    })
+        except Exception as e:
+            print(f"Error for {summoner}: {e}")
+
+    for summoner in SUMMONERS_NA:
+        try:
+            name, tag = summoner.split("#")
+            summoner_id = get_summoner_id(name, tag, api_key, PLATFORM_REGION_NA, REGION_NA)
+            if not summoner_id:
+                continue
+
+            ranked_info = get_ranked_data(summoner_id, api_key, REGION_NA)
+            if ranked_info:
+                # Process solo queue data
+                solo_queue = next((q for q in ranked_info if q["queueType"] == "RANKED_SOLO_5x5"), None)
+                if solo_queue:
+                    # Add adjusted LP for graph positioning
+                    adjusted_lp = adjust_lp(solo_queue["tier"], solo_queue["rank"], solo_queue["leaguePoints"])
+                    summoner_data_list.append({
+                        "summonerName": summoner,
+                        "tier": solo_queue["tier"],
+                        "rank": solo_queue["rank"],
+                        "lp": solo_queue["leaguePoints"],
+                        "adjustedLP": adjusted_lp,
+                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "region": "NA"
                     })
         except Exception as e:
             print(f"Error for {summoner}: {e}")
@@ -140,21 +174,21 @@ def adjust_lp(tier, rank, lp):
         return rank_base + division_points[rank] + lp
 
 
-def get_summoner_id(name, tag, api_key):
+def get_summoner_id(name, tag, api_key, platform, region):
     """Fetch PUUID from Riot ID."""
-    url = f"https://{PLATFORM_REGION}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{name}/{tag}"
+    url = f"https://{platform}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{name}/{tag}"
     headers = {"X-Riot-Token": api_key}
     r = requests.get(url, headers=headers)
     if r.status_code == 200:
         puuid = r.json().get("puuid")
-        return get_summoner_id_by_puuid(puuid, api_key)
+        return get_summoner_id_by_puuid(puuid, api_key, region)
     print(f"Error fetching PUUID for {name}#{tag}: {r.text}")
     return None
 
 
-def get_summoner_id_by_puuid(puuid, api_key):
+def get_summoner_id_by_puuid(puuid, api_key, region):
     """Fetch Summoner ID using PUUID."""
-    url = f"https://{REGION}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{puuid}"
+    url = f"https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{puuid}"
     headers = {"X-Riot-Token": api_key}
     r = requests.get(url, headers=headers)
     if r.status_code == 200:
@@ -163,9 +197,9 @@ def get_summoner_id_by_puuid(puuid, api_key):
     return None
 
 
-def get_ranked_data(encrypted_summoner_id, api_key):
+def get_ranked_data(encrypted_summoner_id, api_key, region):
     """Fetch ranked data for a given Summoner ID."""
-    url = f"https://{REGION}.api.riotgames.com/lol/league/v4/entries/by-summoner/{encrypted_summoner_id}"
+    url = f"https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/{encrypted_summoner_id}"
     headers = {"X-Riot-Token": api_key}
     r = requests.get(url, headers=headers)
     if r.status_code == 200:
