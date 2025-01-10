@@ -23,7 +23,8 @@ SUMMONERS = [
     "MENTALB00MXDD#EUW",
     "L9 Lemis#OWPI",
     "l1kenJ#KITTY",
-    "run#7 7 7"
+    "run#7 7 7",
+    "dingo#gday",
 ]
 
 # Dynamic cutoffs for Grandmaster and Challenger
