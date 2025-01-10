@@ -28,14 +28,14 @@ SUMMONERS = [
     "blueqion#EUW",
     "C9 veigar#EUW",
     "veigar v2#0000",
-    "FroneZone#9688"
+    "FroneZone#9688",
 ]
 
 REGION_NA = "na1"  # Or na1, kr, etc.
 PLATFORM_REGION_NA = "americas"  # Use platform routing values like 'americas', 'europe', 'asia', 'sea'
 SUMMONERS_NA = [
     "Evie#ember",
-    "Feels#444"
+    "Feels#444",
 ]
 
 # Dynamic cutoffs for Grandmaster and Challenger
