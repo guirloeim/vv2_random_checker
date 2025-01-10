@@ -31,7 +31,6 @@ REGION_NA = "na1"  # Or na1, kr, etc.
 PLATFORM_REGION_NA = "americas"  # Use platform routing values like 'americas', 'europe', 'asia', 'sea'
 SUMMONERS_NA = [
     "Evie#ember",
-    "Mash#NA3",
 ]
 
 # Dynamic cutoffs for Grandmaster and Challenger
@@ -64,7 +63,7 @@ def main():
             if not summoner_id:
                 continue
 
-            ranked_info = get_ranked_data(summoner_id, api_key, REGION),
+            ranked_info = get_ranked_data(summoner_id, api_key, REGION)
             if ranked_info:
                 # Process solo queue data
                 solo_queue = next((q for q in ranked_info if q["queueType"] == "RANKED_SOLO_5x5"), None)
