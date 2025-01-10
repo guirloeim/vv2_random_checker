@@ -185,19 +185,19 @@ def get_summoner_id(name, tag, api_key, platform, region):
     r = requests.get(url, headers=headers)
     if r.status_code == 200:
         puuid = r.json().get("puuid")
-        return get_summoner_id_by_puuid(puuid, api_key, region)
+        return get_summoner_id_by_puuid(puuid, api_key, region, name)
     print(f"Error fetching PUUID for {name}#{tag}: {r.text}")
     return None
 
 
-def get_summoner_id_by_puuid(puuid, api_key, region):
+def get_summoner_id_by_puuid(puuid, api_key, region, name):
     """Fetch Summoner ID using PUUID."""
     url = f"https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{puuid}"
     headers = {"X-Riot-Token": api_key}
     r = requests.get(url, headers=headers)
     if r.status_code == 200:
         return r.json().get("id")
-    print(f"Error fetching Summoner ID for PUUID {puuid}: {r.text}")
+    print(f"Error fetching Summoner ID for name:{name} PUUID {puuid}: {r.text}")
     return None
 
 
