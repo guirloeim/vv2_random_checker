@@ -125,9 +125,6 @@
       const domainEnd = d3.timeDay.offset(midnightToday, +1);
       const midnightYesterday = d3.timeDay.offset(midnightToday, -1);
 
-      console.log("Domain Start:", domainStart);
-      console.log("Domain End:", domainEnd);
-
       // 5) Insert missing data points ONLY for domainStart, yesterday, and today
       //    ignoring future dates. Also skip if user already has a point that day.
       summoners.forEach(s => {
@@ -157,7 +154,7 @@
       const width = container.clientWidth;
       const height = container.clientHeight;
 
-      const margin = { top: 20, right: 300, bottom: 50, left: 60 };
+      const margin = { top: 20, right: 340, bottom: 50, left: 60 };
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
 
@@ -238,7 +235,7 @@
           "cyan", "magenta", "teal", "pink", "yellow"
         ]);
 
-      // 16) Optional: insert a "fake" point at domainStart if needed
+      // 16) Insert a "fake" point at domainStart if needed
       summoners.forEach(s => {
         const pts = s.points;
         if (pts.length > 0) {
@@ -316,18 +313,19 @@
           toMidnight(d.x).getTime() === midnightToday.getTime()
         );
         if (foundToday) {
-          // Has data for today
-          s.finalLP = foundToday.realLP;
+          // We'll store BOTH realLP and y for sorting
+          s.finalLP = foundToday.realLP;  // for legend text
+          s.finalY  = foundToday.y;       // for sorting
           s.latestTier = `${foundToday.tier} ${foundToday.division}`;
         } else {
-          // No data for today: default to UNRANKED LMAO 0
-          s.finalLP = 0;
-          s.latestTier = `UNRANKED LMAO`;
+          s.finalLP = 0;       // for legend text
+          s.finalY  = 0;       // for sorting
+          s.latestTier = "UNRANKED LMAO";
         }
       });
 
-      // 22) Sort summoners by "today's" final LP descending
-      summoners.sort((a, b) => b.finalLP - a.finalLP);
+      // 22) Sort summoners by finalY (the y-axis value) descending
+      summoners.sort((a, b) => b.finalY - a.finalY);
 
       // 23) Legend
       const legend = g.selectAll(".legend")
