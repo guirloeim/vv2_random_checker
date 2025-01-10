@@ -141,8 +141,34 @@
       const latestDate = d3.max(allPoints, d => d.x);
 
       // 5) Expand domain to earliestDate - 2 days, latestDate + 1 day
-      const domainStart = d3.timeDay.offset(earliestDate, -2);
-      const domainEnd   = d3.timeDay.offset(latestDate, +1);
+      const today = new Date();
+      const domainStart = d3.timeDay.offset(today, -2);
+      const domainEnd = d3.timeDay.offset(today, +1);
+
+      console.log("Domain Start:", domainStart);
+      console.log("Domain End:", domainEnd);
+
+      // Ensure all summoners have data for the range
+      summoners.forEach(s => {
+        const pts = s.points;
+        const timestamps = pts.map(p => p.x.getTime());
+        const missingDates = [domainStart, today, domainEnd].filter(date =>
+          !timestamps.includes(date.getTime())
+        );
+
+        missingDates.forEach(date => {
+          pts.push({
+            x: date,
+            y: pts[pts.length - 1]?.y || 0, // Default to last LP or 0
+            realLP: pts[pts.length - 1]?.realLP || 0,
+            tier: pts[pts.length - 1]?.tier || "UNKNOWN",
+            division: pts[pts.length - 1]?.division || "UNKNOWN"
+          });
+        });
+
+        pts.sort((a, b) => a.x - b.x);
+      });
+
 
       // 6) Dimensions & margins
       const container = document.getElementById('chart');
