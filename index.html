@@ -142,32 +142,33 @@
 
       // 5) Expand domain to earliestDate - 2 days, latestDate + 1 day
       const today = new Date();
-      const domainStart = d3.timeDay.offset(today, -2);
-      const domainEnd = d3.timeDay.offset(today, +1);
+const domainStart = d3.timeDay.offset(today, -2);
+const domainEnd = d3.timeDay.offset(today, +1);
 
-      console.log("Domain Start:", domainStart);
-      console.log("Domain End:", domainEnd);
+console.log("Domain Start:", domainStart);
+console.log("Domain End:", domainEnd);
 
-      // Ensure all summoners have data for the range
-      summoners.forEach(s => {
-        const pts = s.points;
-        const timestamps = pts.map(p => p.x.getTime());
-        const missingDates = [domainStart, today, domainEnd].filter(date =>
-          !timestamps.includes(date.getTime())
-        );
+// Ensure all summoners have data for the range
+summoners.forEach(s => {
+  const pts = s.points;
+  const timestamps = pts.map(p => p.x.getTime());
+  const missingDates = [domainStart, today, domainEnd].filter(date =>
+    !timestamps.includes(date.getTime())
+  );
 
-        missingDates.forEach(date => {
-          pts.push({
-            x: date,
-            y: pts[pts.length - 1]?.y || 0, // Default to last LP or 0
-            realLP: pts[pts.length - 1]?.realLP || 0,
-            tier: pts[pts.length - 1]?.tier || "UNKNOWN",
-            division: pts[pts.length - 1]?.division || "UNKNOWN"
-          });
-        });
+  missingDates.forEach(date => {
+    pts.push({
+      x: date,
+      y: 0, // Default LP to 0 for the new season
+      realLP: 0, // No real LP, default to 0
+      tier: "UNRANKED", // New default tier
+      division: "LMAO" // New default division
+    });
+  });
 
-        pts.sort((a, b) => a.x - b.x);
-      });
+  pts.sort((a, b) => a.x - b.x);
+});
+
 
 
       // 6) Dimensions & margins
