@@ -295,17 +295,6 @@
         "adjustedLP": 2550,
         "timestamp": "2025-01-10T13:21:04.505382+00:00"
       }
-    ],
-    "Mash#NA3": [
-      {
-        "summonerName": "Mash#NA3",
-        "tier": "DIAMOND",
-        "rank": "II",
-        "lp": 85,
-        "adjustedLP": 2685,
-        "timestamp": "2025-01-10T13:56:07.417388+00:00",
-        "region": "NA"
-      }
     ]
   }
 }
