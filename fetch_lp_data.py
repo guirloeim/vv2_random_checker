@@ -29,6 +29,7 @@ SUMMONERS = [
     "C9 veigar#EUW",
     "veigar v2#0000",
     "Reynor#2002",
+    "Sir Kledington#1337",
 ]
 
 REGION_NA = "na1"  # Or na1, kr, etc.
