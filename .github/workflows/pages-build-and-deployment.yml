@@ -9,8 +9,9 @@ on:
   workflow_dispatch:
 
 permissions:
-  id-token: write
   contents: read
+  pages: write    # <-- Add this line
+  id-token: write
 
 jobs:
   deploy-to-pages:
