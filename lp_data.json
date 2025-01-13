@@ -1,39 +1,256 @@
 {
   "cutoffs": {
-    "CHALLENGER": 513,
-    "GRANDMASTER": 160
+    "CHALLENGER": 0,
+    "GRANDMASTER": 287
   },
   "summoners": {
+    "Nico#coati": [
+      {
+        "summonerName": "Nico#coati",
+        "tier": "CHALLENGER",
+        "rank": "I",
+        "lp": 1044,
+        "adjustedLP": 1979,
+        "timestamp": "2025-01-08T17:18:17.745379+00:00"
+      },
+      {
+        "summonerName": "Nico#coati",
+        "tier": "CHALLENGER",
+        "rank": "I",
+        "lp": 1044,
+        "adjustedLP": 2047,
+        "timestamp": "2025-01-09T01:27:22.124838+00:00"
+      }
+    ],
     "Loopy#0004": [
       {
         "summonerName": "Loopy#0004",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 39,
+        "adjustedLP": 4039,
+        "timestamp": "2025-01-08T17:18:19.811401+00:00"
+      },
+      {
+        "summonerName": "Loopy#0004",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 99,
+        "adjustedLP": 4099,
+        "timestamp": "2025-01-09T01:27:23.609580+00:00"
+      },
+      {
+        "summonerName": "Loopy#0004",
         "tier": "DIAMOND",
-        "rank": "II",
-        "lp": 37,
-        "adjustedLP": 2637,
-        "timestamp": "2025-01-13T08:47:26.416690+00:00",
+        "rank": "IV",
+        "lp": 87,
+        "adjustedLP": 2487,
+        "timestamp": "2025-01-10T01:37:42.637820+00:00"
+      },
+      {
+        "summonerName": "Loopy#0004",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 87,
+        "adjustedLP": 2487,
+        "timestamp": "2025-01-10T13:20:40.876172+00:00"
+      },
+      {
+        "summonerName": "Loopy#0004",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 87,
+        "adjustedLP": 2487,
+        "timestamp": "2025-01-10T14:04:27.270764+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Loopy#0004",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 87,
+        "adjustedLP": 2487,
+        "timestamp": "2025-01-10T15:27:38.422358+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Loopy#0004",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 87,
+        "adjustedLP": 2487,
+        "timestamp": "2025-01-10T15:39:15.715779+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Loopy#0004",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 87,
+        "adjustedLP": 2487,
+        "timestamp": "2025-01-10T15:55:16.017987+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Loopy#0004",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 77,
+        "adjustedLP": 2577,
+        "timestamp": "2025-01-10T21:25:05.585474+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Loopy#0004",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 77,
+        "adjustedLP": 2577,
+        "timestamp": "2025-01-10T21:40:37.218632+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Loopy#0004",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 77,
+        "adjustedLP": 2577,
+        "timestamp": "2025-01-10T23:13:44.338455+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Loopy#0004",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 77,
+        "adjustedLP": 2577,
+        "timestamp": "2025-01-11T01:35:51.775609+00:00",
+        "region": "EUW"
+      }
+    ],
+    "The Mid Game#Canoe": [
+      {
+        "summonerName": "The Mid Game#Canoe",
+        "tier": "GRANDMASTER",
+        "rank": "I",
+        "lp": 670,
+        "adjustedLP": 1212,
+        "timestamp": "2025-01-08T17:18:21.922448+00:00"
+      },
+      {
+        "summonerName": "The Mid Game#Canoe",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 630,
+        "adjustedLP": 4630,
+        "timestamp": "2025-01-09T01:27:25.124693+00:00"
       }
     ],
     "emerrin#623HS": [
       {
         "summonerName": "emerrin#623HS",
+        "tier": "GRANDMASTER",
+        "rank": "I",
+        "lp": 685,
+        "adjustedLP": 1227,
+        "timestamp": "2025-01-08T17:18:23.982025+00:00"
+      },
+      {
+        "summonerName": "emerrin#623HS",
+        "tier": "GRANDMASTER",
+        "rank": "I",
+        "lp": 685,
+        "adjustedLP": 1338,
+        "timestamp": "2025-01-09T01:27:26.585198+00:00"
+      },
+      {
+        "summonerName": "emerrin#623HS",
         "tier": "DIAMOND",
-        "rank": "III",
-        "lp": 21,
-        "adjustedLP": 2521,
-        "timestamp": "2025-01-13T08:47:30.569412+00:00",
+        "rank": "IV",
+        "lp": 60,
+        "adjustedLP": 2460,
+        "timestamp": "2025-01-10T21:25:09.690012+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "emerrin#623HS",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 50,
+        "adjustedLP": 2450,
+        "timestamp": "2025-01-10T21:40:40.192681+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "emerrin#623HS",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 40,
+        "adjustedLP": 2440,
+        "timestamp": "2025-01-10T23:13:47.294291+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "emerrin#623HS",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 40,
+        "adjustedLP": 2440,
+        "timestamp": "2025-01-11T01:35:54.685511+00:00",
         "region": "EUW"
       }
     ],
     "meow81#paw": [
       {
         "summonerName": "meow81#paw",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 315,
+        "adjustedLP": 4315,
+        "timestamp": "2025-01-08T17:18:26.044689+00:00"
+      },
+      {
+        "summonerName": "meow81#paw",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 335,
+        "adjustedLP": 4335,
+        "timestamp": "2025-01-09T01:27:28.076802+00:00"
+      },
+      {
+        "summonerName": "meow81#paw",
         "tier": "DIAMOND",
-        "rank": "III",
+        "rank": "IV",
+        "lp": 45,
+        "adjustedLP": 2445,
+        "timestamp": "2025-01-10T21:25:11.761434+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "meow81#paw",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 45,
+        "adjustedLP": 2445,
+        "timestamp": "2025-01-10T21:40:41.645011+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "meow81#paw",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 25,
+        "adjustedLP": 2425,
+        "timestamp": "2025-01-10T23:13:48.788912+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "meow81#paw",
+        "tier": "DIAMOND",
+        "rank": "IV",
         "lp": 35,
-        "adjustedLP": 2535,
-        "timestamp": "2025-01-13T08:47:32.645200+00:00",
+        "adjustedLP": 2435,
+        "timestamp": "2025-01-11T01:35:56.174180+00:00",
         "region": "EUW"
       }
     ],
@@ -44,30 +261,245 @@
         "rank": "I",
         "lp": 3,
         "adjustedLP": 4003,
-        "timestamp": "2025-01-13T08:47:34.710647+00:00",
+        "timestamp": "2025-01-08T17:18:28.176907+00:00"
+      },
+      {
+        "summonerName": "Owpi#idiot",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 11,
+        "adjustedLP": 4011,
+        "timestamp": "2025-01-09T01:27:29.552146+00:00"
+      },
+      {
+        "summonerName": "Owpi#idiot",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 75,
+        "adjustedLP": 2575,
+        "timestamp": "2025-01-10T01:37:48.767658+00:00"
+      },
+      {
+        "summonerName": "Owpi#idiot",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 5,
+        "adjustedLP": 2605,
+        "timestamp": "2025-01-10T13:20:46.755219+00:00"
+      },
+      {
+        "summonerName": "Owpi#idiot",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 5,
+        "adjustedLP": 2605,
+        "timestamp": "2025-01-10T14:04:34.454967+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Owpi#idiot",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 5,
+        "adjustedLP": 2605,
+        "timestamp": "2025-01-10T15:27:44.341490+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Owpi#idiot",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 5,
+        "adjustedLP": 2605,
+        "timestamp": "2025-01-10T15:39:21.674511+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Owpi#idiot",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 5,
+        "adjustedLP": 2605,
+        "timestamp": "2025-01-10T15:55:24.310140+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Owpi#idiot",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 55,
+        "adjustedLP": 2655,
+        "timestamp": "2025-01-10T21:25:13.810376+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Owpi#idiot",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 55,
+        "adjustedLP": 2655,
+        "timestamp": "2025-01-10T21:40:43.106072+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Owpi#idiot",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 5,
+        "adjustedLP": 2705,
+        "timestamp": "2025-01-10T23:13:50.278850+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Owpi#idiot",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 5,
+        "adjustedLP": 2705,
+        "timestamp": "2025-01-11T01:35:57.636035+00:00",
         "region": "EUW"
       }
     ],
     "Big2080#EUW": [
       {
         "summonerName": "Big2080#EUW",
-        "tier": "EMERALD",
-        "rank": "II",
-        "lp": 95,
-        "adjustedLP": 2295,
-        "timestamp": "2025-01-13T08:47:36.767820+00:00",
-        "region": "EUW"
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 10,
+        "adjustedLP": 4010,
+        "timestamp": "2025-01-08T17:18:30.235914+00:00"
+      },
+      {
+        "summonerName": "Big2080#EUW",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 10,
+        "adjustedLP": 4010,
+        "timestamp": "2025-01-09T01:27:31.011439+00:00"
       }
     ],
     "Myst#Blade": [
       {
         "summonerName": "Myst#Blade",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 3,
+        "adjustedLP": 2503,
+        "timestamp": "2025-01-08T17:18:32.335886+00:00"
+      },
+      {
+        "summonerName": "Myst#Blade",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 3,
+        "adjustedLP": 2503,
+        "timestamp": "2025-01-09T01:27:32.523617+00:00"
+      },
+      {
+        "summonerName": "Myst#Blade",
         "tier": "EMERALD",
-        "rank": "I",
-        "lp": 30,
-        "adjustedLP": 2330,
-        "timestamp": "2025-01-13T08:47:38.926425+00:00",
+        "rank": "III",
+        "lp": 45,
+        "adjustedLP": 2145,
+        "timestamp": "2025-01-10T01:37:51.717360+00:00"
+      },
+      {
+        "summonerName": "Myst#Blade",
+        "tier": "EMERALD",
+        "rank": "III",
+        "lp": 45,
+        "adjustedLP": 2145,
+        "timestamp": "2025-01-10T13:20:49.672278+00:00"
+      },
+      {
+        "summonerName": "Myst#Blade",
+        "tier": "EMERALD",
+        "rank": "III",
+        "lp": 45,
+        "adjustedLP": 2145,
+        "timestamp": "2025-01-10T14:04:38.065803+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Myst#Blade",
+        "tier": "EMERALD",
+        "rank": "III",
+        "lp": 45,
+        "adjustedLP": 2145,
+        "timestamp": "2025-01-10T15:27:47.273356+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Myst#Blade",
+        "tier": "EMERALD",
+        "rank": "III",
+        "lp": 45,
+        "adjustedLP": 2145,
+        "timestamp": "2025-01-10T15:39:24.628564+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Myst#Blade",
+        "tier": "EMERALD",
+        "rank": "III",
+        "lp": 45,
+        "adjustedLP": 2145,
+        "timestamp": "2025-01-10T15:55:28.425839+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Myst#Blade",
+        "tier": "EMERALD",
+        "rank": "III",
+        "lp": 25,
+        "adjustedLP": 2125,
+        "timestamp": "2025-01-10T21:25:17.934917+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Myst#Blade",
+        "tier": "EMERALD",
+        "rank": "III",
+        "lp": 25,
+        "adjustedLP": 2125,
+        "timestamp": "2025-01-10T21:40:46.041832+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Myst#Blade",
+        "tier": "EMERALD",
+        "rank": "III",
+        "lp": 25,
+        "adjustedLP": 2125,
+        "timestamp": "2025-01-10T23:13:53.201738+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Myst#Blade",
+        "tier": "EMERALD",
+        "rank": "III",
+        "lp": 25,
+        "adjustedLP": 2125,
+        "timestamp": "2025-01-11T01:36:00.616604+00:00",
+        "region": "EUW"
+      }
+    ],
+    "Yui#KEK": [
+      {
+        "summonerName": "Yui#KEK",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 26,
+        "adjustedLP": 2426,
+        "timestamp": "2025-01-08T17:18:34.421163+00:00"
+      },
+      {
+        "summonerName": "Yui#KEK",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 26,
+        "adjustedLP": 2426,
+        "timestamp": "2025-01-09T01:27:33.993117+00:00"
       }
     ],
     "Lil Wio#EUW": [
@@ -75,64 +507,205 @@
         "summonerName": "Lil Wio#EUW",
         "tier": "PLATINUM",
         "rank": "II",
-        "lp": 28,
-        "adjustedLP": 1828,
-        "timestamp": "2025-01-13T08:47:43.133945+00:00",
-        "region": "EUW"
+        "lp": 65,
+        "adjustedLP": 1865,
+        "timestamp": "2025-01-08T17:18:36.472447+00:00"
+      },
+      {
+        "summonerName": "Lil Wio#EUW",
+        "tier": "PLATINUM",
+        "rank": "II",
+        "lp": 62,
+        "adjustedLP": 1862,
+        "timestamp": "2025-01-09T01:27:35.449907+00:00"
       }
     ],
     "King Afee#333": [
       {
         "summonerName": "King Afee#333",
         "tier": "PLATINUM",
-        "rank": "IV",
-        "lp": 66,
-        "adjustedLP": 1666,
-        "timestamp": "2025-01-13T08:47:45.187850+00:00",
-        "region": "EUW"
+        "rank": "III",
+        "lp": 82,
+        "adjustedLP": 1782,
+        "timestamp": "2025-01-08T17:18:38.609003+00:00"
+      },
+      {
+        "summonerName": "King Afee#333",
+        "tier": "PLATINUM",
+        "rank": "II",
+        "lp": 6,
+        "adjustedLP": 1806,
+        "timestamp": "2025-01-09T01:27:36.918461+00:00"
       }
     ],
     "Lemis#33310": [
       {
         "summonerName": "Lemis#33310",
+        "tier": "GOLD",
+        "rank": "IV",
+        "lp": 61,
+        "adjustedLP": 1261,
+        "timestamp": "2025-01-08T17:18:40.691470+00:00"
+      },
+      {
+        "summonerName": "Lemis#33310",
+        "tier": "GOLD",
+        "rank": "IV",
+        "lp": 61,
+        "adjustedLP": 1261,
+        "timestamp": "2025-01-09T01:27:38.376205+00:00"
+      },
+      {
+        "summonerName": "Lemis#33310",
+        "tier": "SILVER",
+        "rank": "IV",
+        "lp": 97,
+        "adjustedLP": 897,
+        "timestamp": "2025-01-10T15:27:53.097380+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Lemis#33310",
+        "tier": "SILVER",
+        "rank": "IV",
+        "lp": 97,
+        "adjustedLP": 897,
+        "timestamp": "2025-01-10T15:39:30.553657+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Lemis#33310",
+        "tier": "SILVER",
+        "rank": "IV",
+        "lp": 97,
+        "adjustedLP": 897,
+        "timestamp": "2025-01-10T15:55:36.658361+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Lemis#33310",
         "tier": "SILVER",
         "rank": "III",
-        "lp": 51,
-        "adjustedLP": 951,
-        "timestamp": "2025-01-13T08:47:47.251534+00:00",
+        "lp": 23,
+        "adjustedLP": 923,
+        "timestamp": "2025-01-10T21:25:26.202524+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Lemis#33310",
+        "tier": "SILVER",
+        "rank": "III",
+        "lp": 23,
+        "adjustedLP": 923,
+        "timestamp": "2025-01-10T21:40:52.153091+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Lemis#33310",
+        "tier": "SILVER",
+        "rank": "III",
+        "lp": 23,
+        "adjustedLP": 923,
+        "timestamp": "2025-01-10T23:13:59.116091+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Lemis#33310",
+        "tier": "SILVER",
+        "rank": "III",
+        "lp": 23,
+        "adjustedLP": 923,
+        "timestamp": "2025-01-11T01:36:06.426742+00:00",
         "region": "EUW"
       }
     ],
     "FOOTJOB ENJOYER#QU33N": [
       {
         "summonerName": "FOOTJOB ENJOYER#QU33N",
-        "tier": "EMERALD",
+        "tier": "PLATINUM",
         "rank": "III",
+        "lp": 61,
+        "adjustedLP": 1761,
+        "timestamp": "2025-01-10T01:37:59.038828+00:00"
+      },
+      {
+        "summonerName": "FOOTJOB ENJOYER#QU33N",
+        "tier": "PLATINUM",
+        "rank": "II",
+        "lp": 13,
+        "adjustedLP": 1813,
+        "timestamp": "2025-01-10T13:20:57.213913+00:00"
+      },
+      {
+        "summonerName": "FOOTJOB ENJOYER#QU33N",
+        "tier": "PLATINUM",
+        "rank": "II",
+        "lp": 51,
+        "adjustedLP": 1851,
+        "timestamp": "2025-01-10T14:04:47.049052+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "FOOTJOB ENJOYER#QU33N",
+        "tier": "PLATINUM",
+        "rank": "I",
+        "lp": 26,
+        "adjustedLP": 1926,
+        "timestamp": "2025-01-10T15:27:54.581948+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "FOOTJOB ENJOYER#QU33N",
+        "tier": "PLATINUM",
+        "rank": "I",
+        "lp": 26,
+        "adjustedLP": 1926,
+        "timestamp": "2025-01-10T15:39:32.094039+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "FOOTJOB ENJOYER#QU33N",
+        "tier": "PLATINUM",
+        "rank": "I",
+        "lp": 63,
+        "adjustedLP": 1963,
+        "timestamp": "2025-01-10T15:55:38.710368+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "FOOTJOB ENJOYER#QU33N",
+        "tier": "PLATINUM",
+        "rank": "I",
         "lp": 85,
-        "adjustedLP": 2185,
-        "timestamp": "2025-01-13T08:47:49.326600+00:00",
+        "adjustedLP": 1985,
+        "timestamp": "2025-01-10T21:25:28.254393+00:00",
         "region": "EUW"
-      }
-    ],
-    "l1kenJ#KITTY": [
+      },
       {
-        "summonerName": "l1kenJ#KITTY",
-        "tier": "GOLD",
-        "rank": "III",
-        "lp": 52,
-        "adjustedLP": 1352,
-        "timestamp": "2025-01-13T08:47:55.482243+00:00",
+        "summonerName": "FOOTJOB ENJOYER#QU33N",
+        "tier": "PLATINUM",
+        "rank": "I",
+        "lp": 85,
+        "adjustedLP": 1985,
+        "timestamp": "2025-01-10T21:40:53.648488+00:00",
         "region": "EUW"
-      }
-    ],
-    "run#7 7 7": [
+      },
       {
-        "summonerName": "run#7 7 7",
-        "tier": "DIAMOND",
-        "rank": "III",
-        "lp": 47,
-        "adjustedLP": 2547,
-        "timestamp": "2025-01-13T08:47:57.551443+00:00",
+        "summonerName": "FOOTJOB ENJOYER#QU33N",
+        "tier": "EMERALD",
+        "rank": "IV",
+        "lp": 9,
+        "adjustedLP": 2009,
+        "timestamp": "2025-01-10T23:14:00.585458+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "FOOTJOB ENJOYER#QU33N",
+        "tier": "EMERALD",
+        "rank": "IV",
+        "lp": 9,
+        "adjustedLP": 2009,
+        "timestamp": "2025-01-11T01:36:07.856958+00:00",
         "region": "EUW"
       }
     ],
@@ -140,54 +713,242 @@
       {
         "summonerName": "dingo#gday",
         "tier": "DIAMOND",
-        "rank": "I",
-        "lp": 25,
-        "adjustedLP": 2725,
-        "timestamp": "2025-01-13T08:47:59.611162+00:00",
-        "region": "EUW"
-      }
-    ],
-    "veigar v2#0000": [
+        "rank": "III",
+        "lp": 50,
+        "adjustedLP": 2550,
+        "timestamp": "2025-01-10T13:21:04.505382+00:00"
+      },
       {
-        "summonerName": "veigar v2#0000",
+        "summonerName": "dingo#gday",
         "tier": "DIAMOND",
         "rank": "III",
-        "lp": 0,
-        "adjustedLP": 2500,
-        "timestamp": "2025-01-13T08:48:05.804436+00:00",
+        "lp": 50,
+        "adjustedLP": 2550,
+        "timestamp": "2025-01-10T14:04:56.050777+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "dingo#gday",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 50,
+        "adjustedLP": 2550,
+        "timestamp": "2025-01-10T15:28:02.155235+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "dingo#gday",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 50,
+        "adjustedLP": 2550,
+        "timestamp": "2025-01-10T15:39:39.463206+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "dingo#gday",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 50,
+        "adjustedLP": 2550,
+        "timestamp": "2025-01-10T15:55:48.997906+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "dingo#gday",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 50,
+        "adjustedLP": 2550,
+        "timestamp": "2025-01-10T21:25:38.540209+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "dingo#gday",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 50,
+        "adjustedLP": 2550,
+        "timestamp": "2025-01-10T21:41:01.050977+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "dingo#gday",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 30,
+        "adjustedLP": 2530,
+        "timestamp": "2025-01-10T23:14:08.029100+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "dingo#gday",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 40,
+        "adjustedLP": 2540,
+        "timestamp": "2025-01-11T01:36:15.126421+00:00",
         "region": "EUW"
       }
     ],
     "Reynor#2002": [
       {
         "summonerName": "Reynor#2002",
-        "tier": "DIAMOND",
-        "rank": "III",
-        "lp": 0,
-        "adjustedLP": 2500,
-        "timestamp": "2025-01-13T08:48:07.858557+00:00",
+        "tier": "EMERALD",
+        "rank": "II",
+        "lp": 47,
+        "adjustedLP": 2247,
+        "timestamp": "2025-01-10T15:55:57.204942+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Reynor#2002",
+        "tier": "EMERALD",
+        "rank": "II",
+        "lp": 77,
+        "adjustedLP": 2277,
+        "timestamp": "2025-01-10T21:25:46.780326+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Reynor#2002",
+        "tier": "EMERALD",
+        "rank": "II",
+        "lp": 77,
+        "adjustedLP": 2277,
+        "timestamp": "2025-01-10T21:41:07.107333+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Reynor#2002",
+        "tier": "EMERALD",
+        "rank": "II",
+        "lp": 77,
+        "adjustedLP": 2277,
+        "timestamp": "2025-01-10T23:14:13.923842+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Reynor#2002",
+        "tier": "EMERALD",
+        "rank": "II",
+        "lp": 77,
+        "adjustedLP": 2277,
+        "timestamp": "2025-01-11T01:36:20.917803+00:00",
         "region": "EUW"
       }
     ],
-    "Sir Kledington#1337": [
+    "l1kenJ#KITTY": [
       {
-        "summonerName": "Sir Kledington#1337",
-        "tier": "EMERALD",
+        "summonerName": "l1kenJ#KITTY",
+        "tier": "GOLD",
         "rank": "IV",
-        "lp": 16,
-        "adjustedLP": 2016,
-        "timestamp": "2025-01-13T08:48:09.908948+00:00",
+        "lp": 0,
+        "adjustedLP": 1200,
+        "timestamp": "2025-01-10T21:25:34.423955+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "l1kenJ#KITTY",
+        "tier": "GOLD",
+        "rank": "IV",
+        "lp": 0,
+        "adjustedLP": 1200,
+        "timestamp": "2025-01-10T21:40:58.064000+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "l1kenJ#KITTY",
+        "tier": "GOLD",
+        "rank": "IV",
+        "lp": 0,
+        "adjustedLP": 1200,
+        "timestamp": "2025-01-10T23:14:05.090328+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "l1kenJ#KITTY",
+        "tier": "GOLD",
+        "rank": "IV",
+        "lp": 0,
+        "adjustedLP": 1200,
+        "timestamp": "2025-01-11T01:36:12.231461+00:00",
+        "region": "EUW"
+      }
+    ],
+    "run#7 7 7": [
+      {
+        "summonerName": "run#7 7 7",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 97,
+        "adjustedLP": 2497,
+        "timestamp": "2025-01-10T21:25:36.472892+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "run#7 7 7",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 97,
+        "adjustedLP": 2497,
+        "timestamp": "2025-01-10T21:40:59.580799+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "run#7 7 7",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 97,
+        "adjustedLP": 2497,
+        "timestamp": "2025-01-10T23:14:06.559700+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "run#7 7 7",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 97,
+        "adjustedLP": 2497,
+        "timestamp": "2025-01-11T01:36:13.686489+00:00",
         "region": "EUW"
       }
     ],
     "Evie#ember": [
       {
         "summonerName": "Evie#ember",
-        "tier": "BRONZE",
+        "tier": "IRON",
         "rank": "III",
-        "lp": 20,
-        "adjustedLP": 520,
-        "timestamp": "2025-01-13T08:48:10.999746+00:00",
+        "lp": 80,
+        "adjustedLP": 180,
+        "timestamp": "2025-01-10T21:25:47.634815+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "Evie#ember",
+        "tier": "IRON",
+        "rank": "III",
+        "lp": 80,
+        "adjustedLP": 180,
+        "timestamp": "2025-01-10T21:41:08.512741+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "Evie#ember",
+        "tier": "IRON",
+        "rank": "III",
+        "lp": 80,
+        "adjustedLP": 180,
+        "timestamp": "2025-01-10T23:14:15.387143+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "Evie#ember",
+        "tier": "IRON",
+        "rank": "II",
+        "lp": 18,
+        "adjustedLP": 218,
+        "timestamp": "2025-01-11T01:36:22.309866+00:00",
         "region": "NA"
       }
     ],
@@ -195,10 +956,37 @@
       {
         "summonerName": "Feels#444",
         "tier": "PLATINUM",
+        "rank": "III",
+        "lp": 40,
+        "adjustedLP": 1740,
+        "timestamp": "2025-01-10T21:25:48.271844+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "Feels#444",
+        "tier": "PLATINUM",
+        "rank": "III",
+        "lp": 40,
+        "adjustedLP": 1740,
+        "timestamp": "2025-01-10T21:41:09.575770+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "Feels#444",
+        "tier": "PLATINUM",
+        "rank": "III",
+        "lp": 78,
+        "adjustedLP": 1778,
+        "timestamp": "2025-01-10T23:14:16.447091+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "Feels#444",
+        "tier": "PLATINUM",
         "rank": "II",
-        "lp": 30,
-        "adjustedLP": 1830,
-        "timestamp": "2025-01-13T08:48:11.667191+00:00",
+        "lp": 16,
+        "adjustedLP": 1816,
+        "timestamp": "2025-01-11T01:36:23.367599+00:00",
         "region": "NA"
       }
     ],
@@ -206,11 +994,49 @@
       {
         "summonerName": "staples#na2",
         "tier": "DIAMOND",
-        "rank": "II",
+        "rank": "IV",
         "lp": 65,
-        "adjustedLP": 2665,
-        "timestamp": "2025-01-13T08:48:12.933452+00:00",
+        "adjustedLP": 2465,
+        "timestamp": "2025-01-10T21:41:11.675410+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "staples#na2",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 65,
+        "adjustedLP": 2465,
+        "timestamp": "2025-01-10T23:14:18.687699+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "staples#na2",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 65,
+        "adjustedLP": 2465,
+        "timestamp": "2025-01-11T01:36:25.545093+00:00",
+        "region": "NA"
+      }
+    ],
+    "veigar v2#0000": [
+      {
+        "summonerName": "veigar v2#0000",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 10,
+        "adjustedLP": 2410,
+        "timestamp": "2025-01-10T23:14:12.452820+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "veigar v2#0000",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 40,
+        "adjustedLP": 2440,
+        "timestamp": "2025-01-11T01:36:19.470457+00:00",
+        "region": "EUW"
       }
     ]
   }
