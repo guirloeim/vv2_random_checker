@@ -21,6 +21,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
-      # 2. Deploy to GitHub Pages
+      # 2. Upload files for deployment
+      - name: Upload artifact for Pages
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: .  # Include all files in the root directory (index.html, lp_data.json, etc.)
+
+      # 3. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
