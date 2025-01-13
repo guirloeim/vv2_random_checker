@@ -5,40 +5,25 @@ on:
     branches:
       - main
   schedule:
-    - cron: '15 0 * * *'
+    - cron: '10 0 * * *'
   workflow_dispatch:
 
 jobs:
-  build:
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
 
-      # If you have any build steps (npm run build, etc.), add them here.
-      # Otherwise, do nothing -- the index.html is already in the root.
-      #
+      # Add build steps if necessary
       # - name: Install dependencies
       #   run: npm ci
-      #
       # - name: Build
       #   run: npm run build
 
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
-
-      # 1) Upload everything in the repo root (including index.html)
-      #    to the Pages artifact. If you only want certain files/folders,
-      #    adjust the path: below accordingly.
-      - name: Upload artifact for Pages
+      # Trigger the GitHub Pages deployment action
+      - name: Trigger Pages Build Deployment
         uses: actions/upload-pages-artifact@v1
         with:
-          path: .  # Use '.' so it uploads the current directory (index.html in root)
-
-  # GitHub automatically adds the "pages-build-deployment" or "report-build-status" 
-  # job after these steps, which deploys the artifact to your GitHub Pages.
+          path: .  # Uploads the current directory as an artifact
