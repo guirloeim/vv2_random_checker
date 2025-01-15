@@ -1,4 +1,4 @@
-name: Fetch LP Data
+name: Fetch LP Data NATIME
 
 on:
   workflow_dispatch:
