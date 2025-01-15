@@ -301,15 +301,20 @@
           });
       });
 
-      // 19) determine final points for legend
+      // 19) Determine final points for legend
       summoners.forEach(s => {
-        const foundToday = s.points.find(d =>
+        // Get all measurements for midnightToday
+        const todayPoints = s.points.filter(d =>
           toMidnight(d.x).getTime() === midnightToday.getTime()
         );
-        if (foundToday) {
-          s.finalLP = foundToday.realLP;
-          s.finalY  = foundToday.y;
-          s.latestTier = `${foundToday.tier} ${foundToday.division}`;
+
+        // The array is sorted by time, so the last element is the latest measurement
+        const latestPointToday = todayPoints[todayPoints.length - 1];
+
+        if (latestPointToday) {
+          s.finalLP = latestPointToday.realLP;
+          s.finalY  = latestPointToday.y;
+          s.latestTier = `${latestPointToday.tier} ${latestPointToday.division}`;
         } else {
           s.finalLP = 0;
           s.finalY  = 0;
@@ -317,10 +322,10 @@
         }
       });
 
-      // sort summoners by finalY desc
+      // Sort summoners by finalY desc
       summoners.sort((a, b) => b.finalY - a.finalY);
 
-      // 20) legend
+      // 20) Legend
       const legend = g.selectAll(".legend")
         .data(summoners)
         .enter()
