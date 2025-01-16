@@ -32,6 +32,8 @@ SUMMONERS = [
     "Enemy#MyOwn",
     "BLBO#EUW",
     "kitti#nesp",
+    "gulpbert#sndra",
+    "rbert#EUW",
 ]
 
 SUMMONERS_NICK = [
@@ -60,6 +62,8 @@ SUMMONERS_NICK = [
     "Geftsu",
     "BLBO",
     "Yami",
+    "rbert(smurf)",
+    "rbert"
 ]
 
 SUMMONERS_NA_NICK = [
