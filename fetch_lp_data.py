@@ -31,8 +31,40 @@ SUMMONERS = [
     "Sir Kledington#1337",
 ]
 
-REGION_NA = "na1"  # Or na1, kr, etc.
-PLATFORM_REGION_NA = "americas"  # Use platform routing values like 'americas', 'europe', 'asia', 'sea'
+SUMMONERS_NICK = [
+    "Nico",
+    "Loopy",
+    "Ilikecanoes",
+    "Emily",
+    "Wiosna",
+    "Owpi",
+    "Big2080",
+    "Myst",
+    "Yui",
+    "Wiowid",
+    "Afee",
+    "Mentalboom",
+    "Mentalboom(smurf)",
+    "l1ken(smurf)",
+    "l1ken",
+    "Sevan",
+    "Nico(smurf)",
+    "Blueqion",
+    "veigar v2(smurf)",
+    "veigar v2",
+    "Reynor",
+    "Sir Kledington",
+]
+
+SUMMONERS_NA_NICK = [
+    "Evie",
+    "Feels",
+    "FroneZone",
+    "staples",
+]
+
+REGION_NA = "na1"
+PLATFORM_REGION_NA = "americas"
 SUMMONERS_NA = [
     "Evie#ember",
     "Feels#444",
@@ -40,15 +72,12 @@ SUMMONERS_NA = [
     "staples#na2",
 ]
 
-# Dynamic cutoffs for Grandmaster and Challenger
 CHALLENGER_CUTOFF = 0
 GRANDMASTER_CUTOFF = 0
-
 
 def main():
     global CHALLENGER_CUTOFF, GRANDMASTER_CUTOFF
 
-    # Get API key from environment variable
     api_key = os.getenv("RIOT_API_KEY")
     if not api_key:
         print("Missing Riot API Key!")
@@ -63,7 +92,9 @@ def main():
 
     # Collect summoner data
     summoner_data_list = []
-    for summoner in SUMMONERS:
+
+    # --- Changed loop for EUW summoners ---
+    for i, summoner in enumerate(SUMMONERS):
         try:
             name, tag = summoner.split("#")
             summoner_id = get_summoner_id(name, tag, api_key, PLATFORM_REGION, REGION)
@@ -72,13 +103,11 @@ def main():
 
             ranked_info = get_ranked_data(summoner_id, api_key, REGION)
             if ranked_info:
-                # Process solo queue data
                 solo_queue = next((q for q in ranked_info if q["queueType"] == "RANKED_SOLO_5x5"), None)
                 if solo_queue:
-                    # Add adjusted LP for graph positioning
                     adjusted_lp = adjust_lp(solo_queue["tier"], solo_queue["rank"], solo_queue["leaguePoints"])
                     summoner_data_list.append({
-                        "summonerName": summoner,
+                        "summonerName": SUMMONERS_NICK[i],  # <-- Use the same index in SUMMONERS_NICK
                         "tier": solo_queue["tier"],
                         "rank": solo_queue["rank"],
                         "lp": solo_queue["leaguePoints"],
@@ -89,7 +118,8 @@ def main():
         except Exception as e:
             print(f"Error for {summoner}: {e}")
 
-    for summoner in SUMMONERS_NA:
+    # --- Changed loop for NA summoners ---
+    for i, summoner in enumerate(SUMMONERS_NA):
         try:
             name, tag = summoner.split("#")
             summoner_id = get_summoner_id(name, tag, api_key, PLATFORM_REGION_NA, REGION_NA)
@@ -98,13 +128,11 @@ def main():
 
             ranked_info = get_ranked_data(summoner_id, api_key, REGION_NA)
             if ranked_info:
-                # Process solo queue data
                 solo_queue = next((q for q in ranked_info if q["queueType"] == "RANKED_SOLO_5x5"), None)
                 if solo_queue:
-                    # Add adjusted LP for graph positioning
                     adjusted_lp = adjust_lp(solo_queue["tier"], solo_queue["rank"], solo_queue["leaguePoints"])
                     summoner_data_list.append({
-                        "summonerName": summoner,
+                        "summonerName": SUMMONERS_NA_NICK[i],  # <-- Use the same index in SUMMONERS_NA_NICK
                         "tier": solo_queue["tier"],
                         "rank": solo_queue["rank"],
                         "lp": solo_queue["leaguePoints"],
@@ -120,8 +148,6 @@ def main():
     try:
         with open(data_filename, "r", encoding="utf-8") as f:
             data = json.load(f)
-
-            # Extract summoner data and preserve cutoffs
             old_data = data.get("summoners", {})
             cutoffs = data.get("cutoffs", {"CHALLENGER": 0, "GRANDMASTER": 0})
     except:
@@ -158,27 +184,22 @@ def get_cutoff_lp(tier, api_key):
     if r.status_code == 200:
         entries = r.json().get("entries", [])
         if entries:
-            # Find the lowest LP in this tier
             return min(entry["leaguePoints"] for entry in entries)
     print(f"Error fetching cutoff for {tier}: {r.text}")
     return 0
 
-
 def adjust_lp(tier, rank, lp):
     """Calculate LP based on rank cutoffs."""
-    # Handle special tiers: Master, Grandmaster, Challenger
     if tier == "CHALLENGER":
         return CHALLENGER_CUTOFF + lp  # Use Challenger cutoff
     elif tier == "GRANDMASTER":
         return GRANDMASTER_CUTOFF + lp  # Use Grandmaster cutoff
     elif tier == "MASTER":
-        return 4000 + lp  # Master starts at 4000 LP
+        return 4000 + lp               # Master starts at 4000 LP
     else:
-        # Handle ranks below Master
         division_points = {"IV": 0, "III": 100, "II": 200, "I": 300}
         rank_base = ["IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "EMERALD", "DIAMOND"].index(tier) * 400
         return rank_base + division_points[rank] + lp
-
 
 def get_summoner_id(name, tag, api_key, platform, region):
     """Fetch PUUID from Riot ID."""
@@ -191,7 +212,6 @@ def get_summoner_id(name, tag, api_key, platform, region):
     print(f"Error fetching PUUID for {name}#{tag}: {r.text}")
     return None
 
-
 def get_summoner_id_by_puuid(puuid, api_key, region, name):
     """Fetch Summoner ID using PUUID."""
     url = f"https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{puuid}"
@@ -202,7 +222,6 @@ def get_summoner_id_by_puuid(puuid, api_key, region, name):
     print(f"Error fetching Summoner ID for name:{name} PUUID {puuid}: {r.text}")
     return None
 
-
 def get_ranked_data(encrypted_summoner_id, api_key, region):
     """Fetch ranked data for a given Summoner ID."""
     url = f"https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/{encrypted_summoner_id}"
@@ -212,7 +231,6 @@ def get_ranked_data(encrypted_summoner_id, api_key, region):
         return r.json()
     print(f"Error fetching ranked data for {encrypted_summoner_id}: {r.text}")
     return None
-
 
 if __name__ == "__main__":
     main()
