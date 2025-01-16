@@ -1,0 +1,47 @@
+name: Fetch LP Data NATIME
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  fetch-and-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Debug Environment Variables
+        run: |
+          echo "Environment Variables:"
+          env | sort
+          echo "RIOT_API_KEY is set to: ${RIOT_API_KEY}"
+          echo "RIOT_API_KEY masked test:"
+          echo "${{ secrets.RIOT_API_KEY }}"
+
+      - name: Fetch LP Data
+        run: |
+          export RIOT_API_KEY="${{ secrets.RIOT_API_KEY }}"
+          echo "Exported RIOT_API_KEY: $RIOT_API_KEY"
+          python fetch_lp_data.py
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "guirloeim"
+          git config --global user.email "landedmink2@gmail.com"
+          git add .
+          git commit -m "Update LP data" || echo "No changes to commit"
+          git pull origin main --rebase
+          git push https://${{ secrets.GH_PAT }}@github.com/guirloeim/vv2_random_checker.git HEAD:main
