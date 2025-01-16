@@ -31,6 +31,7 @@ SUMMONERS = [
     "Sir Kledington#1337",
     "Enemy#MyOwn",
     "BLBO#EUW",
+    "kitti#nesp",
 ]
 
 SUMMONERS_NICK = [
@@ -58,6 +59,7 @@ SUMMONERS_NICK = [
     "Sir Kledington",
     "Geftsu",
     "BLBO",
+    "Yami",
 ]
 
 SUMMONERS_NA_NICK = [
