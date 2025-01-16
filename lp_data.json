@@ -3020,6 +3020,204 @@
         "timestamp": "2025-01-16T08:10:03.443349+00:00",
         "region": "EUW"
       }
+    ],
+    "Loopy": [
+      {
+        "summonerName": "Loopy",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 3,
+        "adjustedLP": 4003,
+        "timestamp": "2025-01-16T10:24:38.499394+00:00",
+        "region": "EUW"
+      }
+    ],
+    "Emily": [
+      {
+        "summonerName": "Emily",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 81,
+        "adjustedLP": 2681,
+        "timestamp": "2025-01-16T10:24:40.956630+00:00",
+        "region": "EUW"
+      }
+    ],
+    "Wiosna": [
+      {
+        "summonerName": "Wiosna",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 71,
+        "adjustedLP": 2771,
+        "timestamp": "2025-01-16T10:24:42.217750+00:00",
+        "region": "EUW"
+      }
+    ],
+    "Owpi": [
+      {
+        "summonerName": "Owpi",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 26,
+        "adjustedLP": 4026,
+        "timestamp": "2025-01-16T10:24:43.488112+00:00",
+        "region": "EUW"
+      }
+    ],
+    "Big2080": [
+      {
+        "summonerName": "Big2080",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 80,
+        "adjustedLP": 2580,
+        "timestamp": "2025-01-16T10:24:44.733966+00:00",
+        "region": "EUW"
+      }
+    ],
+    "Myst": [
+      {
+        "summonerName": "Myst",
+        "tier": "EMERALD",
+        "rank": "I",
+        "lp": 47,
+        "adjustedLP": 2347,
+        "timestamp": "2025-01-16T10:24:45.988979+00:00",
+        "region": "EUW"
+      }
+    ],
+    "Wiowid": [
+      {
+        "summonerName": "Wiowid",
+        "tier": "EMERALD",
+        "rank": "IV",
+        "lp": 10,
+        "adjustedLP": 2010,
+        "timestamp": "2025-01-16T10:24:48.475710+00:00",
+        "region": "EUW"
+      }
+    ],
+    "Afee": [
+      {
+        "summonerName": "Afee",
+        "tier": "PLATINUM",
+        "rank": "II",
+        "lp": 21,
+        "adjustedLP": 1821,
+        "timestamp": "2025-01-16T10:24:49.713798+00:00",
+        "region": "EUW"
+      }
+    ],
+    "Mentalboom": [
+      {
+        "summonerName": "Mentalboom",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 14,
+        "adjustedLP": 2414,
+        "timestamp": "2025-01-16T10:24:50.944287+00:00",
+        "region": "EUW"
+      }
+    ],
+    "l1ken": [
+      {
+        "summonerName": "l1ken",
+        "tier": "GOLD",
+        "rank": "II",
+        "lp": 80,
+        "adjustedLP": 1480,
+        "timestamp": "2025-01-16T10:24:54.693734+00:00",
+        "region": "EUW"
+      }
+    ],
+    "Sevan": [
+      {
+        "summonerName": "Sevan",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 22,
+        "adjustedLP": 2522,
+        "timestamp": "2025-01-16T10:24:55.945193+00:00",
+        "region": "EUW"
+      }
+    ],
+    "Nico(smurf)": [
+      {
+        "summonerName": "Nico(smurf)",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 111,
+        "adjustedLP": 4111,
+        "timestamp": "2025-01-16T10:24:57.201315+00:00",
+        "region": "EUW"
+      }
+    ],
+    "veigar v2": [
+      {
+        "summonerName": "veigar v2",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 10,
+        "adjustedLP": 2510,
+        "timestamp": "2025-01-16T10:25:00.906790+00:00",
+        "region": "EUW"
+      }
+    ],
+    "Reynor": [
+      {
+        "summonerName": "Reynor",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 17,
+        "adjustedLP": 2517,
+        "timestamp": "2025-01-16T10:25:02.146684+00:00",
+        "region": "EUW"
+      }
+    ],
+    "Sir Kledington": [
+      {
+        "summonerName": "Sir Kledington",
+        "tier": "EMERALD",
+        "rank": "IV",
+        "lp": 2,
+        "adjustedLP": 2002,
+        "timestamp": "2025-01-16T10:25:03.374741+00:00",
+        "region": "EUW"
+      }
+    ],
+    "Evie": [
+      {
+        "summonerName": "Evie",
+        "tier": "BRONZE",
+        "rank": "III",
+        "lp": 50,
+        "adjustedLP": 550,
+        "timestamp": "2025-01-16T10:25:05.166881+00:00",
+        "region": "NA"
+      }
+    ],
+    "Feels": [
+      {
+        "summonerName": "Feels",
+        "tier": "EMERALD",
+        "rank": "IV",
+        "lp": 34,
+        "adjustedLP": 2034,
+        "timestamp": "2025-01-16T10:25:06.707073+00:00",
+        "region": "NA"
+      }
+    ],
+    "staples": [
+      {
+        "summonerName": "staples",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 1,
+        "adjustedLP": 2701,
+        "timestamp": "2025-01-16T10:25:09.722260+00:00",
+        "region": "NA"
+      }
     ]
   }
 }
