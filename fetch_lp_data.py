@@ -29,6 +29,8 @@ SUMMONERS = [
     "veigar v2#0000",
     "Reynor#2002",
     "Sir Kledington#1337",
+    "Enemy#MyOwn",
+    "BLBO#EUW",
 ]
 
 SUMMONERS_NICK = [
@@ -54,6 +56,8 @@ SUMMONERS_NICK = [
     "veigar v2",
     "Reynor",
     "Sir Kledington",
+    "Geftsu",
+    "BLBO",
 ]
 
 SUMMONERS_NA_NICK = [
