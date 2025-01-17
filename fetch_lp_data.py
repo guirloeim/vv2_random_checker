@@ -27,13 +27,6 @@ SUMMONERS = [
     "blueqion#EUW",
     "C9 veigar#EUW",
     "veigar v2#0000",
-    "Reynor#2002",
-    "Sir Kledington#1337",
-    "Enemy#MyOwn",
-    "BLBO#EUW",
-    "kitti#nesp",
-    "gulpbert#sndra",
-    "rbert#EUW",
 ]
 
 SUMMONERS_NICK = [
@@ -58,19 +51,12 @@ SUMMONERS_NICK = [
     "veigar v2(smurf)",
     "veigar v2",
     "Reynor",
-    "Sir Kledington",
-    "Geftsu",
-    "BLBO",
-    "Yami",
-    "rbert(smurf)",
-    "rbert"
 ]
 
 SUMMONERS_NA_NICK = [
     "Evie",
     "Feels",
     "FroneZone",
-    "staples",
 ]
 
 REGION_NA = "na1"
@@ -79,7 +65,6 @@ SUMMONERS_NA = [
     "Evie#ember",
     "Feels#444",
     "FroneZone#9688",
-    "staples#na2",
 ]
 
 CHALLENGER_CUTOFF = 0
