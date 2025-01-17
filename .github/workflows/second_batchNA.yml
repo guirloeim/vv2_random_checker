@@ -1,4 +1,4 @@
-name: Fetch LP Data
+name: Fetch LP Data Second Batch NA
 
 on:
   workflow_dispatch:
