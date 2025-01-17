@@ -45,7 +45,7 @@ SUMMONERS_NICK = [
     "Mental(smurf)",
     "l1ken(smurf)",
     "l1ken",
-    "Sevan",
+    "sevan",
     "Nico(smurf)",
     "Blueqion",
     "veigar v2(smurf)",
