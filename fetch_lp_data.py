@@ -186,9 +186,9 @@ def get_cutoff_lp(tier, api_key):
 def adjust_lp(tier, rank, lp):
     """Calculate LP based on rank cutoffs."""
     if tier == "CHALLENGER":
-        return CHALLENGER_CUTOFF + lp  # Use Challenger cutoff
+        return 4000 + lp  # Use Challenger cutoff
     elif tier == "GRANDMASTER":
-        return GRANDMASTER_CUTOFF + lp  # Use Grandmaster cutoff
+        return 4000 + lp  # Use Grandmaster cutoff
     elif tier == "MASTER":
         return 4000 + lp               # Master starts at 4000 LP
     else:
