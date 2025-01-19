@@ -353,9 +353,9 @@
         "region": "EUW"
       }
     ],
-    "Ilikecanoes": [
+    "canoes": [
       {
-        "summonerName": "Ilikecanoes",
+        "summonerName": "canoes",
         "tier": "GRANDMASTER",
         "rank": "I",
         "lp": 670,
@@ -363,7 +363,7 @@
         "timestamp": "2025-01-08T17:18:21.922448+00:00"
       },
       {
-        "summonerName": "Ilikecanoes",
+        "summonerName": "canoes",
         "tier": "MASTER",
         "rank": "I",
         "lp": 630,

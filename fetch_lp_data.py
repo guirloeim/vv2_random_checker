@@ -32,7 +32,7 @@ SUMMONERS = [
 SUMMONERS_NICK = [
     "Nico",
     "Loopy",
-    "Ilikecanoes",
+    "canoes",
     "Emily",
     "Wiosna",
     "Owpi",
