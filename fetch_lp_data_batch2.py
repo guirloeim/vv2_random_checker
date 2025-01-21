@@ -32,12 +32,14 @@ SUMMONERS_NICK = [
 
 SUMMONERS_NA_NICK = [
     "staples",
+    "vend0r",
 ]
 
 REGION_NA = "na1"
 PLATFORM_REGION_NA = "americas"
 SUMMONERS_NA = [
     "staples#na2",
+    "Vendor#002",
 ]
 
 CHALLENGER_CUTOFF = 0
