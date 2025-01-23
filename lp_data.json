@@ -1,7 +1,7 @@
 {
   "cutoffs": {
     "CHALLENGER": 454,
-    "GRANDMASTER": 265
+    "GRANDMASTER": 269
   },
   "summoners": {
     "Nico": [
@@ -3995,6 +3995,15 @@
         "adjustedLP": 4020,
         "timestamp": "2025-01-23T01:49:29.643654+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Reynor",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 20,
+        "adjustedLP": 4020,
+        "timestamp": "2025-01-23T08:30:44.372190+00:00",
+        "region": "EUW"
       }
     ],
     "l1ken": [
@@ -5688,6 +5697,15 @@
         "adjustedLP": 4133,
         "timestamp": "2025-01-22T08:31:51.089647+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "staples",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 77,
+        "adjustedLP": 4077,
+        "timestamp": "2025-01-23T08:31:30.900551+00:00",
+        "region": "NA"
       }
     ],
     "veigar v2": [
@@ -6558,6 +6576,15 @@
         "adjustedLP": 1734,
         "timestamp": "2025-01-23T01:49:32.012976+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Geftsu",
+        "tier": "PLATINUM",
+        "rank": "III",
+        "lp": 3,
+        "adjustedLP": 1703,
+        "timestamp": "2025-01-23T08:30:55.660680+00:00",
+        "region": "EUW"
       }
     ],
     "BLBO": [
@@ -6985,6 +7012,15 @@
         "adjustedLP": 1509,
         "timestamp": "2025-01-23T01:49:34.624661+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Yami",
+        "tier": "GOLD",
+        "rank": "I",
+        "lp": 9,
+        "adjustedLP": 1509,
+        "timestamp": "2025-01-23T08:31:06.908504+00:00",
+        "region": "EUW"
       }
     ],
     "rbert(smurf)": [
@@ -7297,6 +7333,15 @@
         "adjustedLP": 1614,
         "timestamp": "2025-01-23T01:49:39.018311+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "blueqion(smurf)",
+        "tier": "PLATINUM",
+        "rank": "IV",
+        "lp": 14,
+        "adjustedLP": 1614,
+        "timestamp": "2025-01-23T08:31:29.192689+00:00",
+        "region": "EUW"
       }
     ],
     "vend0r": [
@@ -7316,6 +7361,15 @@
         "lp": 145,
         "adjustedLP": 4145,
         "timestamp": "2025-01-22T08:31:51.790719+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "vend0r",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 149,
+        "adjustedLP": 4149,
+        "timestamp": "2025-01-23T08:31:32.120270+00:00",
         "region": "NA"
       }
     ]
