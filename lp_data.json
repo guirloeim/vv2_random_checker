@@ -1,6 +1,6 @@
 {
   "cutoffs": {
-    "CHALLENGER": 532,
+    "CHALLENGER": 523,
     "GRANDMASTER": 301
   },
   "summoners": {
@@ -4094,6 +4094,15 @@
         "adjustedLP": 4020,
         "timestamp": "2025-01-23T08:30:44.372190+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Reynor",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 161,
+        "adjustedLP": 4161,
+        "timestamp": "2025-01-24T01:49:36.351256+00:00",
+        "region": "EUW"
       }
     ],
     "l1ken": [
@@ -5832,6 +5841,15 @@
         "adjustedLP": 4077,
         "timestamp": "2025-01-23T08:31:30.900551+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "staples",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 140,
+        "adjustedLP": 4140,
+        "timestamp": "2025-01-24T01:49:46.288676+00:00",
+        "region": "NA"
       }
     ],
     "veigar v2": [
@@ -6493,6 +6511,15 @@
         "adjustedLP": 2357,
         "timestamp": "2025-01-23T01:49:30.958025+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Sir Kledington",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 6,
+        "adjustedLP": 2406,
+        "timestamp": "2025-01-24T01:49:37.383286+00:00",
+        "region": "EUW"
       }
     ],
     "Geftsu": [
@@ -6720,6 +6747,15 @@
         "adjustedLP": 1703,
         "timestamp": "2025-01-23T08:30:55.660680+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Geftsu",
+        "tier": "PLATINUM",
+        "rank": "IV",
+        "lp": 38,
+        "adjustedLP": 1638,
+        "timestamp": "2025-01-24T01:49:38.421619+00:00",
+        "region": "EUW"
       }
     ],
     "BLBO": [
@@ -6937,6 +6973,15 @@
         "lp": 31,
         "adjustedLP": 4031,
         "timestamp": "2025-01-23T01:49:33.325219+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "BLBO",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 38,
+        "adjustedLP": 4038,
+        "timestamp": "2025-01-24T01:49:39.450679+00:00",
         "region": "EUW"
       }
     ],
@@ -7156,6 +7201,15 @@
         "adjustedLP": 1509,
         "timestamp": "2025-01-23T08:31:06.908504+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Yami",
+        "tier": "GOLD",
+        "rank": "II",
+        "lp": 95,
+        "adjustedLP": 1495,
+        "timestamp": "2025-01-24T01:49:40.506517+00:00",
+        "region": "EUW"
       }
     ],
     "rbert(smurf)": [
@@ -7347,6 +7401,15 @@
         "adjustedLP": 4017,
         "timestamp": "2025-01-23T01:49:35.900794+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "rbert(smurf)",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 40,
+        "adjustedLP": 4040,
+        "timestamp": "2025-01-24T01:49:41.523388+00:00",
+        "region": "EUW"
       }
     ],
     "canoes(smurf)": [
@@ -7430,6 +7493,15 @@
         "adjustedLP": 4013,
         "timestamp": "2025-01-23T01:49:38.002372+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "canoes(smurf)",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 68,
+        "adjustedLP": 4068,
+        "timestamp": "2025-01-24T01:49:43.574794+00:00",
+        "region": "EUW"
       }
     ],
     "blueqion(smurf)": [
@@ -7477,6 +7549,15 @@
         "adjustedLP": 1614,
         "timestamp": "2025-01-23T08:31:29.192689+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "blueqion(smurf)",
+        "tier": "PLATINUM",
+        "rank": "IV",
+        "lp": 14,
+        "adjustedLP": 1614,
+        "timestamp": "2025-01-24T01:49:44.614952+00:00",
+        "region": "EUW"
       }
     ],
     "vend0r": [
@@ -7505,6 +7586,15 @@
         "lp": 149,
         "adjustedLP": 4149,
         "timestamp": "2025-01-23T08:31:32.120270+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "vend0r",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 149,
+        "adjustedLP": 4149,
+        "timestamp": "2025-01-24T01:49:47.343449+00:00",
         "region": "NA"
       }
     ]
