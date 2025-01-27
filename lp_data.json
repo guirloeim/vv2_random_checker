@@ -4913,6 +4913,15 @@
         "adjustedLP": 4381,
         "timestamp": "2025-01-26T08:26:45.133986+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Reynor",
+        "tier": "GRANDMASTER",
+        "rank": "I",
+        "lp": 355,
+        "adjustedLP": 4355,
+        "timestamp": "2025-01-27T01:51:31.967958+00:00",
+        "region": "EUW"
       }
     ],
     "l1ken": [
@@ -6993,6 +7002,15 @@
         "adjustedLP": 4208,
         "timestamp": "2025-01-26T08:26:55.760462+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "staples",
+        "tier": "GRANDMASTER",
+        "rank": "I",
+        "lp": 208,
+        "adjustedLP": 4208,
+        "timestamp": "2025-01-27T01:51:41.557640+00:00",
+        "region": "NA"
       }
     ],
     "veigar v2": [
@@ -7789,6 +7807,15 @@
         "adjustedLP": 2456,
         "timestamp": "2025-01-26T08:26:46.302319+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Sir Kledington",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 28,
+        "adjustedLP": 2528,
+        "timestamp": "2025-01-27T01:51:33.024578+00:00",
+        "region": "EUW"
       }
     ],
     "Geftsu": [
@@ -8079,6 +8106,15 @@
         "adjustedLP": 1644,
         "timestamp": "2025-01-26T08:26:47.437287+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Geftsu",
+        "tier": "PLATINUM",
+        "rank": "IV",
+        "lp": 0,
+        "adjustedLP": 1600,
+        "timestamp": "2025-01-27T01:51:34.046216+00:00",
+        "region": "EUW"
       }
     ],
     "BLBO": [
@@ -8359,6 +8395,15 @@
         "lp": 36,
         "adjustedLP": 4036,
         "timestamp": "2025-01-26T08:26:48.586507+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "BLBO",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 40,
+        "adjustedLP": 2740,
+        "timestamp": "2025-01-27T01:51:35.049072+00:00",
         "region": "EUW"
       }
     ],
@@ -8641,6 +8686,15 @@
         "adjustedLP": 1695,
         "timestamp": "2025-01-26T08:26:49.743622+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Yami",
+        "tier": "PLATINUM",
+        "rank": "III",
+        "lp": 60,
+        "adjustedLP": 1760,
+        "timestamp": "2025-01-27T01:51:36.076895+00:00",
+        "region": "EUW"
       }
     ],
     "rbert(smurf)": [
@@ -8895,6 +8949,15 @@
         "adjustedLP": 4020,
         "timestamp": "2025-01-26T08:26:51.047924+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "rbert(smurf)",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 61,
+        "adjustedLP": 4061,
+        "timestamp": "2025-01-27T01:51:37.116961+00:00",
+        "region": "EUW"
       }
     ],
     "canoes(smurf)": [
@@ -9041,6 +9104,15 @@
         "adjustedLP": 4056,
         "timestamp": "2025-01-26T08:26:53.361488+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "canoes(smurf)",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 56,
+        "adjustedLP": 4056,
+        "timestamp": "2025-01-27T01:51:39.155676+00:00",
+        "region": "EUW"
       }
     ],
     "blueqion(smurf)": [
@@ -9151,6 +9223,15 @@
         "adjustedLP": 1614,
         "timestamp": "2025-01-26T08:26:54.506871+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "blueqion(smurf)",
+        "tier": "PLATINUM",
+        "rank": "IV",
+        "lp": 14,
+        "adjustedLP": 1614,
+        "timestamp": "2025-01-27T01:51:40.191640+00:00",
+        "region": "EUW"
       }
     ],
     "vend0r": [
@@ -9242,6 +9323,15 @@
         "lp": 149,
         "adjustedLP": 4149,
         "timestamp": "2025-01-26T08:26:56.598060+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "vend0r",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 149,
+        "adjustedLP": 4149,
+        "timestamp": "2025-01-27T01:51:42.723675+00:00",
         "region": "NA"
       }
     ],
