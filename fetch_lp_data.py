@@ -54,7 +54,6 @@ SUMMONERS_NICK = [
 ]
 
 SUMMONERS_NA_NICK = [
-    "Evie",
     "Feels",
     "FroneZone",
 ]
@@ -62,7 +61,6 @@ SUMMONERS_NA_NICK = [
 REGION_NA = "na1"
 PLATFORM_REGION_NA = "americas"
 SUMMONERS_NA = [
-    "Evie#ember",
     "Feels#444",
     "FroneZone#9688",
 ]
