@@ -24,7 +24,7 @@ jobs:
 
       # 2. Upload files for deployment
       - name: Upload artifact for Pages
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3  # <-- Updated to v3
         with:
           path: .  # Include all files in the root directory (index.html, lp_data.json, etc.)
 
