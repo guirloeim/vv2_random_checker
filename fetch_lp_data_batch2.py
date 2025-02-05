@@ -19,6 +19,7 @@ SUMMONERS = [
     "种族叛徒#laat",
     "Lemis#33310",
     "sankke#aaa",
+    "triopicus#euw",
 ]
 
 SUMMONERS_NICK = [
@@ -34,6 +35,7 @@ SUMMONERS_NICK = [
     "Jesix",
     "Lemis",
     "SaNkKe",
+    "veigarv2(AzirSmurf)",
 ]
 
 SUMMONERS_NA_NICK = [
