@@ -20,6 +20,7 @@ SUMMONERS = [
     "Lemis#33310",
     "sankke#aaa",
     "triopicus#euw",
+    "Stormrazor#4ever",
 ]
 
 SUMMONERS_NICK = [
@@ -36,6 +37,7 @@ SUMMONERS_NICK = [
     "Lemis",
     "SaNkKe",
     "veigarv2(AzirSmurf)",
+    "Ground",
 ]
 
 SUMMONERS_NA_NICK = [
