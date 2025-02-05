@@ -18,6 +18,7 @@ SUMMONERS = [
     "IMissTheBrackern#EUW",
     "种族叛徒#laat",
     "Lemis#33310",
+    "sankke#aaa",
 ]
 
 SUMMONERS_NICK = [
@@ -32,6 +33,7 @@ SUMMONERS_NICK = [
     "blueqion(smurf)",
     "Jesix",
     "Lemis",
+    "SaNkKe",
 ]
 
 SUMMONERS_NA_NICK = [
