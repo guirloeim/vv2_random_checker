@@ -22,6 +22,7 @@ SUMMONERS = [
     "triopicus#euw",
     "Stormrazor#4ever",
     "SkillCheckMe#1vs9",
+    "Genis#001",
 ]
 
 SUMMONERS_NICK = [
@@ -40,6 +41,7 @@ SUMMONERS_NICK = [
     "veigarv2(AzirSmurf)",
     "Ground",
     "Sinner",
+    "Costin",
 ]
 
 SUMMONERS_NA_NICK = [
