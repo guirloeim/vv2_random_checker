@@ -23,6 +23,7 @@ SUMMONERS = [
     "Stormrazor#4ever",
     "SkillCheckMe#1vs9",
     "Genis#0001",
+    "Liny#6228",
 ]
 
 SUMMONERS_NICK = [
@@ -42,6 +43,7 @@ SUMMONERS_NICK = [
     "Ground",
     "Sinner",
     "Costin",
+    "Liny",
 ]
 
 SUMMONERS_NA_NICK = [
