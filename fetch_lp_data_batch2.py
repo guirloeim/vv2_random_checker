@@ -18,14 +18,12 @@ SUMMONERS = [
     "IMissTheBrackern#EUW",
     "种族叛徒#laat",
     "Lemis#33310",
-    "sankke#aaa",
     "triopicus#euw",
     "Stormrazor#4ever",
-    "SkillCheckMe#1vs9",
-    "Genis#0001",
     "Liny#6228",
+    "blvckpink#gucci",
 ]
-
+# Check Sinner(take out), Costin(Take out) and SaNNkKe(Take out)
 SUMMONERS_NICK = [
     "Reynor",
     "Sir Kledington",
@@ -38,12 +36,10 @@ SUMMONERS_NICK = [
     "blueqion(smurf)",
     "Jesix",
     "Lemis",
-    "SaNkKe",
     "veigarv2(AzirSmurf)",
     "Ground",
-    "Sinner",
-    "Costin",
     "Liny",
+    "gucci",
 ]
 
 SUMMONERS_NA_NICK = [
