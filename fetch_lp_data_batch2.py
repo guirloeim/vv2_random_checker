@@ -22,6 +22,8 @@ SUMMONERS = [
     "Stormrazor#4ever",
     "Liny#6228",
     "blvckpink#gucci",
+    "MakZkovich#EUW",
+    "briarismywaifu#euw",
 ]
 # Check Sinner(take out), Costin(Take out) and SaNNkKe(Take out)
 SUMMONERS_NICK = [
@@ -40,6 +42,8 @@ SUMMONERS_NICK = [
     "Ground",
     "Liny",
     "gucci",
+    "MakZkovich",
+    "Commit",
 ]
 
 SUMMONERS_NA_NICK = [
