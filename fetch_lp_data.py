@@ -16,7 +16,7 @@ SUMMONERS = [
     "Big2080#EUW",
     "Yui#KEK",
     "Lil Wio#EUW",
-    "King Afee#333",
+    "Afee#0301",
     "FOOTQUEEN69#QU33N",
     "MENTALB00MXDD#EUW",
     "run#7 7 7",
