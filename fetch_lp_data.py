@@ -24,6 +24,7 @@ SUMMONERS = [
     "blueqion#EUW",
     "C9 veigar#EUW",
     "veigar v2#0000",
+    "Dominatrix#VIOLA",
 ]
 
 SUMMONERS_NICK = [
@@ -45,6 +46,7 @@ SUMMONERS_NICK = [
     "veigar v2(smurf)",
     "veigar v2",
     "Reynor",
+    "Viola",
 ]
 
 SUMMONERS_NA_NICK = [
