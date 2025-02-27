@@ -45,7 +45,6 @@ SUMMONERS_NICK = [
     "Blueqion",
     "veigar v2(smurf)",
     "veigar v2",
-    "Reynor",
     "Viola",
 ]
 
