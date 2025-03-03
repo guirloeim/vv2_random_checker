@@ -25,7 +25,7 @@ SUMMONERS = [
     "C9 veigar#EUW",
     "veigar v2#0000",
     "Dominatrix#VIOLA",
-    "veigar2smurfacc#123",
+    "VeigarV2SmurfAcc#123",
 ]
 
 SUMMONERS_NICK = [
