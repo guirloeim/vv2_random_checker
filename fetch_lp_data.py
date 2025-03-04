@@ -7,7 +7,6 @@ from datetime import datetime, timezone
 REGION = "euw1"  # Or na1, kr, etc.
 PLATFORM_REGION = "europe"  # Use platform routing values like 'americas', 'europe', 'asia', 'sea'
 SUMMONERS = [
-    "Nico#coati",
     "Loopy#0004",
     "The Mid Game#Canoe",
     "emerrin#623HS",
@@ -29,7 +28,6 @@ SUMMONERS = [
 ]
 
 SUMMONERS_NICK = [
-    "Nico",
     "Loopy",
     "canoes",
     "Emily",

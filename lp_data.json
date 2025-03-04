@@ -4,24 +4,6 @@
     "GRANDMASTER": 567
   },
   "summoners": {
-    "Nico": [
-      {
-        "summonerName": "Nico",
-        "tier": "CHALLENGER",
-        "rank": "I",
-        "lp": 1044,
-        "adjustedLP": 1979,
-        "timestamp": "2025-01-08T17:18:17.745379+00:00"
-      },
-      {
-        "summonerName": "Nico",
-        "tier": "CHALLENGER",
-        "rank": "I",
-        "lp": 1044,
-        "adjustedLP": 2047,
-        "timestamp": "2025-01-09T01:27:22.124838+00:00"
-      }
-    ],
     "Loopy": [
       {
         "summonerName": "Loopy",
