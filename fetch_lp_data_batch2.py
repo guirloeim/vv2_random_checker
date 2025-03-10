@@ -7,7 +7,6 @@ from datetime import datetime, timezone
 REGION = "euw1"  # Or na1, kr, etc.
 PLATFORM_REGION = "europe"  # Use platform routing values like 'americas', 'europe', 'asia', 'sea'
 SUMMONERS = [
-    "Reynor#2002",
     "Sir Kledington#1337",
     "Enemy#MyOwn",
     "BLBO#EUW",
@@ -27,7 +26,6 @@ SUMMONERS = [
 ]
 # Check Sinner(take out), Costin(Take out) and SaNNkKe(Take out)
 SUMMONERS_NICK = [
-    "Reynor",
     "Sir Kledington",
     "Geftsu",
     "BLBO",
@@ -56,6 +54,16 @@ PLATFORM_REGION_NA = "americas"
 SUMMONERS_NA = [
     "staples#na2",
     "Vendor#002",
+]
+
+SUMMONERS_KR_NICK = [
+    "reynor",
+]
+
+REGION_KR = "kr"
+PLATFORM_REGION_KR = "asia"
+SUMMONERS_KR = [
+    "Reynor02#2002",
 ]
 
 CHALLENGER_CUTOFF = 0
@@ -129,6 +137,30 @@ def main():
         except Exception as e:
             print(f"Error for {summoner}: {e}")
 
+# --- Changed loop for KR summoners ---
+    for i, summoner in enumerate(SUMMONERS_KR):
+        try:
+            name, tag = summoner.split("#")
+            summoner_id = get_summoner_id(name, tag, api_key,PLATFORM_REGION_KR, REGION_KR)
+            if not summoner_id:
+                continue
+
+            ranked_info = get_ranked_data(summoner_id, api_key, REGION_KR)
+            if ranked_info:
+                solo_queue = next((q for q in ranked_info if q["queueType"] == "RANKED_SOLO_5x5"), None)
+                if solo_queue:
+                    adjusted_lp = adjust_lp(solo_queue["tier"], solo_queue["rank"], solo_queue["leaguePoints"])
+                    summoner_data_list.append({
+                        "summonerName": SUMMONERS_KR_NICK[i],  # <-- Use the same index in SUMMONERS_NA_NICK
+                        "tier": solo_queue["tier"],
+                        "rank": solo_queue["rank"],
+                        "lp": solo_queue["leaguePoints"],
+                        "adjustedLP": adjusted_lp,
+                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                        "region": "KR"
+                    })
+        except Exception as e:
+            print(f"Error for {summoner}: {e}")
     # Load existing data
     data_filename = "lp_data.json"
     try:
