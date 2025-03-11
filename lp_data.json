@@ -1,6 +1,6 @@
 {
   "cutoffs": {
-    "CHALLENGER": 934,
+    "CHALLENGER": 941,
     "GRANDMASTER": 618
   },
   "summoners": {
@@ -15629,6 +15629,15 @@
         "adjustedLP": 4400,
         "timestamp": "2025-03-10T08:28:12.067407+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "staples",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 400,
+        "adjustedLP": 4400,
+        "timestamp": "2025-03-11T01:57:53.139168+00:00",
+        "region": "NA"
       }
     ],
     "veigar v2": [
@@ -18009,6 +18018,15 @@
         "adjustedLP": 4000,
         "timestamp": "2025-03-10T08:27:59.461330+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Sir Kledington",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 0,
+        "adjustedLP": 4000,
+        "timestamp": "2025-03-11T01:57:45.258772+00:00",
+        "region": "EUW"
       }
     ],
     "Geftsu": [
@@ -19100,6 +19118,15 @@
         "adjustedLP": 1274,
         "timestamp": "2025-03-10T08:28:00.426776+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Geftsu",
+        "tier": "GOLD",
+        "rank": "IV",
+        "lp": 74,
+        "adjustedLP": 1274,
+        "timestamp": "2025-03-11T01:57:45.769984+00:00",
+        "region": "EUW"
       }
     ],
     "BLBO": [
@@ -20181,6 +20208,15 @@
         "lp": 42,
         "adjustedLP": 2742,
         "timestamp": "2025-03-10T08:28:01.413156+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "BLBO",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 42,
+        "adjustedLP": 2742,
+        "timestamp": "2025-03-11T01:57:46.255700+00:00",
         "region": "EUW"
       }
     ],
@@ -21264,6 +21300,15 @@
         "adjustedLP": 2002,
         "timestamp": "2025-03-10T08:28:02.133415+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Yami",
+        "tier": "EMERALD",
+        "rank": "IV",
+        "lp": 2,
+        "adjustedLP": 2002,
+        "timestamp": "2025-03-11T01:57:46.742429+00:00",
+        "region": "EUW"
       }
     ],
     "rbert(smurf)": [
@@ -22319,6 +22364,15 @@
         "adjustedLP": 4009,
         "timestamp": "2025-03-10T08:28:03.382738+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "rbert(smurf)",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 9,
+        "adjustedLP": 4009,
+        "timestamp": "2025-03-11T01:57:47.219020+00:00",
+        "region": "EUW"
       }
     ],
     "canoes(smurf)": [
@@ -23266,6 +23320,15 @@
         "adjustedLP": 4269,
         "timestamp": "2025-03-10T08:28:04.500076+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "canoes(smurf)",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 194,
+        "adjustedLP": 4194,
+        "timestamp": "2025-03-11T01:57:48.182384+00:00",
+        "region": "EUW"
       }
     ],
     "blueqion(smurf)": [
@@ -24177,6 +24240,15 @@
         "adjustedLP": 1614,
         "timestamp": "2025-03-10T08:28:05.459445+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "blueqion(smurf)",
+        "tier": "PLATINUM",
+        "rank": "IV",
+        "lp": 14,
+        "adjustedLP": 1614,
+        "timestamp": "2025-03-11T01:57:48.657313+00:00",
+        "region": "EUW"
       }
     ],
     "vend0r": [
@@ -25069,6 +25141,15 @@
         "lp": 49,
         "adjustedLP": 2749,
         "timestamp": "2025-03-10T08:28:12.488586+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "vend0r",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 9,
+        "adjustedLP": 2709,
+        "timestamp": "2025-03-11T01:57:53.610523+00:00",
         "region": "NA"
       }
     ],
@@ -27434,6 +27515,15 @@
         "adjustedLP": 2725,
         "timestamp": "2025-03-10T08:28:04.070039+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "rbert",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 25,
+        "adjustedLP": 2725,
+        "timestamp": "2025-03-11T01:57:47.681958+00:00",
+        "region": "EUW"
       }
     ],
     "Jesix": [
@@ -28147,6 +28237,15 @@
         "adjustedLP": 2770,
         "timestamp": "2025-03-10T08:28:06.412760+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Jesix",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 35,
+        "adjustedLP": 2735,
+        "timestamp": "2025-03-11T01:57:49.140918+00:00",
+        "region": "EUW"
       }
     ],
     "Lemis": [
@@ -28760,6 +28859,15 @@
         "lp": 0,
         "adjustedLP": 1600,
         "timestamp": "2025-03-10T08:28:06.836721+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Lemis",
+        "tier": "PLATINUM",
+        "rank": "IV",
+        "lp": 0,
+        "adjustedLP": 1600,
+        "timestamp": "2025-03-11T01:57:49.629869+00:00",
         "region": "EUW"
       }
     ],
@@ -29375,6 +29483,15 @@
         "adjustedLP": 2775,
         "timestamp": "2025-03-10T08:28:07.241103+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "veigarv2(AzirSmurf)",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 75,
+        "adjustedLP": 2775,
+        "timestamp": "2025-03-11T01:57:50.140698+00:00",
+        "region": "EUW"
       }
     ],
     "Ground": [
@@ -29980,6 +30097,15 @@
         "adjustedLP": 4234,
         "timestamp": "2025-03-10T08:28:08.185589+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Ground",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 234,
+        "adjustedLP": 4234,
+        "timestamp": "2025-03-11T01:57:50.613580+00:00",
+        "region": "EUW"
       }
     ],
     "Liny": [
@@ -30386,6 +30512,15 @@
         "lp": 58,
         "adjustedLP": 4058,
         "timestamp": "2025-03-10T08:28:09.153657+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Liny",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 57,
+        "adjustedLP": 4057,
+        "timestamp": "2025-03-11T01:57:51.109620+00:00",
         "region": "EUW"
       }
     ],
@@ -30922,6 +31057,15 @@
         "adjustedLP": 4226,
         "timestamp": "2025-03-10T08:28:10.544802+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "MakZkovich",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 226,
+        "adjustedLP": 4226,
+        "timestamp": "2025-03-11T01:57:51.769211+00:00",
+        "region": "EUW"
       }
     ],
     "Commit": [
@@ -31229,6 +31373,15 @@
         "lp": 55,
         "adjustedLP": 4055,
         "timestamp": "2025-03-10T08:28:11.218759+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Commit",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 55,
+        "adjustedLP": 4055,
+        "timestamp": "2025-03-11T01:57:52.245432+00:00",
         "region": "EUW"
       }
     ],
@@ -31604,6 +31757,15 @@
         "lp": 65,
         "adjustedLP": 1765,
         "timestamp": "2025-03-10T08:28:13.982825+00:00",
+        "region": "KR"
+      },
+      {
+        "summonerName": "reynor",
+        "tier": "PLATINUM",
+        "rank": "I",
+        "lp": 5,
+        "adjustedLP": 1905,
+        "timestamp": "2025-03-11T01:57:54.435086+00:00",
         "region": "KR"
       }
     ]
