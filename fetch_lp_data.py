@@ -21,10 +21,9 @@ SUMMONERS = [
     "run#7 7 7",
     "dingo#gday",
     "blueqion#EUW",
-    "C9 veigar#EUW",
-    "veigar v2#0000",
     "Dominatrix#VIOLA",
     "VeigarV2SmurfAcc#123",
+    "inflict#eyes",
 ]
 
 SUMMONERS_NICK = [
@@ -42,10 +41,9 @@ SUMMONERS_NICK = [
     "sevan",
     "Nico(smurf)",
     "Blueqion",
-    "veigar v2(smurf)",
-    "veigar v2",
     "Viola",
-    "veigar v2(smurf3?idk)",
+    "veigarv2",
+    "itachi",
 ]
 
 SUMMONERS_NA_NICK = [
