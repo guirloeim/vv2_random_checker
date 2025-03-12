@@ -1,7 +1,7 @@
 {
   "cutoffs": {
-    "CHALLENGER": 945,
-    "GRANDMASTER": 657
+    "CHALLENGER": 0,
+    "GRANDMASTER": 0
   },
   "summoners": {
     "Loopy": [
@@ -15881,6 +15881,15 @@
         "adjustedLP": 4457,
         "timestamp": "2025-03-11T08:33:16.351395+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "staples",
+        "tier": "GRANDMASTER",
+        "rank": "I",
+        "lp": 457,
+        "adjustedLP": 4457,
+        "timestamp": "2025-03-12T01:56:20.927487+00:00",
+        "region": "NA"
       }
     ],
     "veigar v2": [
@@ -25484,6 +25493,15 @@
         "adjustedLP": 2733,
         "timestamp": "2025-03-11T08:33:16.593579+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "vend0r",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 14,
+        "adjustedLP": 2714,
+        "timestamp": "2025-03-12T01:56:21.330419+00:00",
+        "region": "NA"
       }
     ],
     "Blueqion": [
@@ -32252,6 +32270,15 @@
         "lp": 43,
         "adjustedLP": 1943,
         "timestamp": "2025-03-11T08:33:17.160133+00:00",
+        "region": "KR"
+      },
+      {
+        "summonerName": "reynor",
+        "tier": "PLATINUM",
+        "rank": "I",
+        "lp": 43,
+        "adjustedLP": 1943,
+        "timestamp": "2025-03-12T01:56:22.202771+00:00",
         "region": "KR"
       }
     ]
