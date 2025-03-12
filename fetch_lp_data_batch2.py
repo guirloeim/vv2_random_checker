@@ -20,7 +20,7 @@ SUMMONERS = [
     "triopicus#euw",
     "Stormrazor#4ever",
     "Liny#6228",
-    "blvckpink#gucci",
+    "antheia#umbra",
     "MakZkovich#EUW",
     "briarismywaifu#euw",
 ]
