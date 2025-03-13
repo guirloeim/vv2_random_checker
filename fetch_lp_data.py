@@ -22,7 +22,6 @@ SUMMONERS = [
     "dingo#gday",
     "blueqion#EUW",
     "Dominatrix#VIOLA",
-    "VeigarV2SmurfAcc#123",
     "inflict#eyes",
 ]
 
@@ -42,7 +41,6 @@ SUMMONERS_NICK = [
     "Nico(smurf)",
     "Blueqion",
     "Viola",
-    "veigarv2",
     "itachi",
 ]
 

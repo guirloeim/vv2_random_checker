@@ -23,6 +23,7 @@ SUMMONERS = [
     "antheia#umbra",
     "MakZkovich#EUW",
     "briarismywaifu#euw",
+    "VeigarV2SmurfAcc#123",
 ]
 # Check Sinner(take out), Costin(Take out) and SaNNkKe(Take out)
 SUMMONERS_NICK = [
@@ -42,6 +43,7 @@ SUMMONERS_NICK = [
     "gucci",
     "MakZkovich",
     "Commit",
+    "veigarv2",
 ]
 
 SUMMONERS_NA_NICK = [
