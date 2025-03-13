@@ -10,7 +10,7 @@ SUMMONERS = [
     "Loopy#0004",
     "The Mid Game#Canoe",
     "emerrin#623HS",
-    "meow81#paw",
+    "Wiosna#Seal",
     "Owpi#idiot",
     "Big2080#EUW",
     "Yui#KEK",
