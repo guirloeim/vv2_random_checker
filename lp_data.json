@@ -1,7 +1,7 @@
 {
   "cutoffs": {
-    "CHALLENGER": 957,
-    "GRANDMASTER": 608
+    "CHALLENGER": 0,
+    "GRANDMASTER": 0
   },
   "summoners": {
     "Loopy": [
@@ -17903,6 +17903,15 @@
         "lp": 75,
         "adjustedLP": 2275,
         "timestamp": "2025-03-25T08:10:59.536164+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "Feels",
+        "tier": "EMERALD",
+        "rank": "I",
+        "lp": 17,
+        "adjustedLP": 2317,
+        "timestamp": "2025-03-26T01:43:59.248856+00:00",
         "region": "NA"
       }
     ],
