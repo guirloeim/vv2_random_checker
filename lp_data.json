@@ -19400,6 +19400,15 @@
         "adjustedLP": 4284,
         "timestamp": "2025-03-25T08:33:43.245731+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "staples",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 239,
+        "adjustedLP": 4239,
+        "timestamp": "2025-03-26T01:59:50.644210+00:00",
+        "region": "NA"
       }
     ],
     "Sir Kledington": [
@@ -28441,6 +28450,15 @@
         "adjustedLP": 4021,
         "timestamp": "2025-03-25T08:33:44.040502+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "vend0r",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 21,
+        "adjustedLP": 4021,
+        "timestamp": "2025-03-26T01:59:51.087210+00:00",
+        "region": "NA"
       }
     ],
     "Blueqion": [
@@ -36771,6 +36789,15 @@
         "lp": 31,
         "adjustedLP": 2231,
         "timestamp": "2025-03-25T08:33:45.636187+00:00",
+        "region": "KR"
+      },
+      {
+        "summonerName": "reynor",
+        "tier": "EMERALD",
+        "rank": "II",
+        "lp": 31,
+        "adjustedLP": 2231,
+        "timestamp": "2025-03-26T01:59:53.195168+00:00",
         "region": "KR"
       }
     ],
