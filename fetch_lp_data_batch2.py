@@ -8,7 +8,6 @@ REGION = "euw1"  # Or na1, kr, etc.
 PLATFORM_REGION = "europe"  # Use platform routing values like 'americas', 'europe', 'asia', 'sea'
 SUMMONERS = [
     "Sir Kledington#1337",
-    "Enemy#MyOwn",
     "BLBO#EUW",
     "kitti#nesp",
     "sorbert#sndra",
@@ -27,7 +26,6 @@ SUMMONERS = [
 # Check Sinner(take out), Costin(Take out) and SaNNkKe(Take out)
 SUMMONERS_NICK = [
     "Sir Kledington",
-    "Geftsu",
     "BLBO",
     "Yami",
     "rbert",
