@@ -21781,6 +21781,15 @@
         "summonerName": "staples",
         "tier": "MASTER",
         "rank": "I",
+        "lp": 388,
+        "adjustedLP": 4388,
+        "timestamp": "2025-04-03T08:34:50.479063+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "staples",
+        "tier": "MASTER",
+        "rank": "I",
         "lp": 386,
         "adjustedLP": 4386,
         "timestamp": "2025-04-04T02:00:35.621485+00:00",
