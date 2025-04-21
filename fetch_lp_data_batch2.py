@@ -22,7 +22,7 @@ SUMMONERS = [
     "MakZkovich#EUW",
     "briarismywaifu#euw",
     "VeigarV2SmurfAcc#123",
-    "stargazing#souls"
+    "stargazing#souls",
 ]
 # Check Sinner(take out), Costin(Take out) and SaNNkKe(Take out)
 SUMMONERS_NICK = [
@@ -52,7 +52,7 @@ SUMMONERS_NA_NICK = [
 REGION_NA = "na1"
 PLATFORM_REGION_NA = "americas"
 SUMMONERS_NA = [
-    "staples#na2",
+    "pepi#supp",
     "Vendor#002",
 ]
 
