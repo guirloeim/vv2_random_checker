@@ -11,7 +11,7 @@ SUMMONERS = [
     "BLBO#EUW",
     "kitti#nesp",
     "sorbert#sndra",
-    "I Like Canoes#PIG",
+    "pepi#CANOE",
     "IMissTheBrackern#EUW",
     "种族叛徒#laat",
     "Lemis#33310",
