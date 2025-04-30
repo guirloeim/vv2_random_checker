@@ -19,7 +19,7 @@ SUMMONERS = [
     "FOOTQUEEN69#QU33N",
     "MENTALB00MXDD#EUW",
     "run#7 7 7",
-    "dingo#gday",
+    "pepi#nico",
     "blueqion#EUW",
     "Dominatrix#VIOLA",
     "inflict#eyes",
