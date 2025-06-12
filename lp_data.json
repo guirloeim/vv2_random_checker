@@ -26863,24 +26863,6 @@
         "adjustedLP": 2532,
         "timestamp": "2025-06-11T08:11:57.398264+00:00",
         "region": "EUW"
-      },
-      {
-        "summonerName": "Mental",
-        "tier": "EMERALD",
-        "rank": "III",
-        "lp": 71,
-        "adjustedLP": 2171,
-        "timestamp": "2025-06-12T01:54:29.132722+00:00",
-        "region": "EUW"
-      },
-      {
-        "summonerName": "Mental",
-        "tier": "EMERALD",
-        "rank": "III",
-        "lp": 71,
-        "adjustedLP": 2171,
-        "timestamp": "2025-06-12T08:12:10.214602+00:00",
-        "region": "EUW"
       }
     ],
     "Nico(smurf)": [
@@ -82660,26 +82642,6 @@
         "adjustedLP": 1163,
         "timestamp": "2025-06-12T08:12:14.722762+00:00",
         "region": "NA"
-      }
-    ],
-    "Lexa": [
-      {
-        "summonerName": "Lexa",
-        "tier": "DIAMOND",
-        "rank": "III",
-        "lp": 32,
-        "adjustedLP": 2532,
-        "timestamp": "2025-06-12T01:54:29.792217+00:00",
-        "region": "EUW"
-      },
-      {
-        "summonerName": "Lexa",
-        "tier": "DIAMOND",
-        "rank": "III",
-        "lp": 32,
-        "adjustedLP": 2532,
-        "timestamp": "2025-06-12T08:12:10.877367+00:00",
-        "region": "EUW"
       }
     ]
   }

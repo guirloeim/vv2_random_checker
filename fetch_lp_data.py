@@ -12,7 +12,6 @@ SUMMONERS = [
     "emerrin#623HS",
     "Wiosna#Seal",
     "Owpi#idiot",
-    "Owpi#idiot",
     "Big2080#EUW",
     "Yui#KEK",
     "Lil Wio#EUW",
