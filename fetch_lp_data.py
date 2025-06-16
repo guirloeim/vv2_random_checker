@@ -18,7 +18,7 @@ SUMMONERS = [
     "Afee#0301",
     "FOOTQUEEN69#QU33N",
     "Lexa#LEXA3",
-    "run#7 7 7",
+    "absol#7 7 7",
     "pepi#nico",
     "blueqion#EUW",
     "Dominatrix#VIOLA",
