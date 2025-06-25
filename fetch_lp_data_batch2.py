@@ -69,29 +69,30 @@ SUMMONERS_KR = [
 CHALLENGER_CUTOFF = 0
 GRANDMASTER_CUTOFF = 0
 
+summoner_data_list = []
+
+import time
+
 def main():
     global CHALLENGER_CUTOFF, GRANDMASTER_CUTOFF
 
     api_key = os.getenv("RIOT_API_KEY")
+    #  api_key = "RGAPI-3e1a5954-22bc-4d7f-bb43-47740289973c"
     if not api_key:
         print("Missing Riot API Key!")
         return
 
-    # Fetch cutoff LP values dynamically
-    CHALLENGER_CUTOFF = get_cutoff_lp("CHALLENGER", api_key)
-    GRANDMASTER_CUTOFF = get_cutoff_lp("GRANDMASTER", api_key)
-
-    print(f"Challenger Cutoff: {CHALLENGER_CUTOFF} LP")
-    print(f"Grandmaster Cutoff: {GRANDMASTER_CUTOFF} LP")
-
-    # Collect summoner data
-    summoner_data_list = []
-
-    # --- Changed loop for EUW summoners ---
+    # Add delay between API calls
+    DELAY = 1.2  # seconds between requests
+    
+    # [Rest of your existing code...]
+    
     for i, summoner in enumerate(SUMMONERS):
         try:
             name, tag = summoner.split("#")
+            time.sleep(DELAY)  # Add delay
             summoner_id = get_summoner_id(name, tag, api_key, PLATFORM_REGION, REGION)
+            # [Rest of your loop...]
             if not summoner_id:
                 continue
 
@@ -137,30 +138,6 @@ def main():
         except Exception as e:
             print(f"Error for {summoner}: {e}")
 
-# --- Changed loop for KR summoners ---
-    for i, summoner in enumerate(SUMMONERS_KR):
-        try:
-            name, tag = summoner.split("#")
-            summoner_id = get_summoner_id(name, tag, api_key,PLATFORM_REGION_KR, REGION_KR)
-            if not summoner_id:
-                continue
-
-            ranked_info = get_ranked_data(summoner_id, api_key, REGION_KR)
-            if ranked_info:
-                solo_queue = next((q for q in ranked_info if q["queueType"] == "RANKED_SOLO_5x5"), None)
-                if solo_queue:
-                    adjusted_lp = adjust_lp(solo_queue["tier"], solo_queue["rank"], solo_queue["leaguePoints"])
-                    summoner_data_list.append({
-                        "summonerName": SUMMONERS_KR_NICK[i],  # <-- Use the same index in SUMMONERS_NA_NICK
-                        "tier": solo_queue["tier"],
-                        "rank": solo_queue["rank"],
-                        "lp": solo_queue["leaguePoints"],
-                        "adjustedLP": adjusted_lp,
-                        "timestamp": datetime.now(timezone.utc).isoformat(),
-                        "region": "KR"
-                    })
-        except Exception as e:
-            print(f"Error for {summoner}: {e}")
     # Load existing data
     data_filename = "lp_data.json"
     try:
@@ -219,15 +196,33 @@ def adjust_lp(tier, rank, lp):
         rank_base = ["IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "EMERALD", "DIAMOND"].index(tier) * 400
         return rank_base + division_points[rank] + lp
 
+from urllib.parse import quote
+
 def get_summoner_id(name, tag, api_key, platform, region):
     """Fetch PUUID from Riot ID."""
-    url = f"https://{platform}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{name}/{tag}"
+    # URL-encode the name and tag to handle special characters
+    encoded_name = quote(name)
+    encoded_tag = quote(tag)
+    
+    url = f"https://{platform}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{encoded_name}/{encoded_tag}"
     headers = {"X-Riot-Token": api_key}
-    r = requests.get(url, headers=headers)
-    if r.status_code == 200:
-        puuid = r.json().get("puuid")
-        return get_summoner_id_by_puuid(puuid, api_key, region, name)
-    print(f"Error fetching PUUID for {name}#{tag}: {r.text}")
+    
+    try:
+        r = requests.get(url, headers=headers)
+        print(f"Debug - URL: {url}")  # Debug output
+        print(f"Debug - Status: {r.status_code}")  # Debug output
+        
+        if r.status_code == 200:
+            puuid = r.json().get("puuid")
+            if puuid:
+                return get_summoner_id_by_puuid(puuid, api_key, region, name)
+            print("Error: PUUID not found in response")
+        else:
+            print(f"Error fetching PUUID for {name}/{tag}: HTTP {r.status_code} - {r.text}")
+            
+    except Exception as e:
+        print(f"Request failed: {e}")
+    
     return None
 
 def get_summoner_id_by_puuid(puuid, api_key, region, name):
@@ -236,7 +231,7 @@ def get_summoner_id_by_puuid(puuid, api_key, region, name):
     headers = {"X-Riot-Token": api_key}
     r = requests.get(url, headers=headers)
     if r.status_code == 200:
-        return r.json().get("id")
+        return r.json().get("puuid")
     print(f"Error fetching Summoner ID for name:{name} PUUID {puuid}: {r.text}")
     return None
 
