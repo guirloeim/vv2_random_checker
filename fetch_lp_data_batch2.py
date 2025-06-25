@@ -77,7 +77,6 @@ def main():
     global CHALLENGER_CUTOFF, GRANDMASTER_CUTOFF
 
     api_key = os.getenv("RIOT_API_KEY")
-    #  api_key = "RGAPI-3e1a5954-22bc-4d7f-bb43-47740289973c"
     if not api_key:
         print("Missing Riot API Key!")
         return
