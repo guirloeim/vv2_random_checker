@@ -235,10 +235,11 @@ def get_summoner_id_by_puuid(puuid, api_key, region, name):
     return None
 
 def get_ranked_data(encrypted_summoner_id, api_key, region):
-    """Fetch ranked data for a given Summoner ID."""
-    url = f"https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/{encrypted_summoner_id}"
+    time.sleep(1.2)  # 1.2s delay to stay under rate limits
+    url = f"https://{region}.api.riotgames.com/lol/league/v4/entries/by-puuid/{encrypted_summoner_id}"
     headers = {"X-Riot-Token": api_key}
     r = requests.get(url, headers=headers)
+    # ... rest of your code ...
     if r.status_code == 200:
         return r.json()
     print(f"Error fetching ranked data for {encrypted_summoner_id}: {r.text}")
