@@ -67,7 +67,7 @@ def main():
     global CHALLENGER_CUTOFF, GRANDMASTER_CUTOFF
 
     api_key = os.getenv("RIOT_API_KEY")
-    # api_key = "RGAPI-3e1a5954-22bc-4d7f-bb43-47740289973c"
+    api_key = "RGAPI-3e1a5954-22bc-4d7f-bb43-47740289973c"
     if not api_key:
         print("Missing Riot API Key!")
         return
@@ -216,12 +216,13 @@ def get_summoner_id(name, tag, api_key, platform, region):
     return None
 
 def get_summoner_id_by_puuid(puuid, api_key, region, name):
-    """Fetch Summoner ID using PUUID."""
+    """Fetch Summoner ID (encryptedSummonerId) using PUUID."""
     url = f"https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/{puuid}"
     headers = {"X-Riot-Token": api_key}
     r = requests.get(url, headers=headers)
     if r.status_code == 200:
-        return r.json().get("puuid")
+        encrypted_id = r.json().get("puuid")
+        return encrypted_id  # Fix: Return 'id' (encryptedSummonerId), not 'puuid'
     print(f"Error fetching Summoner ID for name:{name} PUUID {puuid}: {r.text}")
     return None
 
@@ -229,7 +230,7 @@ import time
 
 def get_ranked_data(encrypted_summoner_id, api_key, region):
     time.sleep(1.2)  # 1.2s delay to stay under rate limits
-    url = f"https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/{encrypted_summoner_id}"
+    url = f"https://{region}.api.riotgames.com/lol/league/v4/entries/by-puuid/{encrypted_summoner_id}"
     headers = {"X-Riot-Token": api_key}
     r = requests.get(url, headers=headers)
     # ... rest of your code ...
