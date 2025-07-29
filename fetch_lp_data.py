@@ -23,6 +23,7 @@ SUMMONERS = [
     "blueqion#EUW",
     "Dominatrix#VIOLA",
     "inflict#eyes",
+    "sankke#aaa",
 ]
 
 SUMMONERS_NICK = [
@@ -42,6 +43,7 @@ SUMMONERS_NICK = [
     "Blueqion",
     "Viola",
     "itachi",
+    "SaNkKe",
 ]
 
 SUMMONERS_NA_NICK = [
