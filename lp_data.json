@@ -43529,6 +43529,15 @@
         "adjustedLP": 4142,
         "timestamp": "2025-08-03T02:41:22.620280+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "staples",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 119,
+        "adjustedLP": 4119,
+        "timestamp": "2025-08-03T08:37:15.015834+00:00",
+        "region": "NA"
       }
     ],
     "Sir Kledington": [
@@ -46888,6 +46897,15 @@
         "adjustedLP": 4079,
         "timestamp": "2025-08-03T02:40:42.483488+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Sir Kledington",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 79,
+        "adjustedLP": 4079,
+        "timestamp": "2025-08-03T08:36:34.715770+00:00",
+        "region": "EUW"
       }
     ],
     "BLBO": [
@@ -50129,6 +50147,15 @@
         "lp": 81,
         "adjustedLP": 2781,
         "timestamp": "2025-08-03T02:40:45.276808+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "BLBO",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 81,
+        "adjustedLP": 2781,
+        "timestamp": "2025-08-03T08:36:38.080729+00:00",
         "region": "EUW"
       }
     ],
@@ -54913,6 +54940,15 @@
         "adjustedLP": 4572,
         "timestamp": "2025-08-03T02:40:52.518390+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "canoes(smurf)",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 572,
+        "adjustedLP": 4572,
+        "timestamp": "2025-08-03T08:36:45.584411+00:00",
+        "region": "EUW"
       }
     ],
     "blueqion(smurf)": [
@@ -57984,6 +58020,15 @@
         "adjustedLP": 1614,
         "timestamp": "2025-08-03T02:40:55.795359+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "blueqion(smurf)",
+        "tier": "PLATINUM",
+        "rank": "IV",
+        "lp": 14,
+        "adjustedLP": 1614,
+        "timestamp": "2025-08-03T08:36:48.652361+00:00",
+        "region": "EUW"
       }
     ],
     "vend0r": [
@@ -61054,6 +61099,15 @@
         "lp": 62,
         "adjustedLP": 4062,
         "timestamp": "2025-08-03T02:41:24.595645+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "vend0r",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 122,
+        "adjustedLP": 4122,
+        "timestamp": "2025-08-03T08:37:16.884549+00:00",
         "region": "NA"
       }
     ],
@@ -66990,6 +67044,15 @@
         "adjustedLP": 2590,
         "timestamp": "2025-08-03T02:40:58.574097+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Jesix",
+        "tier": "DIAMOND",
+        "rank": "III",
+        "lp": 90,
+        "adjustedLP": 2590,
+        "timestamp": "2025-08-03T08:36:51.482457+00:00",
+        "region": "EUW"
       }
     ],
     "Ground": [
@@ -71683,6 +71746,15 @@
         "adjustedLP": 4046,
         "timestamp": "2025-08-03T02:41:05.834902+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Liny",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 46,
+        "adjustedLP": 4046,
+        "timestamp": "2025-08-03T08:36:58.991826+00:00",
+        "region": "EUW"
       }
     ],
     "MakZkovich": [
@@ -74151,6 +74223,15 @@
         "adjustedLP": 4342,
         "timestamp": "2025-08-03T02:41:08.690787+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "MakZkovich",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 342,
+        "adjustedLP": 4342,
+        "timestamp": "2025-08-03T08:37:01.856197+00:00",
+        "region": "EUW"
       }
     ],
     "Commit": [
@@ -76618,6 +76699,15 @@
         "lp": 75,
         "adjustedLP": 2675,
         "timestamp": "2025-08-03T02:41:11.751760+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Commit",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 75,
+        "adjustedLP": 2675,
+        "timestamp": "2025-08-03T08:37:04.669759+00:00",
         "region": "EUW"
       }
     ],
@@ -81032,6 +81122,15 @@
         "lp": 875,
         "adjustedLP": 4875,
         "timestamp": "2025-08-03T02:41:14.531580+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "veigarv2",
+        "tier": "GRANDMASTER",
+        "rank": "I",
+        "lp": 875,
+        "adjustedLP": 4875,
+        "timestamp": "2025-08-03T08:37:07.531600+00:00",
         "region": "EUW"
       }
     ],
@@ -87276,6 +87375,15 @@
         "adjustedLP": 2649,
         "timestamp": "2025-08-03T02:41:01.378804+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "veigarv2(AzirSmurf)",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 49,
+        "adjustedLP": 2649,
+        "timestamp": "2025-08-03T08:36:54.817901+00:00",
+        "region": "EUW"
       }
     ],
     "rbert": [
@@ -89186,6 +89294,15 @@
         "adjustedLP": 4333,
         "timestamp": "2025-08-03T02:40:49.408588+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "rbert",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 333,
+        "adjustedLP": 4333,
+        "timestamp": "2025-08-03T08:36:42.512582+00:00",
+        "region": "EUW"
       }
     ],
     "nana": [
@@ -90744,6 +90861,15 @@
         "lp": 0,
         "adjustedLP": 4000,
         "timestamp": "2025-08-03T02:41:17.351354+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "nana",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 0,
+        "adjustedLP": 4000,
+        "timestamp": "2025-08-03T08:37:10.378437+00:00",
         "region": "EUW"
       }
     ],
@@ -92606,6 +92732,15 @@
         "lp": 75,
         "adjustedLP": 2375,
         "timestamp": "2025-08-03T02:41:20.136733+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "l1ken",
+        "tier": "EMERALD",
+        "rank": "I",
+        "lp": 75,
+        "adjustedLP": 2375,
+        "timestamp": "2025-08-03T08:37:13.198007+00:00",
         "region": "EUW"
       }
     ]
