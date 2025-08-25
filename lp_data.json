@@ -43968,6 +43968,15 @@
         "adjustedLP": 2403,
         "timestamp": "2025-08-24T08:01:34.206231+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "Feels",
+        "tier": "DIAMOND",
+        "rank": "IV",
+        "lp": 3,
+        "adjustedLP": 2403,
+        "timestamp": "2025-08-25T01:54:27.605327+00:00",
+        "region": "NA"
       }
     ],
     "staples": [
@@ -101924,6 +101933,15 @@
         "lp": 1,
         "adjustedLP": 1201,
         "timestamp": "2025-08-24T08:01:36.183227+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "FroneZone",
+        "tier": "GOLD",
+        "rank": "IV",
+        "lp": 1,
+        "adjustedLP": 1201,
+        "timestamp": "2025-08-25T01:54:29.340719+00:00",
         "region": "NA"
       }
     ],
