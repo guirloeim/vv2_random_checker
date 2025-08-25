@@ -47723,6 +47723,15 @@
         "adjustedLP": 4356,
         "timestamp": "2025-08-24T08:32:34.763627+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "staples",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 333,
+        "adjustedLP": 4333,
+        "timestamp": "2025-08-25T02:16:49.560876+00:00",
+        "region": "NA"
       }
     ],
     "Sir Kledington": [
@@ -67183,6 +67192,15 @@
         "lp": 176,
         "adjustedLP": 4176,
         "timestamp": "2025-08-24T08:32:36.354186+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "vend0r",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 176,
+        "adjustedLP": 4176,
+        "timestamp": "2025-08-25T02:16:51.186154+00:00",
         "region": "NA"
       }
     ],
