@@ -110644,6 +110644,15 @@
         "adjustedLP": 4259,
         "timestamp": "2026-08-04T10:47:20.033559+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Sir Kledington",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 259,
+        "adjustedLP": 4259,
+        "timestamp": "2026-08-05T03:27:14.145060+00:00",
+        "region": "EUW"
       }
     ],
     "BLBO": [
@@ -120437,6 +120446,15 @@
         "lp": 110,
         "adjustedLP": 4110,
         "timestamp": "2026-08-04T10:47:23.059665+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "BLBO",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 110,
+        "adjustedLP": 4110,
+        "timestamp": "2026-08-05T03:27:17.105862+00:00",
         "region": "EUW"
       }
     ],
@@ -136851,6 +136869,15 @@
         "adjustedLP": 1810,
         "timestamp": "2026-08-04T10:47:30.284125+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "blueqion(smurf)",
+        "tier": "PLATINUM",
+        "rank": "II",
+        "lp": 10,
+        "adjustedLP": 1810,
+        "timestamp": "2026-08-05T03:27:24.299798+00:00",
+        "region": "EUW"
       }
     ],
     "vend0r": [
@@ -146482,6 +146509,15 @@
         "lp": 434,
         "adjustedLP": 4434,
         "timestamp": "2026-08-04T10:47:49.769627+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "vend0r",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 463,
+        "adjustedLP": 4463,
+        "timestamp": "2026-08-05T03:27:43.495604+00:00",
         "region": "NA"
       }
     ],
@@ -186251,6 +186287,15 @@
         "lp": 75,
         "adjustedLP": 2675,
         "timestamp": "2026-08-04T10:47:45.044198+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "veigarv2",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 75,
+        "adjustedLP": 2675,
+        "timestamp": "2026-08-05T03:27:38.772213+00:00",
         "region": "EUW"
       }
     ],
