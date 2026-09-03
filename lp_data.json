@@ -104855,6 +104855,15 @@
         "adjustedLP": 4934,
         "timestamp": "2026-09-03T04:17:12.881215+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "staples",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 956,
+        "adjustedLP": 4956,
+        "timestamp": "2026-09-03T12:47:30.718880+00:00",
+        "region": "NA"
       }
     ],
     "Sir Kledington": [
@@ -115288,6 +115297,15 @@
         "adjustedLP": 4746,
         "timestamp": "2026-09-03T04:16:42.314072+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Sir Kledington",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 746,
+        "adjustedLP": 4746,
+        "timestamp": "2026-09-03T12:47:00.971412+00:00",
+        "region": "EUW"
       }
     ],
     "BLBO": [
@@ -125612,6 +125630,15 @@
         "lp": 39,
         "adjustedLP": 2739,
         "timestamp": "2026-09-03T04:16:45.421507+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "BLBO",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 37,
+        "adjustedLP": 2737,
+        "timestamp": "2026-09-03T12:47:04.012690+00:00",
         "region": "EUW"
       }
     ],
@@ -142557,6 +142584,15 @@
         "adjustedLP": 1810,
         "timestamp": "2026-09-03T04:16:52.994273+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "blueqion(smurf)",
+        "tier": "PLATINUM",
+        "rank": "II",
+        "lp": 10,
+        "adjustedLP": 1810,
+        "timestamp": "2026-09-03T12:47:11.352694+00:00",
+        "region": "EUW"
       }
     ],
     "vend0r": [
@@ -152719,6 +152755,15 @@
         "lp": 325,
         "adjustedLP": 4325,
         "timestamp": "2026-09-03T04:17:14.570505+00:00",
+        "region": "NA"
+      },
+      {
+        "summonerName": "vend0r",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 250,
+        "adjustedLP": 4250,
+        "timestamp": "2026-09-03T12:47:32.173463+00:00",
         "region": "NA"
       }
     ],
@@ -193550,6 +193595,15 @@
         "lp": 94,
         "adjustedLP": 2694,
         "timestamp": "2026-09-03T04:17:08.061863+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "veigarv2",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 94,
+        "adjustedLP": 2694,
+        "timestamp": "2026-09-03T12:47:26.175215+00:00",
         "region": "EUW"
       }
     ],
