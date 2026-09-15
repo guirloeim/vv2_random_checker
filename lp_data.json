@@ -106583,6 +106583,15 @@
         "adjustedLP": 5217,
         "timestamp": "2026-09-15T04:47:39.021590+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "staples",
+        "tier": "GRANDMASTER",
+        "rank": "I",
+        "lp": 1184,
+        "adjustedLP": 5184,
+        "timestamp": "2026-09-15T13:28:59.244444+00:00",
+        "region": "NA"
       }
     ],
     "Sir Kledington": [
@@ -117232,6 +117241,15 @@
         "adjustedLP": 4504,
         "timestamp": "2026-09-15T04:47:08.449653+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Sir Kledington",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 504,
+        "adjustedLP": 4504,
+        "timestamp": "2026-09-15T13:28:29.011221+00:00",
+        "region": "EUW"
       }
     ],
     "BLBO": [
@@ -127772,6 +127790,15 @@
         "lp": 161,
         "adjustedLP": 4161,
         "timestamp": "2026-09-15T04:47:11.943574+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "BLBO",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 161,
+        "adjustedLP": 4161,
+        "timestamp": "2026-09-15T13:28:32.136405+00:00",
         "region": "EUW"
       }
     ],
@@ -144932,6 +144959,15 @@
         "lp": 10,
         "adjustedLP": 1810,
         "timestamp": "2026-09-15T04:47:19.387373+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "blueqion(smurf)",
+        "tier": "PLATINUM",
+        "rank": "II",
+        "lp": 10,
+        "adjustedLP": 1810,
+        "timestamp": "2026-09-15T13:28:39.506842+00:00",
         "region": "EUW"
       }
     ],
@@ -196547,6 +196583,15 @@
         "lp": 94,
         "adjustedLP": 2694,
         "timestamp": "2026-09-15T04:47:34.472432+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "veigarv2",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 94,
+        "adjustedLP": 2694,
+        "timestamp": "2026-09-15T13:28:54.563659+00:00",
         "region": "EUW"
       }
     ],
