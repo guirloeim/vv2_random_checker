@@ -111488,6 +111488,15 @@
         "adjustedLP": 4897,
         "timestamp": "2026-10-20T13:31:35.888337+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "staples",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 889,
+        "adjustedLP": 4889,
+        "timestamp": "2026-10-21T13:42:49.281514+00:00",
+        "region": "NA"
       }
     ],
     "Sir Kledington": [
@@ -122758,6 +122767,15 @@
         "adjustedLP": 2775,
         "timestamp": "2026-10-20T13:31:07.148158+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Sir Kledington",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 75,
+        "adjustedLP": 2775,
+        "timestamp": "2026-10-21T13:42:21.130480+00:00",
+        "region": "EUW"
       }
     ],
     "BLBO": [
@@ -133919,6 +133937,15 @@
         "lp": 0,
         "adjustedLP": 4000,
         "timestamp": "2026-10-20T13:31:10.114520+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "BLBO",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 0,
+        "adjustedLP": 4000,
+        "timestamp": "2026-10-21T13:42:23.963298+00:00",
         "region": "EUW"
       }
     ],
@@ -151700,6 +151727,15 @@
         "lp": 10,
         "adjustedLP": 1810,
         "timestamp": "2026-10-20T13:31:17.128480+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "blueqion(smurf)",
+        "tier": "PLATINUM",
+        "rank": "II",
+        "lp": 10,
+        "adjustedLP": 1810,
+        "timestamp": "2026-10-21T13:42:30.842619+00:00",
         "region": "EUW"
       }
     ],
@@ -204566,6 +204602,15 @@
         "lp": 94,
         "adjustedLP": 2694,
         "timestamp": "2026-10-20T13:31:31.413742+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "veigarv2",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 94,
+        "adjustedLP": 2694,
+        "timestamp": "2026-10-21T13:42:44.816932+00:00",
         "region": "EUW"
       }
     ],
