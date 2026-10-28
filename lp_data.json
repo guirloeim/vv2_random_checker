@@ -112244,6 +112244,15 @@
         "adjustedLP": 4589,
         "timestamp": "2026-10-27T14:22:48.391997+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "staples",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 617,
+        "adjustedLP": 4617,
+        "timestamp": "2026-10-28T05:30:22.965585+00:00",
+        "region": "NA"
       }
     ],
     "Sir Kledington": [
@@ -123622,6 +123631,15 @@
         "adjustedLP": 4002,
         "timestamp": "2026-10-27T14:22:18.707920+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Sir Kledington",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 2,
+        "adjustedLP": 4002,
+        "timestamp": "2026-10-28T05:29:54.656582+00:00",
+        "region": "EUW"
       }
     ],
     "BLBO": [
@@ -134891,6 +134909,15 @@
         "lp": 34,
         "adjustedLP": 2734,
         "timestamp": "2026-10-27T14:22:21.707367+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "BLBO",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 16,
+        "adjustedLP": 2716,
+        "timestamp": "2026-10-28T05:29:57.515744+00:00",
         "region": "EUW"
       }
     ],
@@ -152780,6 +152807,15 @@
         "lp": 10,
         "adjustedLP": 1810,
         "timestamp": "2026-10-27T14:22:28.886471+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "blueqion(smurf)",
+        "tier": "PLATINUM",
+        "rank": "II",
+        "lp": 10,
+        "adjustedLP": 1810,
+        "timestamp": "2026-10-28T05:30:04.460569+00:00",
         "region": "EUW"
       }
     ],
@@ -205862,6 +205898,15 @@
         "lp": 94,
         "adjustedLP": 2694,
         "timestamp": "2026-10-27T14:22:43.553312+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "veigarv2",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 94,
+        "adjustedLP": 2694,
+        "timestamp": "2026-10-28T05:30:18.462668+00:00",
         "region": "EUW"
       }
     ],
