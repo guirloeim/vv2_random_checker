@@ -114863,6 +114863,15 @@
         "adjustedLP": 4457,
         "timestamp": "2026-11-18T17:11:27.211823+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "staples",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 457,
+        "adjustedLP": 4457,
+        "timestamp": "2026-11-19T07:14:28.127172+00:00",
+        "region": "NA"
       }
     ],
     "Sir Kledington": [
@@ -126637,6 +126646,15 @@
         "adjustedLP": 2775,
         "timestamp": "2026-11-18T17:10:59.365851+00:00",
         "region": "EUW"
+      },
+      {
+        "summonerName": "Sir Kledington",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 75,
+        "adjustedLP": 2775,
+        "timestamp": "2026-11-19T07:14:00.289264+00:00",
+        "region": "EUW"
       }
     ],
     "BLBO": [
@@ -138302,6 +138320,15 @@
         "lp": 83,
         "adjustedLP": 2783,
         "timestamp": "2026-11-18T17:11:02.480218+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "BLBO",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 83,
+        "adjustedLP": 2783,
+        "timestamp": "2026-11-19T07:14:03.307245+00:00",
         "region": "EUW"
       }
     ],
@@ -156587,6 +156614,15 @@
         "lp": 10,
         "adjustedLP": 1810,
         "timestamp": "2026-11-18T17:11:09.782833+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "blueqion(smurf)",
+        "tier": "PLATINUM",
+        "rank": "II",
+        "lp": 10,
+        "adjustedLP": 1810,
+        "timestamp": "2026-11-19T07:14:10.587698+00:00",
         "region": "EUW"
       }
     ],
@@ -210452,6 +210488,15 @@
         "lp": 94,
         "adjustedLP": 2694,
         "timestamp": "2026-11-18T17:11:22.875881+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "veigarv2",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 94,
+        "adjustedLP": 2694,
+        "timestamp": "2026-11-19T07:14:23.803040+00:00",
         "region": "EUW"
       }
     ],
