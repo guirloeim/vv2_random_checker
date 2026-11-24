@@ -115439,6 +115439,15 @@
         "adjustedLP": 4609,
         "timestamp": "2026-11-24T09:45:10.745128+00:00",
         "region": "NA"
+      },
+      {
+        "summonerName": "staples",
+        "tier": "MASTER",
+        "rank": "I",
+        "lp": 609,
+        "adjustedLP": 4609,
+        "timestamp": "2026-11-24T19:28:38.712742+00:00",
+        "region": "NA"
       }
     ],
     "Sir Kledington": [
@@ -127311,6 +127320,15 @@
         "lp": 75,
         "adjustedLP": 2775,
         "timestamp": "2026-11-24T09:44:42.930826+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "Sir Kledington",
+        "tier": "DIAMOND",
+        "rank": "I",
+        "lp": 75,
+        "adjustedLP": 2775,
+        "timestamp": "2026-11-24T19:28:10.496632+00:00",
         "region": "EUW"
       }
     ],
@@ -211523,6 +211541,15 @@
         "lp": 94,
         "adjustedLP": 2694,
         "timestamp": "2026-11-24T09:45:06.433602+00:00",
+        "region": "EUW"
+      },
+      {
+        "summonerName": "veigarv2",
+        "tier": "DIAMOND",
+        "rank": "II",
+        "lp": 94,
+        "adjustedLP": 2694,
+        "timestamp": "2026-11-24T19:28:34.350080+00:00",
         "region": "EUW"
       }
     ],
